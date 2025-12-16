@@ -1,0 +1,102 @@
+[
+  {
+    "venue": "The Spot on Kirk",
+    "capacity": 125,
+    "last_play_date": "2025-09-27",
+    "tickets_last_1_month": 304,
+    "events_last_1_month": 8,
+    "avg_tickets_last_1_month": 38.0,
+    "tickets_last_1_year": 4062,
+    "events_last_1_year": 87,
+    "avg_tickets_last_1_year": 46.69,
+    "history_last_6_months": [
+      { "month": "Mar", "tickets": 106 },
+      { "month": "Apr", "tickets": 370 },
+      { "month": "May", "tickets": 462 },
+      { "month": "Jun", "tickets": 373 },
+      { "month": "Jul", "tickets": 304 },
+      { "month": "Aug", "tickets": 214 },
+      { "month": "Sep", "tickets": 304 }
+    ]
+  },
+  {
+    "venue": "Bright Box Theater",
+    "capacity": 300,
+    "last_play_date": "2025-08-16",
+    "tickets_last_1_month": 417,
+    "events_last_1_month": 7,
+    "avg_tickets_last_1_month": 59.57,
+    "tickets_last_1_year": 8328,
+    "events_last_1_year": 98,
+    "avg_tickets_last_1_year": 84.98,
+    "history_last_6_months": [
+      { "month": "Feb", "tickets": 524 },
+      { "month": "Mar", "tickets": 876 },
+      { "month": "Apr", "tickets": 555 },
+      { "month": "May", "tickets": 678 },
+      { "month": "Jun", "tickets": 814 },
+      { "month": "Jul", "tickets": 402 },
+      { "month": "Aug", "tickets": 143 }
+    ]
+  },
+  {
+    "venue": "Carolina Theatre",
+    "capacity": 1055,
+    "last_play_date": "2025-10-01",
+    "tickets_last_1_month": 3118,
+    "events_last_1_month": 6,
+    "avg_tickets_last_1_month": 519.67,
+    "tickets_last_1_year": 29721,
+    "events_last_1_year": 42,
+    "avg_tickets_last_1_year": 707.64,
+    "history_last_6_months": [
+      { "month": "Apr", "tickets": 2869 },
+      { "month": "May", "tickets": 2485 },
+      { "month": "Jun", "tickets": 819 },
+      { "month": "Jul", "tickets": 736 },
+      { "month": "Aug", "tickets": 2363 },
+      { "month": "Sep", "tickets": 2111 },
+      { "month": "Oct", "tickets": 1007 }
+    ]
+  },
+  {
+    "venue": "9:30 Club",
+    "capacity": 1200,
+    "last_play_date": "2025-09-28",
+    "tickets_last_1_month": 16422,
+    "events_last_1_month": 17,
+    "avg_tickets_last_1_month": 966.0,
+    "tickets_last_1_year": 218785,
+    "events_last_1_year": 241,
+    "avg_tickets_last_1_year": 907.82,
+    "history_last_6_months": [
+      { "month": "Mar", "tickets": 3141 },
+      { "month": "Apr", "tickets": 24031 },
+      { "month": "May", "tickets": 26843 },
+      { "month": "Jun", "tickets": 21093 },
+      { "month": "Jul", "tickets": 8428 },
+      { "month": "Aug", "tickets": 9262 },
+      { "month": "Sep", "tickets": 15843 }
+    ]
+  },
+  {
+    "venue": "Millwald Theatre",
+    "capacity": 500,
+    "last_play_date": "2025-09-21",
+    "tickets_last_1_month": 0,
+    "events_last_1_month": 4,
+    "avg_tickets_last_1_month": 0.0,
+    "tickets_last_1_year": 4463,
+    "events_last_1_year": 34,
+    "avg_tickets_last_1_year": 131.26,
+    "history_last_6_months": [
+      { "month": "Mar", "tickets": 270 },
+      { "month": "Apr", "tickets": 767 },
+      { "month": "May", "tickets": 839 },
+      { "month": "Jun", "tickets": 125 },
+      { "month": "Jul", "tickets": 0 },
+      { "month": "Aug", "tickets": 0 },
+      { "month": "Sep", "tickets": 0 }
+    ]
+  }
+]

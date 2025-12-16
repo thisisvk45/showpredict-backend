@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The MAP - Generate Report</title>
+
+    <!-- INLINE CSS -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* HEADER */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 22px 40px;
+        }
+
+        .logo-small img {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .user-info {
+            font-size: 14px;
+            color: #4b5563;
+        }
+
+        /* MAIN */
+        .main-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .main-hero {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .hero-icon img {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-top: 14px;
+            color: #1e1e1e;
+        }
+
+        .subtitle {
+            color: #6b6b6b;
+            margin-top: 6px;
+            font-size: 15px;
+        }
+
+        /* FORM CARD */
+        .form-card {
+            background: white;
+            padding: 32px;
+            width: 460px;
+            border-radius: 18px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-group label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #d4d4d4;
+            margin-top: 6px;
+            font-size: 14px;
+        }
+
+        /* BUTTON */
+        .btn-primary {
+            width: 100%;
+            padding: 14px;
+            background: #380E75; /* The MAP Purple */
+            color: white;
+            font-size: 15px;
+            font-weight: 600;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            transition: 0.2s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .btn-primary:hover {
+            background: #4c1ea3;
+        }
+
+        .btn-large {
+            font-size: 16px;
+        }
+
+        .error-message {
+            color: red;
+            margin-bottom: 10px;
+            font-size: 13px;
+        }
+    #recommendedPriceLarge {
+        color: #000000 !important; 
+    }
+    </style>
+</head>
+
+<body class="main-page">
+
+    <!-- Header -->
+    <div class="header">
+        <div class="logo-small">
+            <img src="logo.png" alt="The MAP Logo">
+        </div>
+        <div class="user-info">
+            <span id="welcomeText">Welcome, </span>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-container">
+
+        <!-- Hero Section -->
+        <div class="main-hero">
+            <div class="hero-icon">
+                <img src="logo.png" alt="The MAP Logo">
+            </div>
+            <h1>Welcome to The MAP</h1>
+            <p class="subtitle">Generate show insights for your next event</p>
+        </div>
+
+        <!-- Form Card -->
+        <div class="form-card">
+            <form id="predictForm">
+
+                <div class="form-group">
+                    <label for="artistName">Artist Name</label>
+                    <input 
+                        type="text"
+                        id="artistName"
+                        name="artistName"
+                        placeholder="e.g., Luna Smith"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="venueName">Venue Name</label>
+                    <select id="venueName" name="venueName" required>
+                        <option value="">Select a venue</option>
+                        <option value="The Spot on Kirk">The Spot on Kirk</option>
+                        <option value="Bright Box Theater">Bright Box Theater</option>
+                        <option value="Carolina Theatre">Carolina Theatre</option>
+                        <option value="9:30 Club">9:30 Club</option>
+                        <option value="Millwald Theatre">Millwald Theatre</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="showDate">Show Date</label>
+                    <input 
+                        type="date"
+                        id="showDate"
+                        name="showDate"
+                        required
+                    >
+                </div>
+
+                <div id="errorMessage" class="error-message"></div>
+
+                <button type="submit" class="btn-primary btn-large" id="generateBtn">
+                    <span>Generate Report</span>
+                    <div class="btn-loader"></div>
+                </button>
+
+            </form>
+        </div>
+
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="app.js"></script>
+
+</body>
+</html>

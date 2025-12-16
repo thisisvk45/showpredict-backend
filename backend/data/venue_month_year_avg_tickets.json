@@ -1,0 +1,1256 @@
+[
+    {
+        "Venue":"9:30 Club",
+        "Year":2021,
+        "Month":9,
+        "Tickets sold":768
+    },
+    {
+        "Venue":"9:30 Club",
+        "Year":2021,
+        "Month":10,
+        "Tickets sold":1087
+    },
+    {
+        "Venue":"9:30 Club",
+        "Year":2021,
+        "Month":11,
+        "Tickets sold":1105
+    },
+    {
+        "Venue":"9:30 Club",
+        "Year":2021,
+        "Month":12,
+        "Tickets sold":1219
+    },
+    {
+        "Venue":"9:30 Club",
+        "Year":2022,
+        "Month":1,
+        "Tickets sold":1056
+    },
+    {
+        "Venue":"9:30 Club",
+        "Year":2022,
+        "Month":2,
+        "Tickets sold":1212
+    },
+    {
+        "Venue":"9:30 Club",
+        "Year":2022,
+        "Month":3,
+        "Tickets sold":1036
+    },
+    {
+        "Venue":"9:30 Club",
+        "Year":2022,
+        "Month":4,
+        "Tickets sold":1003
+    },
+    {
+        "Venue":"9:30 Club",
+        "Year":2022,
+        "Month":5,
+        "Tickets sold":990
+    },
+    {
+        "Venue":"9:30 Club",
+        "Year":2022,
+        "Month":6,
+        "Tickets sold":997
+    },
+    {
+        "Venue":"9:30 Club",
+        "Year":2022,
+        "Month":7,
+        "Tickets sold":748
+    },
+    {
+        "Venue":"9:30 Club",
+        "Year":2022,
+        "Month":8,
+        "Tickets sold":795
+    },
+    {
+        "Venue":"9:30 Club",
+        "Year":2022,
+        "Month":9,
+        "Tickets sold":998
+    },
+    {
+        "Venue":"9:30 Club",
+        "Year":2022,
+        "Month":10,
+        "Tickets sold":1001
+    },
+    {
+        "Venue":"9:30 Club",
+        "Year":2022,
+        "Month":11,
+        "Tickets sold":1029
+    },
+    {
+        "Venue":"9:30 Club",
+        "Year":2022,
+        "Month":12,
+        "Tickets sold":1082
+    },
+    {
+        "Venue":"9:30 Club",
+        "Year":2023,
+        "Month":1,
+        "Tickets sold":919
+    },
+    {
+        "Venue":"9:30 Club",
+        "Year":2023,
+        "Month":2,
+        "Tickets sold":1181
+    },
+    {
+        "Venue":"9:30 Club",
+        "Year":2023,
+        "Month":3,
+        "Tickets sold":1248
+    },
+    {
+        "Venue":"9:30 Club",
+        "Year":2023,
+        "Month":4,
+        "Tickets sold":1108
+    },
+    {
+        "Venue":"9:30 Club",
+        "Year":2023,
+        "Month":5,
+        "Tickets sold":1402
+    },
+    {
+        "Venue":"9:30 Club",
+        "Year":2023,
+        "Month":6,
+        "Tickets sold":1036
+    },
+    {
+        "Venue":"9:30 Club",
+        "Year":2023,
+        "Month":7,
+        "Tickets sold":1038
+    },
+    {
+        "Venue":"9:30 Club",
+        "Year":2023,
+        "Month":8,
+        "Tickets sold":919
+    },
+    {
+        "Venue":"9:30 Club",
+        "Year":2023,
+        "Month":9,
+        "Tickets sold":873
+    },
+    {
+        "Venue":"9:30 Club",
+        "Year":2023,
+        "Month":10,
+        "Tickets sold":1025
+    },
+    {
+        "Venue":"9:30 Club",
+        "Year":2023,
+        "Month":11,
+        "Tickets sold":948
+    },
+    {
+        "Venue":"9:30 Club",
+        "Year":2023,
+        "Month":12,
+        "Tickets sold":883
+    },
+    {
+        "Venue":"9:30 Club",
+        "Year":2024,
+        "Month":1,
+        "Tickets sold":832
+    },
+    {
+        "Venue":"9:30 Club",
+        "Year":2024,
+        "Month":2,
+        "Tickets sold":965
+    },
+    {
+        "Venue":"9:30 Club",
+        "Year":2024,
+        "Month":3,
+        "Tickets sold":1065
+    },
+    {
+        "Venue":"9:30 Club",
+        "Year":2024,
+        "Month":4,
+        "Tickets sold":936
+    },
+    {
+        "Venue":"9:30 Club",
+        "Year":2024,
+        "Month":5,
+        "Tickets sold":919
+    },
+    {
+        "Venue":"9:30 Club",
+        "Year":2024,
+        "Month":6,
+        "Tickets sold":979
+    },
+    {
+        "Venue":"9:30 Club",
+        "Year":2024,
+        "Month":7,
+        "Tickets sold":970
+    },
+    {
+        "Venue":"9:30 Club",
+        "Year":2024,
+        "Month":8,
+        "Tickets sold":768
+    },
+    {
+        "Venue":"9:30 Club",
+        "Year":2024,
+        "Month":9,
+        "Tickets sold":971
+    },
+    {
+        "Venue":"9:30 Club",
+        "Year":2024,
+        "Month":10,
+        "Tickets sold":920
+    },
+    {
+        "Venue":"9:30 Club",
+        "Year":2024,
+        "Month":11,
+        "Tickets sold":917
+    },
+    {
+        "Venue":"9:30 Club",
+        "Year":2024,
+        "Month":12,
+        "Tickets sold":977
+    },
+    {
+        "Venue":"9:30 Club",
+        "Year":2025,
+        "Month":1,
+        "Tickets sold":1006
+    },
+    {
+        "Venue":"9:30 Club",
+        "Year":2025,
+        "Month":2,
+        "Tickets sold":999
+    },
+    {
+        "Venue":"9:30 Club",
+        "Year":2025,
+        "Month":3,
+        "Tickets sold":867
+    },
+    {
+        "Venue":"9:30 Club",
+        "Year":2025,
+        "Month":4,
+        "Tickets sold":924
+    },
+    {
+        "Venue":"9:30 Club",
+        "Year":2025,
+        "Month":5,
+        "Tickets sold":866
+    },
+    {
+        "Venue":"9:30 Club",
+        "Year":2025,
+        "Month":6,
+        "Tickets sold":879
+    },
+    {
+        "Venue":"9:30 Club",
+        "Year":2025,
+        "Month":7,
+        "Tickets sold":843
+    },
+    {
+        "Venue":"9:30 Club",
+        "Year":2025,
+        "Month":8,
+        "Tickets sold":712
+    },
+    {
+        "Venue":"9:30 Club",
+        "Year":2025,
+        "Month":9,
+        "Tickets sold":990
+    },
+    {
+        "Venue":"Bright Box Theater",
+        "Year":2022,
+        "Month":1,
+        "Tickets sold":86
+    },
+    {
+        "Venue":"Bright Box Theater",
+        "Year":2022,
+        "Month":2,
+        "Tickets sold":112
+    },
+    {
+        "Venue":"Bright Box Theater",
+        "Year":2022,
+        "Month":3,
+        "Tickets sold":105
+    },
+    {
+        "Venue":"Bright Box Theater",
+        "Year":2022,
+        "Month":4,
+        "Tickets sold":85
+    },
+    {
+        "Venue":"Bright Box Theater",
+        "Year":2022,
+        "Month":5,
+        "Tickets sold":63
+    },
+    {
+        "Venue":"Bright Box Theater",
+        "Year":2022,
+        "Month":6,
+        "Tickets sold":97
+    },
+    {
+        "Venue":"Bright Box Theater",
+        "Year":2022,
+        "Month":7,
+        "Tickets sold":88
+    },
+    {
+        "Venue":"Bright Box Theater",
+        "Year":2022,
+        "Month":8,
+        "Tickets sold":61
+    },
+    {
+        "Venue":"Bright Box Theater",
+        "Year":2022,
+        "Month":9,
+        "Tickets sold":77
+    },
+    {
+        "Venue":"Bright Box Theater",
+        "Year":2022,
+        "Month":10,
+        "Tickets sold":74
+    },
+    {
+        "Venue":"Bright Box Theater",
+        "Year":2022,
+        "Month":11,
+        "Tickets sold":114
+    },
+    {
+        "Venue":"Bright Box Theater",
+        "Year":2022,
+        "Month":12,
+        "Tickets sold":164
+    },
+    {
+        "Venue":"Bright Box Theater",
+        "Year":2023,
+        "Month":1,
+        "Tickets sold":172
+    },
+    {
+        "Venue":"Bright Box Theater",
+        "Year":2023,
+        "Month":2,
+        "Tickets sold":119
+    },
+    {
+        "Venue":"Bright Box Theater",
+        "Year":2023,
+        "Month":3,
+        "Tickets sold":106
+    },
+    {
+        "Venue":"Bright Box Theater",
+        "Year":2023,
+        "Month":4,
+        "Tickets sold":130
+    },
+    {
+        "Venue":"Bright Box Theater",
+        "Year":2023,
+        "Month":5,
+        "Tickets sold":84
+    },
+    {
+        "Venue":"Bright Box Theater",
+        "Year":2023,
+        "Month":6,
+        "Tickets sold":67
+    },
+    {
+        "Venue":"Bright Box Theater",
+        "Year":2023,
+        "Month":7,
+        "Tickets sold":71
+    },
+    {
+        "Venue":"Bright Box Theater",
+        "Year":2023,
+        "Month":8,
+        "Tickets sold":93
+    },
+    {
+        "Venue":"Bright Box Theater",
+        "Year":2023,
+        "Month":9,
+        "Tickets sold":65
+    },
+    {
+        "Venue":"Bright Box Theater",
+        "Year":2023,
+        "Month":10,
+        "Tickets sold":94
+    },
+    {
+        "Venue":"Bright Box Theater",
+        "Year":2023,
+        "Month":11,
+        "Tickets sold":145
+    },
+    {
+        "Venue":"Bright Box Theater",
+        "Year":2023,
+        "Month":12,
+        "Tickets sold":84
+    },
+    {
+        "Venue":"Bright Box Theater",
+        "Year":2024,
+        "Month":1,
+        "Tickets sold":94
+    },
+    {
+        "Venue":"Bright Box Theater",
+        "Year":2024,
+        "Month":2,
+        "Tickets sold":89
+    },
+    {
+        "Venue":"Bright Box Theater",
+        "Year":2024,
+        "Month":3,
+        "Tickets sold":105
+    },
+    {
+        "Venue":"Bright Box Theater",
+        "Year":2024,
+        "Month":4,
+        "Tickets sold":100
+    },
+    {
+        "Venue":"Bright Box Theater",
+        "Year":2024,
+        "Month":5,
+        "Tickets sold":91
+    },
+    {
+        "Venue":"Bright Box Theater",
+        "Year":2024,
+        "Month":6,
+        "Tickets sold":76
+    },
+    {
+        "Venue":"Bright Box Theater",
+        "Year":2024,
+        "Month":7,
+        "Tickets sold":85
+    },
+    {
+        "Venue":"Bright Box Theater",
+        "Year":2024,
+        "Month":8,
+        "Tickets sold":117
+    },
+    {
+        "Venue":"Bright Box Theater",
+        "Year":2024,
+        "Month":9,
+        "Tickets sold":51
+    },
+    {
+        "Venue":"Bright Box Theater",
+        "Year":2024,
+        "Month":10,
+        "Tickets sold":96
+    },
+    {
+        "Venue":"Bright Box Theater",
+        "Year":2024,
+        "Month":11,
+        "Tickets sold":97
+    },
+    {
+        "Venue":"Bright Box Theater",
+        "Year":2024,
+        "Month":12,
+        "Tickets sold":159
+    },
+    {
+        "Venue":"Bright Box Theater",
+        "Year":2025,
+        "Month":1,
+        "Tickets sold":77
+    },
+    {
+        "Venue":"Bright Box Theater",
+        "Year":2025,
+        "Month":2,
+        "Tickets sold":127
+    },
+    {
+        "Venue":"Bright Box Theater",
+        "Year":2025,
+        "Month":3,
+        "Tickets sold":73
+    },
+    {
+        "Venue":"Bright Box Theater",
+        "Year":2025,
+        "Month":4,
+        "Tickets sold":92
+    },
+    {
+        "Venue":"Bright Box Theater",
+        "Year":2025,
+        "Month":5,
+        "Tickets sold":85
+    },
+    {
+        "Venue":"Bright Box Theater",
+        "Year":2025,
+        "Month":6,
+        "Tickets sold":74
+    },
+    {
+        "Venue":"Bright Box Theater",
+        "Year":2025,
+        "Month":7,
+        "Tickets sold":57
+    },
+    {
+        "Venue":"Bright Box Theater",
+        "Year":2025,
+        "Month":8,
+        "Tickets sold":48
+    },
+    {
+        "Venue":"Carolina Theatre",
+        "Year":2021,
+        "Month":9,
+        "Tickets sold":793
+    },
+    {
+        "Venue":"Carolina Theatre",
+        "Year":2021,
+        "Month":10,
+        "Tickets sold":677
+    },
+    {
+        "Venue":"Carolina Theatre",
+        "Year":2021,
+        "Month":11,
+        "Tickets sold":709
+    },
+    {
+        "Venue":"Carolina Theatre",
+        "Year":2021,
+        "Month":12,
+        "Tickets sold":914
+    },
+    {
+        "Venue":"Carolina Theatre",
+        "Year":2022,
+        "Month":1,
+        "Tickets sold":958
+    },
+    {
+        "Venue":"Carolina Theatre",
+        "Year":2022,
+        "Month":2,
+        "Tickets sold":1345
+    },
+    {
+        "Venue":"Carolina Theatre",
+        "Year":2022,
+        "Month":3,
+        "Tickets sold":684
+    },
+    {
+        "Venue":"Carolina Theatre",
+        "Year":2022,
+        "Month":4,
+        "Tickets sold":889
+    },
+    {
+        "Venue":"Carolina Theatre",
+        "Year":2022,
+        "Month":5,
+        "Tickets sold":727
+    },
+    {
+        "Venue":"Carolina Theatre",
+        "Year":2022,
+        "Month":6,
+        "Tickets sold":713
+    },
+    {
+        "Venue":"Carolina Theatre",
+        "Year":2022,
+        "Month":7,
+        "Tickets sold":704
+    },
+    {
+        "Venue":"Carolina Theatre",
+        "Year":2022,
+        "Month":8,
+        "Tickets sold":627
+    },
+    {
+        "Venue":"Carolina Theatre",
+        "Year":2022,
+        "Month":9,
+        "Tickets sold":734
+    },
+    {
+        "Venue":"Carolina Theatre",
+        "Year":2022,
+        "Month":10,
+        "Tickets sold":733
+    },
+    {
+        "Venue":"Carolina Theatre",
+        "Year":2022,
+        "Month":11,
+        "Tickets sold":609
+    },
+    {
+        "Venue":"Carolina Theatre",
+        "Year":2022,
+        "Month":12,
+        "Tickets sold":615
+    },
+    {
+        "Venue":"Carolina Theatre",
+        "Year":2023,
+        "Month":1,
+        "Tickets sold":880
+    },
+    {
+        "Venue":"Carolina Theatre",
+        "Year":2023,
+        "Month":2,
+        "Tickets sold":906
+    },
+    {
+        "Venue":"Carolina Theatre",
+        "Year":2023,
+        "Month":3,
+        "Tickets sold":924
+    },
+    {
+        "Venue":"Carolina Theatre",
+        "Year":2023,
+        "Month":4,
+        "Tickets sold":1118
+    },
+    {
+        "Venue":"Carolina Theatre",
+        "Year":2023,
+        "Month":5,
+        "Tickets sold":797
+    },
+    {
+        "Venue":"Carolina Theatre",
+        "Year":2023,
+        "Month":6,
+        "Tickets sold":795
+    },
+    {
+        "Venue":"Carolina Theatre",
+        "Year":2023,
+        "Month":7,
+        "Tickets sold":777
+    },
+    {
+        "Venue":"Carolina Theatre",
+        "Year":2023,
+        "Month":8,
+        "Tickets sold":941
+    },
+    {
+        "Venue":"Carolina Theatre",
+        "Year":2023,
+        "Month":9,
+        "Tickets sold":742
+    },
+    {
+        "Venue":"Carolina Theatre",
+        "Year":2023,
+        "Month":10,
+        "Tickets sold":769
+    },
+    {
+        "Venue":"Carolina Theatre",
+        "Year":2023,
+        "Month":11,
+        "Tickets sold":667
+    },
+    {
+        "Venue":"Carolina Theatre",
+        "Year":2023,
+        "Month":12,
+        "Tickets sold":620
+    },
+    {
+        "Venue":"Carolina Theatre",
+        "Year":2024,
+        "Month":1,
+        "Tickets sold":697
+    },
+    {
+        "Venue":"Carolina Theatre",
+        "Year":2024,
+        "Month":2,
+        "Tickets sold":952
+    },
+    {
+        "Venue":"Carolina Theatre",
+        "Year":2024,
+        "Month":3,
+        "Tickets sold":793
+    },
+    {
+        "Venue":"Carolina Theatre",
+        "Year":2024,
+        "Month":4,
+        "Tickets sold":616
+    },
+    {
+        "Venue":"Carolina Theatre",
+        "Year":2024,
+        "Month":5,
+        "Tickets sold":937
+    },
+    {
+        "Venue":"Carolina Theatre",
+        "Year":2024,
+        "Month":6,
+        "Tickets sold":788
+    },
+    {
+        "Venue":"Carolina Theatre",
+        "Year":2024,
+        "Month":8,
+        "Tickets sold":534
+    },
+    {
+        "Venue":"Carolina Theatre",
+        "Year":2024,
+        "Month":9,
+        "Tickets sold":640
+    },
+    {
+        "Venue":"Carolina Theatre",
+        "Year":2024,
+        "Month":10,
+        "Tickets sold":674
+    },
+    {
+        "Venue":"Carolina Theatre",
+        "Year":2024,
+        "Month":11,
+        "Tickets sold":772
+    },
+    {
+        "Venue":"Carolina Theatre",
+        "Year":2025,
+        "Month":1,
+        "Tickets sold":652
+    },
+    {
+        "Venue":"Carolina Theatre",
+        "Year":2025,
+        "Month":2,
+        "Tickets sold":674
+    },
+    {
+        "Venue":"Carolina Theatre",
+        "Year":2025,
+        "Month":3,
+        "Tickets sold":808
+    },
+    {
+        "Venue":"Carolina Theatre",
+        "Year":2025,
+        "Month":4,
+        "Tickets sold":717
+    },
+    {
+        "Venue":"Carolina Theatre",
+        "Year":2025,
+        "Month":5,
+        "Tickets sold":828
+    },
+    {
+        "Venue":"Carolina Theatre",
+        "Year":2025,
+        "Month":6,
+        "Tickets sold":819
+    },
+    {
+        "Venue":"Carolina Theatre",
+        "Year":2025,
+        "Month":7,
+        "Tickets sold":736
+    },
+    {
+        "Venue":"Carolina Theatre",
+        "Year":2025,
+        "Month":8,
+        "Tickets sold":788
+    },
+    {
+        "Venue":"Carolina Theatre",
+        "Year":2025,
+        "Month":9,
+        "Tickets sold":422
+    },
+    {
+        "Venue":"Carolina Theatre",
+        "Year":2025,
+        "Month":10,
+        "Tickets sold":1007
+    },
+    {
+        "Venue":"Millwald Theatre",
+        "Year":2024,
+        "Month":1,
+        "Tickets sold":269
+    },
+    {
+        "Venue":"Millwald Theatre",
+        "Year":2024,
+        "Month":2,
+        "Tickets sold":165
+    },
+    {
+        "Venue":"Millwald Theatre",
+        "Year":2024,
+        "Month":3,
+        "Tickets sold":148
+    },
+    {
+        "Venue":"Millwald Theatre",
+        "Year":2024,
+        "Month":4,
+        "Tickets sold":115
+    },
+    {
+        "Venue":"Millwald Theatre",
+        "Year":2024,
+        "Month":5,
+        "Tickets sold":180
+    },
+    {
+        "Venue":"Millwald Theatre",
+        "Year":2024,
+        "Month":8,
+        "Tickets sold":0
+    },
+    {
+        "Venue":"Millwald Theatre",
+        "Year":2024,
+        "Month":9,
+        "Tickets sold":96
+    },
+    {
+        "Venue":"Millwald Theatre",
+        "Year":2024,
+        "Month":10,
+        "Tickets sold":22
+    },
+    {
+        "Venue":"Millwald Theatre",
+        "Year":2024,
+        "Month":11,
+        "Tickets sold":362
+    },
+    {
+        "Venue":"Millwald Theatre",
+        "Year":2024,
+        "Month":12,
+        "Tickets sold":221
+    },
+    {
+        "Venue":"Millwald Theatre",
+        "Year":2025,
+        "Month":1,
+        "Tickets sold":187
+    },
+    {
+        "Venue":"Millwald Theatre",
+        "Year":2025,
+        "Month":2,
+        "Tickets sold":171
+    },
+    {
+        "Venue":"Millwald Theatre",
+        "Year":2025,
+        "Month":3,
+        "Tickets sold":159
+    },
+    {
+        "Venue":"Millwald Theatre",
+        "Year":2025,
+        "Month":4,
+        "Tickets sold":153
+    },
+    {
+        "Venue":"Millwald Theatre",
+        "Year":2025,
+        "Month":5,
+        "Tickets sold":210
+    },
+    {
+        "Venue":"Millwald Theatre",
+        "Year":2025,
+        "Month":6,
+        "Tickets sold":62
+    },
+    {
+        "Venue":"Millwald Theatre",
+        "Year":2025,
+        "Month":7,
+        "Tickets sold":0
+    },
+    {
+        "Venue":"Millwald Theatre",
+        "Year":2025,
+        "Month":8,
+        "Tickets sold":0
+    },
+    {
+        "Venue":"Millwald Theatre",
+        "Year":2025,
+        "Month":9,
+        "Tickets sold":0
+    },
+    {
+        "Venue":"The Spot on Kirk",
+        "Year":2021,
+        "Month":9,
+        "Tickets sold":35
+    },
+    {
+        "Venue":"The Spot on Kirk",
+        "Year":2021,
+        "Month":10,
+        "Tickets sold":45
+    },
+    {
+        "Venue":"The Spot on Kirk",
+        "Year":2021,
+        "Month":11,
+        "Tickets sold":34
+    },
+    {
+        "Venue":"The Spot on Kirk",
+        "Year":2021,
+        "Month":12,
+        "Tickets sold":72
+    },
+    {
+        "Venue":"The Spot on Kirk",
+        "Year":2022,
+        "Month":1,
+        "Tickets sold":44
+    },
+    {
+        "Venue":"The Spot on Kirk",
+        "Year":2022,
+        "Month":2,
+        "Tickets sold":35
+    },
+    {
+        "Venue":"The Spot on Kirk",
+        "Year":2022,
+        "Month":3,
+        "Tickets sold":42
+    },
+    {
+        "Venue":"The Spot on Kirk",
+        "Year":2022,
+        "Month":4,
+        "Tickets sold":36
+    },
+    {
+        "Venue":"The Spot on Kirk",
+        "Year":2022,
+        "Month":5,
+        "Tickets sold":41
+    },
+    {
+        "Venue":"The Spot on Kirk",
+        "Year":2022,
+        "Month":6,
+        "Tickets sold":42
+    },
+    {
+        "Venue":"The Spot on Kirk",
+        "Year":2022,
+        "Month":7,
+        "Tickets sold":28
+    },
+    {
+        "Venue":"The Spot on Kirk",
+        "Year":2022,
+        "Month":8,
+        "Tickets sold":54
+    },
+    {
+        "Venue":"The Spot on Kirk",
+        "Year":2022,
+        "Month":9,
+        "Tickets sold":38
+    },
+    {
+        "Venue":"The Spot on Kirk",
+        "Year":2022,
+        "Month":10,
+        "Tickets sold":42
+    },
+    {
+        "Venue":"The Spot on Kirk",
+        "Year":2022,
+        "Month":11,
+        "Tickets sold":29
+    },
+    {
+        "Venue":"The Spot on Kirk",
+        "Year":2022,
+        "Month":12,
+        "Tickets sold":69
+    },
+    {
+        "Venue":"The Spot on Kirk",
+        "Year":2023,
+        "Month":1,
+        "Tickets sold":57
+    },
+    {
+        "Venue":"The Spot on Kirk",
+        "Year":2023,
+        "Month":2,
+        "Tickets sold":53
+    },
+    {
+        "Venue":"The Spot on Kirk",
+        "Year":2023,
+        "Month":3,
+        "Tickets sold":28
+    },
+    {
+        "Venue":"The Spot on Kirk",
+        "Year":2023,
+        "Month":4,
+        "Tickets sold":59
+    },
+    {
+        "Venue":"The Spot on Kirk",
+        "Year":2023,
+        "Month":5,
+        "Tickets sold":30
+    },
+    {
+        "Venue":"The Spot on Kirk",
+        "Year":2023,
+        "Month":6,
+        "Tickets sold":61
+    },
+    {
+        "Venue":"The Spot on Kirk",
+        "Year":2023,
+        "Month":7,
+        "Tickets sold":57
+    },
+    {
+        "Venue":"The Spot on Kirk",
+        "Year":2023,
+        "Month":8,
+        "Tickets sold":52
+    },
+    {
+        "Venue":"The Spot on Kirk",
+        "Year":2023,
+        "Month":9,
+        "Tickets sold":37
+    },
+    {
+        "Venue":"The Spot on Kirk",
+        "Year":2023,
+        "Month":10,
+        "Tickets sold":51
+    },
+    {
+        "Venue":"The Spot on Kirk",
+        "Year":2023,
+        "Month":11,
+        "Tickets sold":48
+    },
+    {
+        "Venue":"The Spot on Kirk",
+        "Year":2023,
+        "Month":12,
+        "Tickets sold":58
+    },
+    {
+        "Venue":"The Spot on Kirk",
+        "Year":2024,
+        "Month":1,
+        "Tickets sold":49
+    },
+    {
+        "Venue":"The Spot on Kirk",
+        "Year":2024,
+        "Month":2,
+        "Tickets sold":59
+    },
+    {
+        "Venue":"The Spot on Kirk",
+        "Year":2024,
+        "Month":3,
+        "Tickets sold":46
+    },
+    {
+        "Venue":"The Spot on Kirk",
+        "Year":2024,
+        "Month":4,
+        "Tickets sold":46
+    },
+    {
+        "Venue":"The Spot on Kirk",
+        "Year":2024,
+        "Month":5,
+        "Tickets sold":33
+    },
+    {
+        "Venue":"The Spot on Kirk",
+        "Year":2024,
+        "Month":6,
+        "Tickets sold":44
+    },
+    {
+        "Venue":"The Spot on Kirk",
+        "Year":2024,
+        "Month":7,
+        "Tickets sold":24
+    },
+    {
+        "Venue":"The Spot on Kirk",
+        "Year":2024,
+        "Month":8,
+        "Tickets sold":43
+    },
+    {
+        "Venue":"The Spot on Kirk",
+        "Year":2024,
+        "Month":9,
+        "Tickets sold":35
+    },
+    {
+        "Venue":"The Spot on Kirk",
+        "Year":2024,
+        "Month":10,
+        "Tickets sold":43
+    },
+    {
+        "Venue":"The Spot on Kirk",
+        "Year":2024,
+        "Month":11,
+        "Tickets sold":39
+    },
+    {
+        "Venue":"The Spot on Kirk",
+        "Year":2024,
+        "Month":12,
+        "Tickets sold":58
+    },
+    {
+        "Venue":"The Spot on Kirk",
+        "Year":2025,
+        "Month":1,
+        "Tickets sold":74
+    },
+    {
+        "Venue":"The Spot on Kirk",
+        "Year":2025,
+        "Month":2,
+        "Tickets sold":46
+    },
+    {
+        "Venue":"The Spot on Kirk",
+        "Year":2025,
+        "Month":3,
+        "Tickets sold":52
+    },
+    {
+        "Venue":"The Spot on Kirk",
+        "Year":2025,
+        "Month":4,
+        "Tickets sold":46
+    },
+    {
+        "Venue":"The Spot on Kirk",
+        "Year":2025,
+        "Month":5,
+        "Tickets sold":46
+    },
+    {
+        "Venue":"The Spot on Kirk",
+        "Year":2025,
+        "Month":6,
+        "Tickets sold":47
+    },
+    {
+        "Venue":"The Spot on Kirk",
+        "Year":2025,
+        "Month":7,
+        "Tickets sold":43
+    },
+    {
+        "Venue":"The Spot on Kirk",
+        "Year":2025,
+        "Month":8,
+        "Tickets sold":54
+    },
+    {
+        "Venue":"The Spot on Kirk",
+        "Year":2025,
+        "Month":9,
+        "Tickets sold":38
+    }
+]

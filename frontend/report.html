@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>The MAP - Report</title>
+    <link rel="stylesheet" href="styles.css" />
+
+    <!-- INLINE PURPLE THEME OVERRIDES -->
+    <style>
+        :root {
+            --map-purple: #380E75;
+            --map-purple-light: #DED5EB;
+            --map-purple-mid: #4c1ea3;
+        }
+
+        .btn-primary,
+        .btn-large {
+            background: var(--map-purple) !important;
+            color: white !important;
+            border: none !important;
+        }
+
+        .btn-primary:hover,
+        .btn-large:hover {
+            background: var(--map-purple-mid) !important;
+        }
+
+        h1, h2, h3, .trend-value.primary {
+            color: var(--map-purple) !important;
+        }
+
+        .toggle-btn.active {
+            background: var(--map-purple) !important;
+            color: white !important;
+            border-color: var(--map-purple) !important;
+        }
+
+        .chart-toggle button:hover {
+            border-color: var(--map-purple) !important;
+            color: var(--map-purple) !important;
+        }
+
+        .threat-badge.high {
+            background: var(--map-purple) !important;
+            color: white !important;
+        }
+
+        .threat-badge.medium {
+            background: #8e6cc6 !important;
+            color: white !important;
+        }
+
+        .threat-badge.low {
+            background: var(--map-purple-light) !important;
+            color: var(--map-purple) !important;
+        }
+
+        .card-subtitle, .stat-label {
+            color: #5b4f68 !important;
+        }
+
+        .clickable:hover {
+            color: var(--map-purple) !important;
+        }
+
+        /* Three Card Row */
+        .three-cards-row {
+            display: flex;
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        .three-cards-row .info-card {
+            flex: 1;
+            min-width: 240px;
+            padding: 14px !important;
+        }
+
+        .three-cards-row .stat-card {
+            padding: 10px 14px !important;
+        }
+
+        .three-cards-row .stat-value {
+            font-size: 20px !important;
+        }
+
+        #recommendedPriceLarge {
+            color: #000 !important;
+        }
+
+        .lastplay-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        /* Hide footer under chart */
+        .chart-footer {
+            display: none !important;
+        }
+    </style>
+</head>
+
+<body class="report-page">
+    <div class="header">
+        <div class="header-left">
+            <button class="btn-back" onclick="window.location.href='main.html'">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+            </button>
+
+            <div class="report-title">
+                <h2 id="artistName">Artist Name</h2>
+                <p id="venueInfo">Venue • Date</p>
+            </div>
+        </div>
+
+        <div class="user-info">
+            <span id="welcomeText">Welcome, </span>
+        </div>
+    </div>
+
+    <div class="report-container">
+
+        <!-- Top Stats Row -->
+        <div class="stats-row compact">
+            <div class="stat-card small">
+                <div class="stat-label">Avg Tickets (Last Month)</div>
+                <div class="stat-value" id="avgLastMonth">-</div>
+            </div>
+
+            <div class="stat-card small">
+                <div class="stat-label">Events (Last Month)</div>
+                <div class="stat-value" id="eventsLastMonth">-</div>
+            </div>
+
+            <div class="stat-card small">
+                <div class="stat-label">Avg Tickets (Last Year)</div>
+                <div class="stat-value" id="avgLastYear">-</div>
+            </div>
+
+            <div class="stat-card small">
+                <div class="stat-label">Events (Last Year)</div>
+                <div class="stat-value" id="eventsLastYear">-</div>
+            </div>
+
+            <div class="stat-card small">
+                <div class="stat-label">Weather</div>
+                <div class="stat-value" id="weatherConditionSmall">-</div>
+                <div class="stat-detail" id="weatherTempSmall"></div>
+            </div>
+        </div>
+
+        <!-- SOCIAL + COMPETITION -->
+        <div class="two-column">
+
+            <!-- Social -->
+            <div class="info-card">
+                <div class="card-header">
+                    <h3>Social & Streaming Stats</h3>
+                    <span class="card-source">source: Chartmetric</span>
+                </div>
+                <div class="social-stats" id="socialStats"></div>
+            </div>
+
+            <!-- UPDATED COMPETITION ANALYSIS -->
+            <div class="info-card">
+                <div class="card-header">
+                    <h3>Competition Analysis</h3>
+                    <span class="card-source">source: JamBase</span>
+                </div>
+
+                <div id="competingEventsList" class="competition-list">
+                    <!-- JS inserts TWO events like:
+                        <div class="competing-event-item">
+                            <span class="event-name">Rock Night</span>
+                            <span class="event-date">2025-12-14 (2 days away)</span>
+                        </div>
+                    -->
+                </div>
+
+                <div class="competition-summary">
+                    ⚠️ <span id="competingShowsCount">0</span> competing shows within 7 days
+                </div>
+            </div>
+        </div>
+
+        <!-- Chart -->
+        <div class="chart-card">
+            <div class="card-header">
+                <div>
+                    <h3>Historical Sales Trends</h3>
+                    <p class="card-subtitle" id="chartSubtitle">Last 6 months • Average: - tickets</p>
+                </div>
+                <div class="chart-toggle">
+                    <button class="toggle-btn active">Bar</button>
+                    <button class="toggle-btn">Line</button>
+                </div>
+            </div>
+
+            <canvas id="trendsChart"></canvas>
+        </div>
+
+        <!-- Three Cards -->
+        <div class="three-cards-row">
+
+            <div class="info-card">
+                <div class="card-header">
+                    <h3>Expected Ticket Sales</h3>
+                    <span class="card-source">ML Model</span>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Expected Sales</div>
+                    <div class="stat-value" id="expectedSales">-</div>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="card-header">
+                    <h3>Last Play Information</h3>
+                    <span class="card-source">venue history</span>
+                </div>
+
+                <div class="stat-card">
+                    <div class="lastplay-row">
+                        <div>
+                            <div class="stat-label">Last Play Date</div>
+                            <div class="stat-value" id="lastPlayDate">-</div>
+                        </div>
+
+                        <div>
+                            <div class="stat-label">Times played</div>
+                            <div class="stat-value" id="timesPlayed">-</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="card-header">
+                    <h3>Recommended Price</h3>
+                    <span class="card-source">ML Model</span>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-label">Price</div>
+                    <div class="stat-value primary" id="recommendedPriceLarge">$0.00</div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Raw Data -->
+        <div class="info-card">
+            <div class="card-header clickable" onclick="toggleSection('rawData')">
+                <h3>Raw Data & Features</h3>
+                <svg class="expand-icon" width="20" height="20" viewBox="0 0 24 24">
+                    <path d="M6 9l6 6 6-6"/>
+                </svg>
+            </div>
+
+            <div id="rawData" class="raw-data collapsed">
+                <div class="data-section">
+                    <h4>Weather Data</h4>
+                    <pre id="weatherData"></pre>
+                </div>
+
+                <div class="data-section">
+                    <h4>Artist Data (Chartmetric)</h4>
+                    <pre id="artistData"></pre>
+                </div>
+
+                <div class="data-section">
+                    <h4>Features Used</h4>
+                    <pre id="featuresData"></pre>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="report.js"></script>
+</body>
+</html>
