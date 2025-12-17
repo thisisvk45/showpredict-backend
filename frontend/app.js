@@ -4,7 +4,7 @@
 // Automatically detect API URL based on environment
 const API_BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
     ? "http://localhost:8000/api"  // Local development
-    : "REPLACE_WITH_YOUR_RENDER_URL/api";  // Production (update after backend deployment)
+    : "https://showpredict-backend.onrender.com/api";  // Production (update after backend deployment)
 
 // Alternative: You can also hardcode it after deploying backend:
 // const API_BASE_URL = "https://your-backend-name.onrender.com/api";
