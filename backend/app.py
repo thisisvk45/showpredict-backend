@@ -4,7 +4,7 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import json
-from datetime import datetime
+from datetime import datetime, timedelta
 import os
 
 # Local imports
@@ -53,12 +53,11 @@ with open(USERS_FILE, "r") as f:
 
 
 # -----------------------------
-# Load Venue Stats (NEW)
+# Load Venue Stats
 # -----------------------------
 VENUE_STATS_FILE = "data/venue_stats.json"
 
 if not os.path.exists(VENUE_STATS_FILE):
-    # fallback: if user placed it in backend/
     VENUE_STATS_FILE = "venue_stats.json"
 
 if not os.path.exists(VENUE_STATS_FILE):
@@ -67,8 +66,20 @@ if not os.path.exists(VENUE_STATS_FILE):
 with open(VENUE_STATS_FILE, "r") as f:
     VENUE_STATS_LIST = json.load(f)
 
-# convert list → dict for quick lookup
 VENUE_STATS = {item["venue"]: item for item in VENUE_STATS_LIST}
+
+
+# -----------------------------
+# Load Artist-Venue Last Play Data (NEW)
+# -----------------------------
+ARTIST_VENUE_FILE = "data/artist_venue_last_play.json"
+
+if not os.path.exists(ARTIST_VENUE_FILE):
+    print("Warning: artist_venue_last_play.json not found")
+    ARTIST_VENUE_DATA = []
+else:
+    with open(ARTIST_VENUE_FILE, "r") as f:
+        ARTIST_VENUE_DATA = json.load(f)
 
 
 # -----------------------------
@@ -119,6 +130,58 @@ VENUES = {
 
 
 # -----------------------------
+# Helper: Get Artist-Venue Info
+# -----------------------------
+def get_artist_venue_info(artist, venue):
+    """Look up last play date and times played for artist at venue"""
+    for record in ARTIST_VENUE_DATA:
+        if record.get("Artist") == artist and record.get("Venue") == venue:
+            return {
+                "last_play_date": record.get("last_play_date"),
+                "times_played": record.get("times_played", 0)
+            }
+    return {"last_play_date": None, "times_played": 0}
+
+
+# -----------------------------
+# Helper: Calculate Competing Shows (Placeholder - you can enhance this)
+# -----------------------------
+def calculate_competing_shows(venue, date_obj):
+    """
+    Calculate competing shows within 7 days of the target date.
+    For now, returns mock data. You can replace this with real logic.
+    """
+    # This is a placeholder - replace with your actual competition data
+    # For MVP, we'll return a simple calculation
+    import random
+    
+    # Simulate competing shows count based on venue and date
+    day_of_week = date_obj.weekday()
+    is_weekend = day_of_week >= 5
+    
+    # Weekend = more competition
+    base_count = random.randint(5, 15) if is_weekend else random.randint(2, 8)
+    
+    # Generate 2 sample events
+    events = []
+    event_names = ["Rock Night", "Jazz Session", "Indie Showcase", "Pop Night", "Metal Show"]
+    
+    for i in range(min(2, base_count)):
+        days_offset = random.randint(-3, 3)
+        event_date = date_obj + timedelta(days=days_offset)
+        events.append({
+            "name": random.choice(event_names),
+            "date": event_date.strftime("%Y-%m-%d"),
+            "daysDiff": abs(days_offset)
+        })
+    
+    return {
+        "totalShows": base_count,
+        "events": events
+    }
+
+
+# -----------------------------
 # HEALTH CHECK
 # -----------------------------
 @app.get("/")
@@ -153,7 +216,7 @@ def login(data: LoginRequest):
 
 
 # -----------------------------
-# PREDICTION ENDPOINT
+# PREDICTION ENDPOINT (UPDATED)
 # -----------------------------
 @app.post("/api/predict")
 def predict(data: PredictRequest):
@@ -199,40 +262,43 @@ def predict(data: PredictRequest):
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Prediction error: {e}")
 
-    # -----------------------------
-    # 5. VENUE HISTORICAL STATS (NEW)
-    # -----------------------------
+    # 5. VENUE HISTORICAL STATS
     stats = VENUE_STATS.get(venue, {})
-
-    # Trim to EXACT last 6 months
     history = stats.get("history_last_6_months", [])
     if len(history) > 6:
-        history = history[-6:]   # keep last 6 by order
+        history = history[-6:]
 
-    # -----------------------------
-    # 6. COMPLETE RESPONSE
-    # -----------------------------
+    # 6. ARTIST-VENUE INFO (NEW)
+    artist_venue_info = get_artist_venue_info(artist, venue)
+
+    # 7. COMPETING SHOWS (NEW)
+    competing_shows = calculate_competing_shows(venue, date_obj)
+
+    # 8. COMPLETE RESPONSE
     return {
         "recommended_price": predicted_price,
         "weather": weather,
         "cm_data": cm_data,
         "features_used": raw_features,
 
-        # NEW
+        # Venue stats
         "venue_stats": {
             "capacity": stats.get("capacity"),
             "last_play_date": stats.get("last_play_date"),
-
             "tickets_last_1_month": stats.get("tickets_last_1_month"),
             "events_last_1_month": stats.get("events_last_1_month"),
             "avg_tickets_last_1_month": stats.get("avg_tickets_last_1_month"),
-
             "tickets_last_1_year": stats.get("tickets_last_1_year"),
             "events_last_1_year": stats.get("events_last_1_year"),
             "avg_tickets_last_1_year": stats.get("avg_tickets_last_1_year"),
-
             "history_last_6_months": history
-        }
+        },
+
+        # Artist-venue info (NEW)
+        "artist_venue_info": artist_venue_info,
+
+        # Competition analysis (NEW)
+        "competing_shows": competing_shows
     }
 
 
