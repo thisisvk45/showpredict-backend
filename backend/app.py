@@ -23,7 +23,6 @@ app = FastAPI()
 # -----------------------------
 # CORS (Frontend → Backend)
 # -----------------------------
-# PRODUCTION: Update this with your Netlify URL after deployment
 ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://localhost:8000",
@@ -70,7 +69,7 @@ VENUE_STATS = {item["venue"]: item for item in VENUE_STATS_LIST}
 
 
 # -----------------------------
-# Load Artist-Venue Last Play Data (NEW)
+# Load Artist-Venue Last Play Data
 # -----------------------------
 ARTIST_VENUE_FILE = "data/artist_venue_last_play.json"
 
@@ -144,15 +143,13 @@ def get_artist_venue_info(artist, venue):
 
 
 # -----------------------------
-# Helper: Calculate Competing Shows (Placeholder - you can enhance this)
+# Helper: Calculate Competing Shows
 # -----------------------------
 def calculate_competing_shows(venue, date_obj):
     """
     Calculate competing shows within 7 days of the target date.
     For now, returns mock data. You can replace this with real logic.
     """
-    # This is a placeholder - replace with your actual competition data
-    # For MVP, we'll return a simple calculation
     import random
     
     # Simulate competing shows count based on venue and date
@@ -202,7 +199,7 @@ def health():
 
 
 # -----------------------------
-# LOGIN ENDPOINT
+# LOGIN ENDPOINT (UPDATED - Returns venue)
 # -----------------------------
 @app.post("/api/login")
 def login(data: LoginRequest):
@@ -212,11 +209,17 @@ def login(data: LoginRequest):
     if username not in USERS or USERS[username]["password"] != password:
         raise HTTPException(status_code=401, detail="Invalid username or password")
 
-    return {"success": True}
+    # Get user's assigned venue
+    user_venue = USERS[username].get("venue")
+
+    return {
+        "success": True,
+        "venue": user_venue  # NEW: Return the user's assigned venue
+    }
 
 
 # -----------------------------
-# PREDICTION ENDPOINT (UPDATED)
+# PREDICTION ENDPOINT
 # -----------------------------
 @app.post("/api/predict")
 def predict(data: PredictRequest):
@@ -268,10 +271,10 @@ def predict(data: PredictRequest):
     if len(history) > 6:
         history = history[-6:]
 
-    # 6. ARTIST-VENUE INFO (NEW)
+    # 6. ARTIST-VENUE INFO
     artist_venue_info = get_artist_venue_info(artist, venue)
 
-    # 7. COMPETING SHOWS (NEW)
+    # 7. COMPETING SHOWS
     competing_shows = calculate_competing_shows(venue, date_obj)
 
     # 8. COMPLETE RESPONSE
@@ -294,10 +297,10 @@ def predict(data: PredictRequest):
             "history_last_6_months": history
         },
 
-        # Artist-venue info (NEW)
+        # Artist-venue info
         "artist_venue_info": artist_venue_info,
 
-        # Competition analysis (NEW)
+        # Competition analysis
         "competing_shows": competing_shows
     }
 
