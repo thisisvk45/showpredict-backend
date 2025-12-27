@@ -12,6 +12,7 @@ from utils.weather import fetch_weather
 from utils.chartmetric import search_artist_full
 from utils.features import build_features
 from utils.model_utils import load_model
+from utils.jambase import get_competing_events
 
 
 # -----------------------------
