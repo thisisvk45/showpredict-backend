@@ -75,11 +75,11 @@ function populateReport(data) {
     // ===========================
     const ticketPrediction = data.predicted_tickets || {};
     
-    if (ticketPrediction.expected) {
-        const expectedSalesEl = document.getElementById("expectedSales");
-        if (expectedSalesEl) {
-            expectedSalesEl.textContent = `${ticketPrediction.low} - ${ticketPrediction.high}`;
-        }
+    // if (ticketPrediction.expected) {
+    //     const expectedSalesEl = document.getElementById("expectedSales");
+    //     if (expectedSalesEl) {
+    //         expectedSalesEl.textContent = `${ticketPrediction.low} - ${ticketPrediction.high}`;
+    //     }
         
         // Also update the "Recommended Price" section to show prediction
         const recommendedPriceEl = document.getElementById("recommendedPriceLarge");
