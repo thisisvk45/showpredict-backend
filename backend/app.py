@@ -130,6 +130,18 @@ VENUES = {
 
 
 # -----------------------------
+# Venue Locations for JamBase API
+# -----------------------------
+VENUE_LOCATIONS = {
+    "The Spot on Kirk": {"city": "Roanoke", "state": "VA"},
+    "Bright Box Theater": {"city": "Winchester", "state": "VA"},
+    "Carolina Theatre": {"city": "Durham", "state": "NC"},
+    "9:30 Club": {"city": "Washington", "state": "DC"},
+    "Millwald Theatre": {"city": "Wytheville", "state": "VA"},
+}
+
+
+# -----------------------------
 # Helper: Get Artist-Venue Info
 # -----------------------------
 def get_artist_venue_info(artist, venue):
@@ -144,39 +156,24 @@ def get_artist_venue_info(artist, venue):
 
 
 # -----------------------------
-# Helper: Calculate Competing Shows
+# Helper: Calculate Competing Shows (UPDATED - Real JamBase Data)
 # -----------------------------
 def calculate_competing_shows(venue, date_obj):
-    """
-    Calculate competing shows within 7 days of the target date.
-    For now, returns mock data. You can replace this with real logic.
-    """
-    import random
+    """Get real competition data from JamBase API"""
     
-    # Simulate competing shows count based on venue and date
-    day_of_week = date_obj.weekday()
-    is_weekend = day_of_week >= 5
+    location = VENUE_LOCATIONS.get(venue)
+    if not location:
+        print(f"Warning: No location mapping for venue: {venue}")
+        return {"totalShows": 0, "events": []}
     
-    # Weekend = more competition
-    base_count = random.randint(5, 15) if is_weekend else random.randint(2, 8)
+    date_str = date_obj.strftime("%Y-%m-%d")
     
-    # Generate 2 sample events
-    events = []
-    event_names = ["Rock Night", "Jazz Session", "Indie Showcase", "Pop Night", "Metal Show"]
-    
-    for i in range(min(2, base_count)):
-        days_offset = random.randint(-3, 3)
-        event_date = date_obj + timedelta(days=days_offset)
-        events.append({
-            "name": random.choice(event_names),
-            "date": event_date.strftime("%Y-%m-%d"),
-            "daysDiff": abs(days_offset)
-        })
-    
-    return {
-        "totalShows": base_count,
-        "events": events
-    }
+    return get_competing_events(
+        city=location["city"],
+        state=location["state"],
+        date_str=date_str,
+        days=7
+    )
 
 
 # -----------------------------
@@ -215,7 +212,7 @@ def login(data: LoginRequest):
 
     return {
         "success": True,
-        "venue": user_venue  # NEW: Return the user's assigned venue
+        "venue": user_venue  # Return the user's assigned venue
     }
 
 
@@ -275,7 +272,7 @@ def predict(data: PredictRequest):
     # 6. ARTIST-VENUE INFO
     artist_venue_info = get_artist_venue_info(artist, venue)
 
-    # 7. COMPETING SHOWS
+    # 7. COMPETING SHOWS (NOW USING REAL JAMBASE DATA)
     competing_shows = calculate_competing_shows(venue, date_obj)
 
     # 8. COMPLETE RESPONSE
@@ -301,7 +298,7 @@ def predict(data: PredictRequest):
         # Artist-venue info
         "artist_venue_info": artist_venue_info,
 
-        # Competition analysis
+        # Competition analysis (REAL DATA FROM JAMBASE)
         "competing_shows": competing_shows
     }
 
