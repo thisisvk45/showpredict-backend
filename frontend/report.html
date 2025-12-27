@@ -64,7 +64,7 @@
             color: var(--map-purple) !important;
         }
 
-        /* Three Card Row */
+        /* Two Card Row (Updated from Three Cards) */
         .three-cards-row {
             display: flex;
             gap: 12px;
@@ -174,12 +174,7 @@
                 </div>
 
                 <div id="competingEventsList" class="competition-list">
-                    <!-- JS inserts TWO events like:
-                        <div class="competing-event-item">
-                            <span class="event-name">Rock Night</span>
-                            <span class="event-date">2025-12-14 (2 days away)</span>
-                        </div>
-                    -->
+                    <!-- JS inserts TWO events -->
                 </div>
 
                 <div class="competition-summary">
@@ -204,19 +199,8 @@
             <canvas id="trendsChart"></canvas>
         </div>
 
-        <!-- Three Cards -->
+        <!-- Two Cards: Last Play Information and Predicted Ticket Sales -->
         <div class="three-cards-row">
-
-            <div class="info-card">
-                <div class="card-header">
-                    <h3>Expected Ticket Sales</h3>
-                    <span class="card-source">ML Model</span>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-label">Expected Sales</div>
-                    <div class="stat-value" id="expectedSales">-</div>
-                </div>
-            </div>
 
             <div class="info-card">
                 <div class="card-header">
@@ -241,13 +225,13 @@
 
             <div class="info-card">
                 <div class="card-header">
-                    <h3>Recommended Price</h3>
+                    <h3>Predicted Ticket Sales</h3>
                     <span class="card-source">ML Model</span>
                 </div>
 
                 <div class="stat-card">
-                    <div class="stat-label">Price</div>
-                    <div class="stat-value primary" id="recommendedPriceLarge">$0.00</div>
+                    <div class="stat-label">Expected Sales</div>
+                    <div class="stat-value primary" id="recommendedPriceLarge">-</div>
                 </div>
             </div>
 
