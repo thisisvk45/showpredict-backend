@@ -70,12 +70,51 @@ function populateReport(data) {
 
     createTrendsChart(labels, values);
 
-    // Expected Sales
-    const capacity = venueStats.capacity || 500;
-    const min = capacity * 0.50;
-    const max = capacity * 0.65;
-    const expected = Math.round(min + Math.random() * (max - min));
-    document.getElementById("expectedSales").textContent = expected;
+    // ===========================
+    // PREDICTED TICKET SALES (UPDATED - Show Range)
+    // ===========================
+    const ticketPrediction = data.predicted_tickets || {};
+    
+    if (ticketPrediction.expected) {
+        const expectedSalesEl = document.getElementById("expectedSales");
+        if (expectedSalesEl) {
+            expectedSalesEl.textContent = `${ticketPrediction.low} - ${ticketPrediction.high}`;
+        }
+        
+        // Also update the "Recommended Price" section to show prediction
+        const recommendedPriceEl = document.getElementById("recommendedPriceLarge");
+        if (recommendedPriceEl) {
+            recommendedPriceEl.textContent = ticketPrediction.expected;
+            
+            // Add capacity percentage
+            const priceCard = recommendedPriceEl.closest('.info-card');
+            if (priceCard) {
+                const cardHeader = priceCard.querySelector('.card-header h3');
+                if (cardHeader) {
+                    cardHeader.textContent = 'Predicted Ticket Sales';
+                }
+                
+                const statLabel = priceCard.querySelector('.stat-label');
+                if (statLabel) {
+                    statLabel.textContent = 'Expected Sales';
+                }
+                
+                // Add capacity info
+                if (!document.getElementById('capacityInfo')) {
+                    const capacityInfo = document.createElement('div');
+                    capacityInfo.id = 'capacityInfo';
+                    capacityInfo.style.marginTop = '10px';
+                    capacityInfo.style.fontSize = '14px';
+                    capacityInfo.style.color = '#6b7280';
+                    capacityInfo.innerHTML = `
+                        <div>Range: ${ticketPrediction.low} - ${ticketPrediction.high} tickets</div>
+                        <div>Capacity: ${ticketPrediction.capacity} (${ticketPrediction.capacity_percentage}% expected)</div>
+                    `;
+                    priceCard.querySelector('.stat-card').appendChild(capacityInfo);
+                }
+            }
+        }
+    }
 
     // ===========================
     // COMPETING SHOWS (from API)
@@ -188,10 +227,6 @@ function populateReport(data) {
     } else {
         document.getElementById("timesPlayed").textContent = "0";
     }
-
-    // Recommended price
-    document.getElementById("recommendedPriceLarge").textContent =
-        `$${(data.recommended_price || 0).toFixed(2)}`;
 
     // Social
     populateSocialStats(data.cm_data);
