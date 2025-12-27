@@ -156,7 +156,7 @@ def get_artist_venue_info(artist, venue):
 
 
 # -----------------------------
-# Helper: Calculate Competing Shows (UPDATED - Real JamBase Data)
+# Helper: Calculate Competing Shows
 # -----------------------------
 def calculate_competing_shows(venue, date_obj):
     """Get real competition data from JamBase API"""
@@ -197,7 +197,7 @@ def health():
 
 
 # -----------------------------
-# LOGIN ENDPOINT (UPDATED - Returns venue)
+# LOGIN ENDPOINT
 # -----------------------------
 @app.post("/api/login")
 def login(data: LoginRequest):
@@ -212,12 +212,12 @@ def login(data: LoginRequest):
 
     return {
         "success": True,
-        "venue": user_venue  # Return the user's assigned venue
+        "venue": user_venue
     }
 
 
 # -----------------------------
-# PREDICTION ENDPOINT
+# PREDICTION ENDPOINT (UPDATED - Returns Range)
 # -----------------------------
 @app.post("/api/predict")
 def predict(data: PredictRequest):
@@ -257,9 +257,31 @@ def predict(data: PredictRequest):
         IMPUTER,
     )
 
-    # 4. PRICE PREDICTION
+    # 4. TICKET SALES PREDICTION (WITH RANGE AND CAPACITY CAP)
     try:
-        predicted_price = float(MODEL.predict(X)[0])
+        predicted_tickets = float(MODEL.predict(X)[0])
+        
+        # Calculate range using MAE-based uncertainty
+        MAE = 155  # Your model's Mean Absolute Error
+        
+        low_estimate = max(0, predicted_tickets - (1.5 * MAE))  # Conservative
+        high_estimate = predicted_tickets + (1.5 * MAE)  # Optimistic
+        
+        # Apply capacity cap - cannot exceed venue maximum
+        venue_capacity = VENUES[venue]["capacity"]
+        low_estimate = min(low_estimate, venue_capacity)
+        predicted_tickets = min(predicted_tickets, venue_capacity)
+        high_estimate = min(high_estimate, venue_capacity)
+        
+        # Round to integers
+        prediction_range = {
+            "low": int(round(low_estimate)),
+            "expected": int(round(predicted_tickets)),
+            "high": int(round(high_estimate)),
+            "capacity": venue_capacity,
+            "capacity_percentage": int(round((predicted_tickets / venue_capacity) * 100))
+        }
+        
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Prediction error: {e}")
 
@@ -272,12 +294,12 @@ def predict(data: PredictRequest):
     # 6. ARTIST-VENUE INFO
     artist_venue_info = get_artist_venue_info(artist, venue)
 
-    # 7. COMPETING SHOWS (NOW USING REAL JAMBASE DATA)
+    # 7. COMPETING SHOWS
     competing_shows = calculate_competing_shows(venue, date_obj)
 
     # 8. COMPLETE RESPONSE
     return {
-        "recommended_price": predicted_price,
+        "predicted_tickets": prediction_range,  # CHANGED: Now returns range instead of single price
         "weather": weather,
         "cm_data": cm_data,
         "features_used": raw_features,
@@ -298,7 +320,7 @@ def predict(data: PredictRequest):
         # Artist-venue info
         "artist_venue_info": artist_venue_info,
 
-        # Competition analysis (REAL DATA FROM JAMBASE)
+        # Competition analysis
         "competing_shows": competing_shows
     }
 
