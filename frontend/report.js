@@ -71,47 +71,39 @@ function populateReport(data) {
     createTrendsChart(labels, values);
 
     // ===========================
-    // PREDICTED TICKET SALES (UPDATED - Show Range)
+    // PREDICTED TICKET SALES (Show Range)
     // ===========================
     const ticketPrediction = data.predicted_tickets || {};
     
-    // if (ticketPrediction.expected) {
-    //     const expectedSalesEl = document.getElementById("expectedSales");
-    //     if (expectedSalesEl) {
-    //         expectedSalesEl.textContent = `${ticketPrediction.low} - ${ticketPrediction.high}`;
-    //     }
+    const recommendedPriceEl = document.getElementById("recommendedPriceLarge");
+    if (recommendedPriceEl && ticketPrediction.expected) {
+        recommendedPriceEl.textContent = ticketPrediction.expected;
         
-        // Also update the "Recommended Price" section to show prediction
-        const recommendedPriceEl = document.getElementById("recommendedPriceLarge");
-        if (recommendedPriceEl) {
-            recommendedPriceEl.textContent = ticketPrediction.expected;
+        // Add capacity percentage
+        const priceCard = recommendedPriceEl.closest('.info-card');
+        if (priceCard) {
+            const cardHeader = priceCard.querySelector('.card-header h3');
+            if (cardHeader) {
+                cardHeader.textContent = 'Predicted Ticket Sales';
+            }
             
-            // Add capacity percentage
-            const priceCard = recommendedPriceEl.closest('.info-card');
-            if (priceCard) {
-                const cardHeader = priceCard.querySelector('.card-header h3');
-                if (cardHeader) {
-                    cardHeader.textContent = 'Predicted Ticket Sales';
-                }
-                
-                const statLabel = priceCard.querySelector('.stat-label');
-                if (statLabel) {
-                    statLabel.textContent = 'Expected Sales';
-                }
-                
-                // Add capacity info
-                if (!document.getElementById('capacityInfo')) {
-                    const capacityInfo = document.createElement('div');
-                    capacityInfo.id = 'capacityInfo';
-                    capacityInfo.style.marginTop = '10px';
-                    capacityInfo.style.fontSize = '14px';
-                    capacityInfo.style.color = '#6b7280';
-                    capacityInfo.innerHTML = `
-                        <div>Range: ${ticketPrediction.low} - ${ticketPrediction.high} tickets</div>
-                        <div>Capacity: ${ticketPrediction.capacity} (${ticketPrediction.capacity_percentage}% expected)</div>
-                    `;
-                    priceCard.querySelector('.stat-card').appendChild(capacityInfo);
-                }
+            const statLabel = priceCard.querySelector('.stat-label');
+            if (statLabel) {
+                statLabel.textContent = 'Expected Sales';
+            }
+            
+            // Add capacity info
+            if (!document.getElementById('capacityInfo')) {
+                const capacityInfo = document.createElement('div');
+                capacityInfo.id = 'capacityInfo';
+                capacityInfo.style.marginTop = '10px';
+                capacityInfo.style.fontSize = '14px';
+                capacityInfo.style.color = '#6b7280';
+                capacityInfo.innerHTML = `
+                    <div>Range: ${ticketPrediction.low} - ${ticketPrediction.high} tickets</div>
+                    <div>Capacity: ${ticketPrediction.capacity} (${ticketPrediction.capacity_percentage}% expected)</div>
+                `;
+                priceCard.querySelector('.stat-card').appendChild(capacityInfo);
             }
         }
     }
