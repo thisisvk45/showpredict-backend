@@ -45,6 +45,7 @@
             cursor: pointer;
             display: flex;
             align-items: center;
+            transition: background 0.2s;
         }
 
         .btn-back:hover {
@@ -68,45 +69,52 @@
             padding: 30px 40px;
         }
 
-        /* Artist Name Section */
+        /* Main 40/60 Split Layout */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 40% 60%;
+            gap: 24px;
+        }
+
+        /* LEFT COLUMN (40%) */
+        .left-column {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Artist Name Card */
         .artist-hero {
             background: white;
             border-radius: 12px;
-            padding: 30px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-            margin-bottom: 20px;
+            padding: 32px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
         }
 
         .artist-name {
             font-size: 48px;
             font-weight: 700;
             color: #1d1d1f;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
+            line-height: 1.1;
         }
 
         .event-info {
-            font-size: 18px;
+            font-size: 16px;
             color: #6e6e73;
+            font-weight: 400;
         }
 
-        /* Main Two-Column Layout */
-        .main-grid {
-            display: grid;
-            grid-template-columns: 320px 1fr;
-            gap: 20px;
-        }
-
-        /* Left: Social Stats Sidebar */
+        /* Social Stats Card */
         .social-sidebar {
             background: white;
             border-radius: 12px;
-            padding: 24px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-            height: fit-content;
+            padding: 28px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
         }
 
         .social-platform {
-            margin-bottom: 28px;
+            margin-bottom: 32px;
         }
 
         .social-platform:last-child {
@@ -116,16 +124,16 @@
         .platform-header {
             display: flex;
             align-items: center;
-            gap: 10px;
-            margin-bottom: 12px;
+            gap: 12px;
+            margin-bottom: 16px;
         }
 
         .platform-icon {
-            font-size: 22px;
+            font-size: 24px;
         }
 
         .platform-name {
-            font-size: 16px;
+            font-size: 17px;
             font-weight: 600;
             color: #1d1d1f;
         }
@@ -134,7 +142,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 8px 0;
+            padding: 10px 0;
             border-bottom: 1px solid #f5f5f7;
         }
 
@@ -143,27 +151,27 @@
         }
 
         .metric-label {
-            font-size: 13px;
+            font-size: 14px;
             color: #6e6e73;
         }
 
         .metric-value-wrapper {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
         }
 
         .metric-value {
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 600;
             color: #1d1d1f;
         }
 
         .metric-change {
-            font-size: 12px;
+            font-size: 13px;
             font-weight: 500;
-            padding: 2px 6px;
-            border-radius: 4px;
+            padding: 3px 8px;
+            border-radius: 6px;
         }
 
         .metric-change.positive {
@@ -181,14 +189,14 @@
             background: #f5f5f7;
         }
 
-        /* Right: Content Area */
-        .content-area {
+        /* RIGHT COLUMN (60%) */
+        .right-column {
             display: flex;
             flex-direction: column;
             gap: 20px;
         }
 
-        /* 2x2 Cards Grid at Top */
+        /* 2x2 Info Cards Grid */
         .info-cards-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -198,44 +206,52 @@
         .info-card {
             background: white;
             border-radius: 12px;
-            padding: 24px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            padding: 28px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .info-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.12);
         }
 
         .card-title {
-            font-size: 13px;
-            font-weight: 500;
+            font-size: 12px;
+            font-weight: 600;
             color: #6e6e73;
-            margin-bottom: 12px;
+            margin-bottom: 14px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.8px;
         }
 
         .card-value {
-            font-size: 36px;
+            font-size: 38px;
             font-weight: 700;
             color: #1d1d1f;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
+            line-height: 1.1;
         }
 
         .card-subtitle {
             font-size: 14px;
             color: #6e6e73;
+            font-weight: 400;
         }
 
         /* Competition Section */
         .competition-section {
             background: white;
             border-radius: 12px;
-            padding: 24px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            padding: 28px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
         }
 
         .section-header {
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 600;
             color: #1d1d1f;
-            margin-bottom: 16px;
+            margin-bottom: 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -245,6 +261,7 @@
             font-size: 12px;
             color: #6e6e73;
             font-weight: 400;
+            text-transform: lowercase;
         }
 
         .competition-table {
@@ -254,17 +271,18 @@
 
         .competition-table th {
             text-align: left;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 600;
             color: #6e6e73;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            padding: 12px 16px;
+            letter-spacing: 0.8px;
+            padding: 14px 16px;
             border-bottom: 2px solid #f5f5f7;
+            background: #fafafa;
         }
 
         .competition-table td {
-            padding: 14px 16px;
+            padding: 16px;
             font-size: 14px;
             color: #1d1d1f;
             border-bottom: 1px solid #f5f5f7;
@@ -272,6 +290,10 @@
 
         .competition-table tr:last-child td {
             border-bottom: none;
+        }
+
+        .competition-table tr:hover {
+            background: #fafafa;
         }
 
         /* Venue Stats Grid */
@@ -282,20 +304,21 @@
         }
 
         .stat-card {
-            background: #f5f5f7;
-            border-radius: 8px;
-            padding: 20px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #f5f5f7 100%);
+            border-radius: 10px;
+            padding: 22px;
+            border: 1px solid #e8e8ed;
         }
 
         .stat-card-title {
             font-size: 13px;
             font-weight: 500;
             color: #6e6e73;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
 
         .stat-card-value {
-            font-size: 32px;
+            font-size: 34px;
             font-weight: 700;
             color: #1d1d1f;
         }
@@ -304,19 +327,19 @@
         .chart-section {
             background: white;
             border-radius: 12px;
-            padding: 24px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            padding: 28px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
         }
 
         .chart-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
         }
 
         .chart-title {
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 600;
             color: #1d1d1f;
         }
@@ -324,7 +347,7 @@
         .chart-subtitle {
             font-size: 13px;
             color: #6e6e73;
-            margin-top: 4px;
+            margin-top: 6px;
         }
 
         .chart-toggle {
@@ -333,8 +356,8 @@
         }
 
         .toggle-btn {
-            padding: 6px 16px;
-            border: 1px solid #d2d2d7;
+            padding: 8px 20px;
+            border: 1.5px solid #d2d2d7;
             background: white;
             border-radius: 20px;
             font-size: 13px;
@@ -351,14 +374,15 @@
 
         .toggle-btn:hover:not(.active) {
             background: #f5f5f7;
+            border-color: #380E75;
         }
 
         /* Raw Data Section */
         .raw-data-section {
             background: white;
             border-radius: 12px;
-            padding: 24px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            padding: 28px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
         }
 
         .collapsible-header {
@@ -366,6 +390,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            transition: color 0.2s;
         }
 
         .collapsible-header:hover {
@@ -374,6 +399,7 @@
 
         .expand-icon {
             transition: transform 0.3s;
+            stroke: #6e6e73;
         }
 
         .expand-icon.rotated {
@@ -403,17 +429,18 @@
             font-size: 14px;
             font-weight: 600;
             color: #1d1d1f;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
 
         .data-block pre {
-            background: #f5f5f7;
-            padding: 16px;
-            border-radius: 8px;
+            background: #f8f9fa;
+            padding: 18px;
+            border-radius: 10px;
             font-size: 12px;
             overflow-x: auto;
             color: #1d1d1f;
             font-family: 'Monaco', 'Menlo', monospace;
+            border: 1px solid #e8e8ed;
         }
 
         /* Hide when never played */
@@ -439,99 +466,102 @@
     </div>
 
     <div class="container">
-        <!-- Artist Name Hero -->
-        <div class="artist-hero">
-            <div class="artist-name" id="artistName">Still Woozy</div>
-            <div class="event-info" id="venueInfo">@ The Spot on Kirk on December 28, 2025</div>
-        </div>
-
-        <!-- Main Two-Column Layout -->
+        <!-- Main 40/60 Split Layout -->
         <div class="main-grid">
             
-            <!-- LEFT: Social Media Sidebar -->
-            <div class="social-sidebar">
-                <div class="social-platform">
-                    <div class="platform-header">
-                        <i class="fab fa-spotify platform-icon" style="color: #1DB954;"></i>
-                        <span class="platform-name">Spotify</span>
-                    </div>
-                    <div class="social-metric">
-                        <span class="metric-label">Monthly listeners</span>
-                        <div class="metric-value-wrapper">
-                            <span class="metric-value" id="spotifyListeners">3.2M</span>
-                            <span class="metric-change positive">+5%</span>
-                        </div>
-                    </div>
-                    <div class="social-metric">
-                        <span class="metric-label">Followers</span>
-                        <div class="metric-value-wrapper">
-                            <span class="metric-value" id="spotifyFollowers">1.1M</span>
-                            <span class="metric-change negative">-2%</span>
-                        </div>
-                    </div>
+            <!-- LEFT COLUMN (40%) -->
+            <div class="left-column">
+                <!-- Artist Name Card -->
+                <div class="artist-hero">
+                    <div class="artist-name" id="artistName">Still Woozy</div>
+                    <div class="event-info" id="venueInfo">@ The Spot on Kirk on December 28, 2025</div>
                 </div>
 
-                <div class="social-platform">
-                    <div class="platform-header">
-                        <i class="fab fa-instagram platform-icon" style="color: #E4405F;"></i>
-                        <span class="platform-name">Instagram</span>
-                    </div>
-                    <div class="social-metric">
-                        <span class="metric-label">Followers</span>
-                        <div class="metric-value-wrapper">
-                            <span class="metric-value" id="instaFollowers">290.4K</span>
-                            <span class="metric-change positive">+10%</span>
+                <!-- Social Media Stats -->
+                <div class="social-sidebar">
+                    <div class="social-platform">
+                        <div class="platform-header">
+                            <i class="fab fa-spotify platform-icon" style="color: #1DB954;"></i>
+                            <span class="platform-name">Spotify</span>
+                        </div>
+                        <div class="social-metric">
+                            <span class="metric-label">Monthly listeners</span>
+                            <div class="metric-value-wrapper">
+                                <span class="metric-value" id="spotifyListeners">3.2M</span>
+                                <span class="metric-change positive">+5%</span>
+                            </div>
+                        </div>
+                        <div class="social-metric">
+                            <span class="metric-label">Followers</span>
+                            <div class="metric-value-wrapper">
+                                <span class="metric-value" id="spotifyFollowers">1.1M</span>
+                                <span class="metric-change negative">-2%</span>
+                            </div>
                         </div>
                     </div>
-                    <div class="social-metric">
-                        <span class="metric-label">Avg likes per post</span>
-                        <div class="metric-value-wrapper">
-                            <span class="metric-value" id="instaLikes">14.3K</span>
-                            <span class="metric-change negative">-8%</span>
-                        </div>
-                    </div>
-                    <div class="social-metric">
-                        <span class="metric-label">Avg comments per post</span>
-                        <div class="metric-value-wrapper">
-                            <span class="metric-value" id="instaComments">3.6K</span>
-                            <span class="metric-change positive">+5%</span>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="social-platform">
-                    <div class="platform-header">
-                        <i class="fab fa-tiktok platform-icon" style="color: #000000;"></i>
-                        <span class="platform-name">TikTok</span>
-                    </div>
-                    <div class="social-metric">
-                        <span class="metric-label">Followers</span>
-                        <div class="metric-value-wrapper">
-                            <span class="metric-value" id="tiktokFollowers">116.1K</span>
-                            <span class="metric-change positive">+1%</span>
+                    <div class="social-platform">
+                        <div class="platform-header">
+                            <i class="fab fa-instagram platform-icon" style="color: #E4405F;"></i>
+                            <span class="platform-name">Instagram</span>
+                        </div>
+                        <div class="social-metric">
+                            <span class="metric-label">Followers</span>
+                            <div class="metric-value-wrapper">
+                                <span class="metric-value" id="instaFollowers">290.4K</span>
+                                <span class="metric-change positive">+10%</span>
+                            </div>
+                        </div>
+                        <div class="social-metric">
+                            <span class="metric-label">Avg likes per post</span>
+                            <div class="metric-value-wrapper">
+                                <span class="metric-value" id="instaLikes">14.3K</span>
+                                <span class="metric-change negative">-8%</span>
+                            </div>
+                        </div>
+                        <div class="social-metric">
+                            <span class="metric-label">Avg comments per post</span>
+                            <div class="metric-value-wrapper">
+                                <span class="metric-value" id="instaComments">3.6K</span>
+                                <span class="metric-change positive">+5%</span>
+                            </div>
                         </div>
                     </div>
-                    <div class="social-metric">
-                        <span class="metric-label">Avg likes per post</span>
-                        <div class="metric-value-wrapper">
-                            <span class="metric-value" id="tiktokLikes">32.5K</span>
-                            <span class="metric-change neutral">-</span>
+
+                    <div class="social-platform">
+                        <div class="platform-header">
+                            <i class="fab fa-tiktok platform-icon" style="color: #000000;"></i>
+                            <span class="platform-name">TikTok</span>
                         </div>
-                    </div>
-                    <div class="social-metric">
-                        <span class="metric-label">Avg comments per post</span>
-                        <div class="metric-value-wrapper">
-                            <span class="metric-value" id="tiktokComments">1.9K</span>
-                            <span class="metric-change positive">+4%</span>
+                        <div class="social-metric">
+                            <span class="metric-label">Followers</span>
+                            <div class="metric-value-wrapper">
+                                <span class="metric-value" id="tiktokFollowers">116.1K</span>
+                                <span class="metric-change positive">+1%</span>
+                            </div>
+                        </div>
+                        <div class="social-metric">
+                            <span class="metric-label">Avg likes per post</span>
+                            <div class="metric-value-wrapper">
+                                <span class="metric-value" id="tiktokLikes">32.5K</span>
+                                <span class="metric-change neutral">-</span>
+                            </div>
+                        </div>
+                        <div class="social-metric">
+                            <span class="metric-label">Avg comments per post</span>
+                            <div class="metric-value-wrapper">
+                                <span class="metric-value" id="tiktokComments">1.9K</span>
+                                <span class="metric-change positive">+4%</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- RIGHT: Content Area -->
-            <div class="content-area">
+            <!-- RIGHT COLUMN (60%) -->
+            <div class="right-column">
                 
-                <!-- 2x2 Info Cards Grid -->
+                <!-- 2x2 Info Cards Grid (Top) -->
                 <div class="info-cards-grid">
                     <div class="info-card">
                         <div class="card-title">Expected ticket sales</div>
@@ -554,8 +584,8 @@
                         </div>
                     </div>
 
-                    <div class="info-card" style="display: none;">
-                        <!-- Reserved for future use -->
+                    <div class="info-card" style="visibility: hidden;">
+                        <!-- Hidden placeholder for grid alignment -->
                     </div>
                 </div>
 
