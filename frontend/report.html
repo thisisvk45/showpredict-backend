@@ -4,6 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>The MAP - Report</title>
+    
+    <!-- Font Awesome for Brand Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         * {
@@ -65,75 +68,41 @@
             padding: 30px 40px;
         }
 
-        /* Top Cards Grid */
-        .top-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr;
-            gap: 16px;
-            margin-bottom: 30px;
-        }
-
-        .card {
+        /* Artist Name Section */
+        .artist-hero {
             background: white;
             border-radius: 12px;
-            padding: 24px;
+            padding: 30px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-        }
-
-        .card-title {
-            font-size: 13px;
-            font-weight: 500;
-            color: #6e6e73;
-            margin-bottom: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .card-value {
-            font-size: 36px;
-            font-weight: 700;
-            color: #1d1d1f;
-            margin-bottom: 8px;
-        }
-
-        .card-subtitle {
-            font-size: 14px;
-            color: #6e6e73;
-        }
-
-        /* Artist Header */
-        .artist-header {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+            margin-bottom: 20px;
         }
 
         .artist-name {
-            font-size: 42px;
+            font-size: 48px;
             font-weight: 700;
             color: #1d1d1f;
             margin-bottom: 8px;
         }
 
         .event-info {
-            font-size: 16px;
+            font-size: 18px;
             color: #6e6e73;
         }
 
-        /* Main Content Grid */
+        /* Main Two-Column Layout */
         .main-grid {
             display: grid;
-            grid-template-columns: 300px 1fr;
+            grid-template-columns: 320px 1fr;
             gap: 20px;
-            margin-bottom: 30px;
         }
 
-        /* Social Stats Sidebar */
+        /* Left: Social Stats Sidebar */
         .social-sidebar {
             background: white;
             border-radius: 12px;
             padding: 24px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            height: fit-content;
         }
 
         .social-platform {
@@ -147,12 +116,12 @@
         .platform-header {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             margin-bottom: 12px;
         }
 
         .platform-icon {
-            font-size: 24px;
+            font-size: 22px;
         }
 
         .platform-name {
@@ -207,14 +176,54 @@
             background: #ffe8e6;
         }
 
-        /* Right Content Area */
+        .metric-change.neutral {
+            color: #6e6e73;
+            background: #f5f5f7;
+        }
+
+        /* Right: Content Area */
         .content-area {
             display: flex;
             flex-direction: column;
             gap: 20px;
         }
 
-        /* Competition Table */
+        /* 2x2 Cards Grid at Top */
+        .info-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .info-card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .card-title {
+            font-size: 13px;
+            font-weight: 500;
+            color: #6e6e73;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .card-value {
+            font-size: 36px;
+            font-weight: 700;
+            color: #1d1d1f;
+            margin-bottom: 8px;
+        }
+
+        .card-subtitle {
+            font-size: 14px;
+            color: #6e6e73;
+        }
+
+        /* Competition Section */
         .competition-section {
             background: white;
             border-radius: 12px;
@@ -273,10 +282,9 @@
         }
 
         .stat-card {
-            background: white;
-            border-radius: 12px;
+            background: #f5f5f7;
+            border-radius: 8px;
             padding: 20px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
         }
 
         .stat-card-title {
@@ -407,6 +415,11 @@
             color: #1d1d1f;
             font-family: 'Monaco', 'Menlo', monospace;
         }
+
+        /* Hide when never played */
+        .hide-info {
+            display: none !important;
+        }
     </style>
 </head>
 
@@ -426,61 +439,33 @@
     </div>
 
     <div class="container">
-        <!-- Top Section -->
-        <div class="top-grid">
-            <div class="card artist-header">
-                <div class="artist-name" id="artistName">The Local Honeys</div>
-                <div class="event-info" id="venueInfo">@ The Historic Theater on 1/20/2025</div>
-            </div>
-
-            <div class="card">
-                <div class="card-title">Expected ticket sales</div>
-                <div class="card-value" id="expectedSalesRange">280-310</div>
-                <div class="card-subtitle" id="expectedPercentage">80% above average</div>
-            </div>
-
-            <div class="card">
-                <div class="card-title">Expected weather</div>
-                <div class="card-value" id="weatherCondition">Partly Cloudy</div>
-                <div class="card-subtitle" id="weatherTemp">40°F</div>
-            </div>
+        <!-- Artist Name Hero -->
+        <div class="artist-hero">
+            <div class="artist-name" id="artistName">Still Woozy</div>
+            <div class="event-info" id="venueInfo">@ The Spot on Kirk on December 28, 2025</div>
         </div>
 
-        <div class="top-grid" style="grid-template-columns: repeat(2, 1fr);">
-            <div class="card">
-                <div class="card-title">Last play date</div>
-                <div class="card-value" id="lastPlayDate">2025-06-14</div>
-                <div class="card-subtitle">
-                    <span id="lastPlayTickets">300</span> tickets sold • 
-                    <span id="timesPlayed">2</span> times played
-                </div>
-            </div>
-
-            <div class="card" style="display: none;">
-                <!-- Placeholder for future feature -->
-            </div>
-        </div>
-
-        <!-- Main Content Grid -->
+        <!-- Main Two-Column Layout -->
         <div class="main-grid">
-            <!-- Social Media Sidebar -->
+            
+            <!-- LEFT: Social Media Sidebar -->
             <div class="social-sidebar">
                 <div class="social-platform">
                     <div class="platform-header">
-                        <span class="platform-icon">🎵</span>
+                        <i class="fab fa-spotify platform-icon" style="color: #1DB954;"></i>
                         <span class="platform-name">Spotify</span>
                     </div>
                     <div class="social-metric">
                         <span class="metric-label">Monthly listeners</span>
                         <div class="metric-value-wrapper">
-                            <span class="metric-value" id="spotifyListeners">123.3K</span>
+                            <span class="metric-value" id="spotifyListeners">3.2M</span>
                             <span class="metric-change positive">+5%</span>
                         </div>
                     </div>
                     <div class="social-metric">
                         <span class="metric-label">Followers</span>
                         <div class="metric-value-wrapper">
-                            <span class="metric-value" id="spotifyFollowers">25.6K</span>
+                            <span class="metric-value" id="spotifyFollowers">1.1M</span>
                             <span class="metric-change negative">-2%</span>
                         </div>
                     </div>
@@ -488,27 +473,27 @@
 
                 <div class="social-platform">
                     <div class="platform-header">
-                        <span class="platform-icon">📷</span>
+                        <i class="fab fa-instagram platform-icon" style="color: #E4405F;"></i>
                         <span class="platform-name">Instagram</span>
                     </div>
                     <div class="social-metric">
                         <span class="metric-label">Followers</span>
                         <div class="metric-value-wrapper">
-                            <span class="metric-value" id="instaFollowers">29.4K</span>
+                            <span class="metric-value" id="instaFollowers">290.4K</span>
                             <span class="metric-change positive">+10%</span>
                         </div>
                     </div>
                     <div class="social-metric">
                         <span class="metric-label">Avg likes per post</span>
                         <div class="metric-value-wrapper">
-                            <span class="metric-value" id="instaLikes">4K</span>
+                            <span class="metric-value" id="instaLikes">14.3K</span>
                             <span class="metric-change negative">-8%</span>
                         </div>
                     </div>
                     <div class="social-metric">
                         <span class="metric-label">Avg comments per post</span>
                         <div class="metric-value-wrapper">
-                            <span class="metric-value" id="instaComments">1K</span>
+                            <span class="metric-value" id="instaComments">3.6K</span>
                             <span class="metric-change positive">+5%</span>
                         </div>
                     </div>
@@ -516,35 +501,64 @@
 
                 <div class="social-platform">
                     <div class="platform-header">
-                        <span class="platform-icon">🎬</span>
+                        <i class="fab fa-tiktok platform-icon" style="color: #000000;"></i>
                         <span class="platform-name">TikTok</span>
                     </div>
                     <div class="social-metric">
                         <span class="metric-label">Followers</span>
                         <div class="metric-value-wrapper">
-                            <span class="metric-value" id="tiktokFollowers">1.8K</span>
+                            <span class="metric-value" id="tiktokFollowers">116.1K</span>
                             <span class="metric-change positive">+1%</span>
                         </div>
                     </div>
                     <div class="social-metric">
                         <span class="metric-label">Avg likes per post</span>
                         <div class="metric-value-wrapper">
-                            <span class="metric-value" id="tiktokLikes">0.5K</span>
-                            <span class="metric-change">-</span>
+                            <span class="metric-value" id="tiktokLikes">32.5K</span>
+                            <span class="metric-change neutral">-</span>
                         </div>
                     </div>
                     <div class="social-metric">
                         <span class="metric-label">Avg comments per post</span>
                         <div class="metric-value-wrapper">
-                            <span class="metric-value" id="tiktokComments">0.1K</span>
+                            <span class="metric-value" id="tiktokComments">1.9K</span>
                             <span class="metric-change positive">+4%</span>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Right Content -->
+            <!-- RIGHT: Content Area -->
             <div class="content-area">
+                
+                <!-- 2x2 Info Cards Grid -->
+                <div class="info-cards-grid">
+                    <div class="info-card">
+                        <div class="card-title">Expected ticket sales</div>
+                        <div class="card-value" id="expectedSalesRange">0-125</div>
+                        <div class="card-subtitle" id="expectedPercentage">12% below average</div>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="card-title">Expected weather</div>
+                        <div class="card-value" id="weatherCondition">Rain, Partially cloudy</div>
+                        <div class="card-subtitle" id="weatherTemp">41°F</div>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="card-title">Last play date</div>
+                        <div class="card-value" id="lastPlayDate">Never</div>
+                        <div class="card-subtitle" id="lastPlaySubtitle">
+                            <span id="lastPlayTickets">300</span> tickets sold • 
+                            <span id="timesPlayed">0</span> times played
+                        </div>
+                    </div>
+
+                    <div class="info-card" style="display: none;">
+                        <!-- Reserved for future use -->
+                    </div>
+                </div>
+
                 <!-- Competition Table -->
                 <div class="competition-section">
                     <div class="section-header">
@@ -572,19 +586,19 @@
                     <div class="venue-stats">
                         <div class="stat-card">
                             <div class="stat-card-title">Avg tickets last month</div>
-                            <div class="stat-card-value" id="avgLastMonth">30</div>
+                            <div class="stat-card-value" id="avgLastMonth">38</div>
                         </div>
                         <div class="stat-card">
                             <div class="stat-card-title">Avg tickets last year</div>
-                            <div class="stat-card-value" id="avgLastYear">50</div>
+                            <div class="stat-card-value" id="avgLastYear">47</div>
                         </div>
                         <div class="stat-card">
                             <div class="stat-card-title">Events last month</div>
-                            <div class="stat-card-value" id="eventsLastMonth">5</div>
+                            <div class="stat-card-value" id="eventsLastMonth">8</div>
                         </div>
                         <div class="stat-card">
                             <div class="stat-card-title">Events last year</div>
-                            <div class="stat-card-value" id="eventsLastYear">40</div>
+                            <div class="stat-card-value" id="eventsLastYear">87</div>
                         </div>
                     </div>
                 </div>
@@ -627,6 +641,7 @@
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
