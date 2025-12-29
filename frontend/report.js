@@ -54,11 +54,17 @@ function populateReport(data) {
         document.getElementById("expectedSalesRange").textContent = 
             `${ticketPrediction.low}-${ticketPrediction.high}`;
         
-        // Calculate % above average
+        // Calculate % above/below average
         const avgLastYear = venueStats.avg_tickets_last_1_year || 100;
         const percentAbove = Math.round(((ticketPrediction.expected - avgLastYear) / avgLastYear) * 100);
-        document.getElementById("expectedPercentage").textContent = 
-            `${Math.abs(percentAbove)}% ${percentAbove >= 0 ? 'above' : 'below'} average`;
+        
+        if (percentAbove >= 0) {
+            document.getElementById("expectedPercentage").textContent = 
+                `${percentAbove}% above average`;
+        } else {
+            document.getElementById("expectedPercentage").textContent = 
+                `${Math.abs(percentAbove)}% below average`;
+        }
     }
 
     // Weather
@@ -71,21 +77,28 @@ function populateReport(data) {
         document.getElementById("weatherTemp").textContent = `${tempF}°F`;
     }
 
-    // Last Play Information
-    // Last Play Information
+    // Last Play Information (FIXED LOGIC)
     const artistVenueInfo = data.artist_venue_info || {};
-    if (artistVenueInfo.last_play_date) {
+    
+    if (artistVenueInfo.last_play_date && artistVenueInfo.last_play_date !== null) {
         // Artist HAS played here before
         document.getElementById("lastPlayDate").textContent = artistVenueInfo.last_play_date;
         
+        // Show subtitle with tickets and times played
+        const lastPlaySubtitle = document.getElementById("lastPlaySubtitle");
+        lastPlaySubtitle.classList.remove("hide-info");
+        
+        // Estimate tickets sold from last play
         const estimatedLastPlayTickets = Math.round(venueStats.avg_tickets_last_1_year || ticketPrediction.expected || 300);
         document.getElementById("lastPlayTickets").textContent = estimatedLastPlayTickets;
         document.getElementById("timesPlayed").textContent = artistVenueInfo.times_played || 0;
     } else {
         // Artist has NEVER played here
         document.getElementById("lastPlayDate").textContent = "Never";
-        document.getElementById("lastPlayTickets").parentElement.style.display = "none"; // Hide tickets info
-        document.getElementById("timesPlayed").parentElement.style.display = "none"; // Hide times played info
+        
+        // Hide the subtitle (tickets sold and times played)
+        const lastPlaySubtitle = document.getElementById("lastPlaySubtitle");
+        lastPlaySubtitle.classList.add("hide-info");
     }
 
     // Social Media Stats (Detailed)
@@ -129,7 +142,7 @@ function populateSocialStats(cmData = {}) {
     document.getElementById("instaFollowers").textContent = 
         formatNumber(cmData.instagram_total_followers || 0);
     
-    // Estimate likes and comments (Chartmetric doesn't provide these, so we'll calculate)
+    // Estimate likes and comments (Chartmetric doesn't provide these directly)
     const instaFollowers = cmData.instagram_total_followers || 0;
     const engagementRate = cmData.instagram_engagement_rate || 3;
     const avgLikes = Math.round((instaFollowers * engagementRate) / 100);
@@ -142,7 +155,7 @@ function populateSocialStats(cmData = {}) {
     document.getElementById("tiktokFollowers").textContent = 
         formatNumber(cmData.tiktok_total_followers || 0);
     
-    // Estimate TikTok engagement (rough estimates)
+    // Estimate TikTok engagement (rough estimates based on typical rates)
     const tiktokFollowers = cmData.tiktok_total_followers || 0;
     const tiktokLikes = Math.round(tiktokFollowers * 0.28); // ~28% engagement typical
     const tiktokComments = Math.round(tiktokLikes * 0.06); // ~6% of likes
