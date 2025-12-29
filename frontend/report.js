@@ -72,17 +72,21 @@ function populateReport(data) {
     }
 
     // Last Play Information
+    // Last Play Information
     const artistVenueInfo = data.artist_venue_info || {};
     if (artistVenueInfo.last_play_date) {
+        // Artist HAS played here before
         document.getElementById("lastPlayDate").textContent = artistVenueInfo.last_play_date;
+        
+        const estimatedLastPlayTickets = Math.round(venueStats.avg_tickets_last_1_year || ticketPrediction.expected || 300);
+        document.getElementById("lastPlayTickets").textContent = estimatedLastPlayTickets;
+        document.getElementById("timesPlayed").textContent = artistVenueInfo.times_played || 0;
     } else {
+        // Artist has NEVER played here
         document.getElementById("lastPlayDate").textContent = "Never";
+        document.getElementById("lastPlayTickets").parentElement.style.display = "none"; // Hide tickets info
+        document.getElementById("timesPlayed").parentElement.style.display = "none"; // Hide times played info
     }
-    
-    // Estimate tickets sold from last play (using venue average or prediction)
-    const estimatedLastPlayTickets = Math.round(venueStats.avg_tickets_last_1_year || ticketPrediction.expected || 300);
-    document.getElementById("lastPlayTickets").textContent = estimatedLastPlayTickets;
-    document.getElementById("timesPlayed").textContent = artistVenueInfo.times_played || 0;
 
     // Social Media Stats (Detailed)
     populateSocialStats(data.cm_data);
