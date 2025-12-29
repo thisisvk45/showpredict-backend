@@ -1,8 +1,6 @@
 // ===========================
-// NO MORE HARDCODED DATA!
-// All data comes from the backend API
+// Storage Helper
 // ===========================
-
 const Storage = {
     getUser: () => localStorage.getItem("showpredict_user"),
     getReportData: () => {
@@ -27,11 +25,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("welcomeText").textContent = `Welcome, ${username}`;
     populateReport(reportData);
 
+    // Chart toggle buttons
     document.querySelectorAll(".toggle-btn").forEach(btn => {
         btn.addEventListener("click", () => {
             document.querySelectorAll(".toggle-btn").forEach(b => b.classList.remove("active"));
             btn.classList.add("active");
-
             currentChartType = btn.textContent.trim().toLowerCase();
             recreateChart();
         });
@@ -39,232 +37,145 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 // ===========================
+// POPULATE REPORT
+// ===========================
 function populateReport(data) {
+    // Artist & Venue Info
     document.getElementById("artistName").textContent = data.artist;
-    document.getElementById("venueInfo").textContent =
-        `${data.venue} • ${formatDate(data.date)}`;
+    document.getElementById("headerArtist").textContent = data.artist;
+    document.getElementById("venueInfo").textContent = 
+        `@ ${data.venue} on ${formatDate(data.date)}`;
 
     const venueStats = data.venue_stats || {};
+    const ticketPrediction = data.predicted_tickets || {};
 
-    // Top cards
-    document.getElementById("avgLastMonth").textContent = roundOrDash(venueStats.avg_tickets_last_1_month);
-    document.getElementById("eventsLastMonth").textContent = roundOrDash(venueStats.events_last_1_month);
-    document.getElementById("avgLastYear").textContent = roundOrDash(venueStats.avg_tickets_last_1_year);
-    document.getElementById("eventsLastYear").textContent = roundOrDash(venueStats.events_last_1_year);
+    // Expected Ticket Sales with Range and % Above Average
+    if (ticketPrediction.expected) {
+        document.getElementById("expectedSalesRange").textContent = 
+            `${ticketPrediction.low}-${ticketPrediction.high}`;
+        
+        // Calculate % above average
+        const avgLastYear = venueStats.avg_tickets_last_1_year || 100;
+        const percentAbove = Math.round(((ticketPrediction.expected - avgLastYear) / avgLastYear) * 100);
+        document.getElementById("expectedPercentage").textContent = 
+            `${Math.abs(percentAbove)}% ${percentAbove >= 0 ? 'above' : 'below'} average`;
+    }
 
     // Weather
     if (data.weather && Object.keys(data.weather).length) {
-        const c = data.weather.conditions || "Unknown";
-        const t = Math.round(data.weather.temperature || 0);
-        document.getElementById("weatherConditionSmall").textContent = c;
-        document.getElementById("weatherTempSmall").textContent = `${t}°C`;
-    }
-
-    // Chart
-    const history = venueStats.history_last_6_months || [];
-    const labels = history.map(h => h.month);
-    const values = history.map(h => h.tickets);
-
-    window._chartLabels = labels;
-    window._chartValues = values;
-
-    createTrendsChart(labels, values);
-
-    // ===========================
-    // PREDICTED TICKET SALES (Show Range)
-    // ===========================
-    const ticketPrediction = data.predicted_tickets || {};
-    
-    const recommendedPriceEl = document.getElementById("recommendedPriceLarge");
-    if (recommendedPriceEl && ticketPrediction.expected) {
-        recommendedPriceEl.textContent = ticketPrediction.expected;
+        const condition = data.weather.conditions || "Unknown";
+        const tempC = data.weather.temperature || 0;
+        const tempF = Math.round((tempC * 9/5) + 32);
         
-        // Add capacity percentage
-        const priceCard = recommendedPriceEl.closest('.info-card');
-        if (priceCard) {
-            const cardHeader = priceCard.querySelector('.card-header h3');
-            if (cardHeader) {
-                cardHeader.textContent = 'Predicted Ticket Sales';
-            }
-            
-            const statLabel = priceCard.querySelector('.stat-label');
-            if (statLabel) {
-                statLabel.textContent = 'Expected Sales';
-            }
-            
-            // Add capacity info
-            if (!document.getElementById('capacityInfo')) {
-                const capacityInfo = document.createElement('div');
-                capacityInfo.id = 'capacityInfo';
-                capacityInfo.style.marginTop = '10px';
-                capacityInfo.style.fontSize = '14px';
-                capacityInfo.style.color = '#6b7280';
-                capacityInfo.innerHTML = `
-                    <div>Range: ${ticketPrediction.low} - ${ticketPrediction.high} tickets</div>
-                    <div>Capacity: ${ticketPrediction.capacity} (${ticketPrediction.capacity_percentage}% expected)</div>
-                `;
-                priceCard.querySelector('.stat-card').appendChild(capacityInfo);
-            }
-        }
+        document.getElementById("weatherCondition").textContent = condition;
+        document.getElementById("weatherTemp").textContent = `${tempF}°F`;
     }
 
-    // ===========================
-    // COMPETING SHOWS (from API)
-    // ===========================
-    const competingShows = data.competing_shows || { totalShows: 0, events: [] };
-    
-    // Update the count
-    const competingShowsEl = document.getElementById("competingShowsCount");
-    if (competingShowsEl) {
-        competingShowsEl.textContent = competingShows.totalShows;
-    }
-    
-    // Update the events list
-    const competingEventsList = document.getElementById("competingEventsList");
-    if (competingEventsList && competingShows.events && competingShows.events.length > 0) {
-        competingEventsList.innerHTML = competingShows.events.map(event => `
-            <div class="competing-event-item">
-                <div class="competing-event-content">
-                    <span class="event-name">${event.name}</span>
-                    <span class="event-date">${event.date}</span>
-                </div>
-                <span class="event-days">${event.daysDiff} days away</span>
-            </div>
-        `).join('');
-    } else if (competingEventsList) {
-        competingEventsList.innerHTML = '<p style="color: #6b7280; font-size: 14px;">No competing events in the next 7 days</p>';
-    }
-    
-    // Add styles if not already present
-    if (!document.getElementById('competingAnalysisStyles')) {
-        const style = document.createElement('style');
-        style.id = 'competingAnalysisStyles';
-        style.textContent = `
-            .competing-event-item {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                padding: 14px 16px;
-                margin-bottom: 10px;
-                background: #f8f9fa;
-                border-radius: 8px;
-                border-left: 3px solid #9b87f5;
-                transition: all 0.2s ease;
-            }
-            
-            .competing-event-item:hover {
-                background: #f1f3f5;
-                transform: translateX(2px);
-                box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            }
-            
-            .competing-event-item:last-child {
-                margin-bottom: 0;
-            }
-            
-            .competing-event-content {
-                display: flex;
-                flex-direction: column;
-                gap: 4px;
-            }
-            
-            .event-name {
-                font-weight: 600;
-                font-size: 15px;
-                color: #1a1a1a;
-            }
-            
-            .event-date {
-                font-size: 13px;
-                color: #6b7280;
-            }
-            
-            .event-days {
-                font-size: 13px;
-                font-weight: 500;
-                color: #9b87f5;
-                background: rgba(155, 135, 245, 0.1);
-                padding: 4px 12px;
-                border-radius: 12px;
-                white-space: nowrap;
-            }
-            
-            .competition-summary {
-                margin-top: 16px;
-                padding: 12px 16px;
-                background: #fff7ed;
-                border: 1px solid #fed7aa;
-                border-radius: 8px;
-                font-size: 14px;
-                color: #ea580c;
-                font-weight: 500;
-            }
-        `;
-        document.head.appendChild(style);
-    }
-
-    // ===========================
-    // LAST PLAY INFORMATION (from API)
-    // ===========================
+    // Last Play Information
     const artistVenueInfo = data.artist_venue_info || {};
-    
     if (artistVenueInfo.last_play_date) {
         document.getElementById("lastPlayDate").textContent = artistVenueInfo.last_play_date;
     } else {
         document.getElementById("lastPlayDate").textContent = "Never";
     }
     
-    if (artistVenueInfo.times_played) {
-        document.getElementById("timesPlayed").textContent = artistVenueInfo.times_played;
-    } else {
-        document.getElementById("timesPlayed").textContent = "0";
-    }
+    // Estimate tickets sold from last play (using venue average or prediction)
+    const estimatedLastPlayTickets = Math.round(venueStats.avg_tickets_last_1_year || ticketPrediction.expected || 300);
+    document.getElementById("lastPlayTickets").textContent = estimatedLastPlayTickets;
+    document.getElementById("timesPlayed").textContent = artistVenueInfo.times_played || 0;
 
-    // Social
+    // Social Media Stats (Detailed)
     populateSocialStats(data.cm_data);
 
-    // Raw sections
-    document.getElementById("weatherData").textContent =
-        JSON.stringify(data.weather, null, 2);
-    document.getElementById("artistData").textContent =
-        JSON.stringify(data.cm_data, null, 2);
-    document.getElementById("featuresData").textContent =
-        JSON.stringify(data.features_used, null, 2);
+    // Competition Table
+    populateCompetitionTable(data.competing_shows);
+
+    // Venue Stats
+    document.getElementById("avgLastMonth").textContent = roundOrDash(venueStats.avg_tickets_last_1_month);
+    document.getElementById("avgLastYear").textContent = roundOrDash(venueStats.avg_tickets_last_1_year);
+    document.getElementById("eventsLastMonth").textContent = roundOrDash(venueStats.events_last_1_month);
+    document.getElementById("eventsLastYear").textContent = roundOrDash(venueStats.events_last_1_year);
+
+    // Historical Chart
+    const history = venueStats.history_last_6_months || [];
+    const labels = history.map(h => h.month);
+    const values = history.map(h => h.tickets);
+    
+    window._chartLabels = labels;
+    window._chartValues = values;
+    createTrendsChart(labels, values);
+
+    // Raw Data
+    document.getElementById("weatherData").textContent = JSON.stringify(data.weather, null, 2);
+    document.getElementById("artistData").textContent = JSON.stringify(data.cm_data, null, 2);
+    document.getElementById("featuresData").textContent = JSON.stringify(data.features_used, null, 2);
 }
 
 // ===========================
+// SOCIAL MEDIA STATS (Detailed)
+// ===========================
 function populateSocialStats(cmData = {}) {
-    const el = document.getElementById("socialStats");
-    if (!el) return;
+    // Spotify
+    document.getElementById("spotifyListeners").textContent = 
+        formatNumber(cmData.spotify_monthly_listeners || 0);
+    document.getElementById("spotifyFollowers").textContent = 
+        formatNumber(cmData.spotify_followers || 0);
 
-    const platforms = [
-        { icon: "🎵", name: "Spotify", value: cmData.spotify_followers || 0, change: -3 },
-        { icon: "📷", name: "Instagram", value: cmData.instagram_total_followers || 0, change: -5 },
-        { icon: "🎬", name: "TikTok", value: cmData.tiktok_total_followers || 0, change: -8 }
-    ];
+    // Instagram
+    document.getElementById("instaFollowers").textContent = 
+        formatNumber(cmData.instagram_total_followers || 0);
+    
+    // Estimate likes and comments (Chartmetric doesn't provide these, so we'll calculate)
+    const instaFollowers = cmData.instagram_total_followers || 0;
+    const engagementRate = cmData.instagram_engagement_rate || 3;
+    const avgLikes = Math.round((instaFollowers * engagementRate) / 100);
+    const avgComments = Math.round(avgLikes * 0.25); // ~25% of likes
+    
+    document.getElementById("instaLikes").textContent = formatNumber(avgLikes);
+    document.getElementById("instaComments").textContent = formatNumber(avgComments);
 
-    el.innerHTML = platforms
-        .map(p => {
-            const arrow = p.change < 0 ? "↘" : "↗";
-            const dir = p.change < 0 ? "negative" : "positive";
-            return `
-                <div class="social-item">
-                    <div class="social-left">
-                        <span class="social-icon">${p.icon}</span>
-                        <span class="social-name">${p.name}</span>
-                    </div>
-                    <div>
-                        <span class="social-value">${formatNumber(p.value)}</span>
-                        <span class="social-change ${dir}">
-                            ${arrow}${Math.abs(p.change)}%
-                        </span>
-                    </div>
-                </div>
-            `;
-        })
-        .join("");
+    // TikTok
+    document.getElementById("tiktokFollowers").textContent = 
+        formatNumber(cmData.tiktok_total_followers || 0);
+    
+    // Estimate TikTok engagement (rough estimates)
+    const tiktokFollowers = cmData.tiktok_total_followers || 0;
+    const tiktokLikes = Math.round(tiktokFollowers * 0.28); // ~28% engagement typical
+    const tiktokComments = Math.round(tiktokLikes * 0.06); // ~6% of likes
+    
+    document.getElementById("tiktokLikes").textContent = formatNumber(tiktokLikes);
+    document.getElementById("tiktokComments").textContent = formatNumber(tiktokComments);
 }
 
+// ===========================
+// COMPETITION TABLE
+// ===========================
+function populateCompetitionTable(competingShows = {}) {
+    const tbody = document.getElementById("competitionTableBody");
+    
+    if (!competingShows.events || competingShows.events.length === 0) {
+        tbody.innerHTML = `
+            <tr>
+                <td colspan="4" style="text-align: center; color: #6e6e73;">
+                    No competing events in the next 7 days
+                </td>
+            </tr>
+        `;
+        return;
+    }
+
+    tbody.innerHTML = competingShows.events.map(event => `
+        <tr>
+            <td>Nearby Venue</td>
+            <td>${event.name}</td>
+            <td>Various</td>
+            <td>${formatDateShort(event.date)}</td>
+        </tr>
+    `).join('');
+}
+
+// ===========================
+// CHART
 // ===========================
 function createTrendsChart(labels, values) {
     const ctx = document.getElementById("trendsChart");
@@ -272,20 +183,19 @@ function createTrendsChart(labels, values) {
 
     if (trendsChart) trendsChart.destroy();
 
-    const avg =
-        values.length > 0
-            ? Math.round(values.reduce((a, b) => a + b, 0) / values.length)
-            : 0;
+    const avg = values.length > 0
+        ? Math.round(values.reduce((a, b) => a + b, 0) / values.length)
+        : 0;
 
-    document.getElementById("chartSubtitle").textContent =
+    document.getElementById("chartSubtitle").textContent = 
         `Last 6 months • Average: ${avg} tickets`;
 
     const dataset = {
         label: "Tickets",
         data: values,
-        backgroundColor: "rgba(222, 213, 235, 0.9)",
-        borderColor: "#DED5EB",
-        borderWidth: 2,
+        backgroundColor: "rgba(211, 204, 227, 0.8)",
+        borderColor: "#9b87f5",
+        borderWidth: 0,
         borderRadius: 6,
         tension: 0.4
     };
@@ -298,7 +208,30 @@ function createTrendsChart(labels, values) {
         },
         options: {
             responsive: true,
-            plugins: { legend: { display: false } }
+            maintainAspectRatio: true,
+            aspectRatio: 2.5,
+            plugins: {
+                legend: { display: false }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    grid: {
+                        color: '#f5f5f7'
+                    },
+                    ticks: {
+                        color: '#6e6e73'
+                    }
+                },
+                x: {
+                    grid: {
+                        display: false
+                    },
+                    ticks: {
+                        color: '#6e6e73'
+                    }
+                }
+            }
         }
     });
 }
@@ -307,16 +240,26 @@ function recreateChart() {
     createTrendsChart(window._chartLabels, window._chartValues);
 }
 
-// -------------------------
-function toggleSection(id) {
-    const section = document.getElementById(id);
-    const icon = event.currentTarget.querySelector(".expand-icon");
-    const isClosed = section.classList.contains("collapsed");
-    section.classList.toggle("collapsed", !isClosed);
-    icon.classList.toggle("rotated", isClosed);
+// ===========================
+// RAW DATA TOGGLE
+// ===========================
+function toggleRawData() {
+    const content = document.getElementById("rawDataContent");
+    const icon = document.getElementById("expandIcon");
+    
+    if (content.classList.contains("expanded")) {
+        content.classList.remove("expanded");
+        icon.classList.remove("rotated");
+    } else {
+        content.classList.add("expanded");
+        icon.classList.add("rotated");
+    }
 }
-window.toggleSection = toggleSection;
+window.toggleRawData = toggleRawData;
 
+// ===========================
+// UTILITY FUNCTIONS
+// ===========================
 function roundOrDash(v) {
     return typeof v === "number" ? Math.round(v) : "-";
 }
@@ -332,6 +275,14 @@ function formatDate(dateStr) {
     return d.toLocaleDateString("en-US", {
         year: "numeric",
         month: "long",
+        day: "numeric"
+    });
+}
+
+function formatDateShort(dateStr) {
+    const d = new Date(dateStr);
+    return d.toLocaleDateString("en-US", {
+        month: "numeric",
         day: "numeric"
     });
 }
