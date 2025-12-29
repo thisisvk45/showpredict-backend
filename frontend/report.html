@@ -4,106 +4,413 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>The MAP - Report</title>
-    <link rel="stylesheet" href="styles.css" />
 
-    <!-- INLINE PURPLE THEME OVERRIDES -->
     <style>
-        :root {
-            --map-purple: #380E75;
-            --map-purple-light: #DED5EB;
-            --map-purple-mid: #4c1ea3;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        .btn-primary,
-        .btn-large {
-            background: var(--map-purple) !important;
-            color: white !important;
-            border: none !important;
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #f5f5f7;
+            color: #1d1d1f;
+            line-height: 1.5;
         }
 
-        .btn-primary:hover,
-        .btn-large:hover {
-            background: var(--map-purple-mid) !important;
-        }
-
-        h1, h2, h3, .trend-value.primary {
-            color: var(--map-purple) !important;
-        }
-
-        .toggle-btn.active {
-            background: var(--map-purple) !important;
-            color: white !important;
-            border-color: var(--map-purple) !important;
-        }
-
-        .chart-toggle button:hover {
-            border-color: var(--map-purple) !important;
-            color: var(--map-purple) !important;
-        }
-
-        .threat-badge.high {
-            background: var(--map-purple) !important;
-            color: white !important;
-        }
-
-        .threat-badge.medium {
-            background: #8e6cc6 !important;
-            color: white !important;
-        }
-
-        .threat-badge.low {
-            background: var(--map-purple-light) !important;
-            color: var(--map-purple) !important;
-        }
-
-        .card-subtitle, .stat-label {
-            color: #5b4f68 !important;
-        }
-
-        .clickable:hover {
-            color: var(--map-purple) !important;
-        }
-
-        /* Two Card Row (Updated from Three Cards) */
-        .three-cards-row {
-            display: flex;
-            gap: 12px;
-            margin-top: 25px;
-        }
-
-        .three-cards-row .info-card {
-            flex: 1;
-            min-width: 240px;
-            padding: 14px !important;
-        }
-
-        .three-cards-row .stat-card {
-            padding: 10px 14px !important;
-        }
-
-        .three-cards-row .stat-value {
-            font-size: 20px !important;
-        }
-
-        #recommendedPriceLarge {
-            color: #000 !important;
-        }
-
-        .lastplay-row {
+        .header {
+            background: white;
+            padding: 20px 40px;
+            border-bottom: 1px solid #d2d2d7;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            width: 100%;
         }
 
-        /* Hide footer under chart */
-        .chart-footer {
-            display: none !important;
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .btn-back {
+            background: #f5f5f7;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+
+        .btn-back:hover {
+            background: #e8e8ed;
+        }
+
+        .artist-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1d1d1f;
+        }
+
+        .user-info {
+            font-size: 14px;
+            color: #6e6e73;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 30px 40px;
+        }
+
+        /* Top Cards Grid */
+        .top-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .card-title {
+            font-size: 13px;
+            font-weight: 500;
+            color: #6e6e73;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .card-value {
+            font-size: 36px;
+            font-weight: 700;
+            color: #1d1d1f;
+            margin-bottom: 8px;
+        }
+
+        .card-subtitle {
+            font-size: 14px;
+            color: #6e6e73;
+        }
+
+        /* Artist Header */
+        .artist-header {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .artist-name {
+            font-size: 42px;
+            font-weight: 700;
+            color: #1d1d1f;
+            margin-bottom: 8px;
+        }
+
+        .event-info {
+            font-size: 16px;
+            color: #6e6e73;
+        }
+
+        /* Main Content Grid */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        /* Social Stats Sidebar */
+        .social-sidebar {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .social-platform {
+            margin-bottom: 28px;
+        }
+
+        .social-platform:last-child {
+            margin-bottom: 0;
+        }
+
+        .platform-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .platform-icon {
+            font-size: 24px;
+        }
+
+        .platform-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1d1d1f;
+        }
+
+        .social-metric {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #f5f5f7;
+        }
+
+        .social-metric:last-child {
+            border-bottom: none;
+        }
+
+        .metric-label {
+            font-size: 13px;
+            color: #6e6e73;
+        }
+
+        .metric-value-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .metric-value {
+            font-size: 15px;
+            font-weight: 600;
+            color: #1d1d1f;
+        }
+
+        .metric-change {
+            font-size: 12px;
+            font-weight: 500;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        .metric-change.positive {
+            color: #34c759;
+            background: #e8f9ef;
+        }
+
+        .metric-change.negative {
+            color: #ff3b30;
+            background: #ffe8e6;
+        }
+
+        /* Right Content Area */
+        .content-area {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Competition Table */
+        .competition-section {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .section-header {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1d1d1f;
+            margin-bottom: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .section-source {
+            font-size: 12px;
+            color: #6e6e73;
+            font-weight: 400;
+        }
+
+        .competition-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .competition-table th {
+            text-align: left;
+            font-size: 12px;
+            font-weight: 600;
+            color: #6e6e73;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 12px 16px;
+            border-bottom: 2px solid #f5f5f7;
+        }
+
+        .competition-table td {
+            padding: 14px 16px;
+            font-size: 14px;
+            color: #1d1d1f;
+            border-bottom: 1px solid #f5f5f7;
+        }
+
+        .competition-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Venue Stats Grid */
+        .venue-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .stat-card-title {
+            font-size: 13px;
+            font-weight: 500;
+            color: #6e6e73;
+            margin-bottom: 8px;
+        }
+
+        .stat-card-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: #1d1d1f;
+        }
+
+        /* Chart Section */
+        .chart-section {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .chart-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1d1d1f;
+        }
+
+        .chart-subtitle {
+            font-size: 13px;
+            color: #6e6e73;
+            margin-top: 4px;
+        }
+
+        .chart-toggle {
+            display: flex;
+            gap: 8px;
+        }
+
+        .toggle-btn {
+            padding: 6px 16px;
+            border: 1px solid #d2d2d7;
+            background: white;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .toggle-btn.active {
+            background: #380E75;
+            color: white;
+            border-color: #380E75;
+        }
+
+        .toggle-btn:hover:not(.active) {
+            background: #f5f5f7;
+        }
+
+        /* Raw Data Section */
+        .raw-data-section {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .collapsible-header {
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .collapsible-header:hover {
+            color: #380E75;
+        }
+
+        .expand-icon {
+            transition: transform 0.3s;
+        }
+
+        .expand-icon.rotated {
+            transform: rotate(180deg);
+        }
+
+        .raw-data-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .raw-data-content.expanded {
+            max-height: 2000px;
+            margin-top: 20px;
+        }
+
+        .data-block {
+            margin-bottom: 20px;
+        }
+
+        .data-block:last-child {
+            margin-bottom: 0;
+        }
+
+        .data-block-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1d1d1f;
+            margin-bottom: 8px;
+        }
+
+        .data-block pre {
+            background: #f5f5f7;
+            padding: 16px;
+            border-radius: 8px;
+            font-size: 12px;
+            overflow-x: auto;
+            color: #1d1d1f;
+            font-family: 'Monaco', 'Menlo', monospace;
         }
     </style>
 </head>
 
-<body class="report-page">
+<body>
     <div class="header">
         <div class="header-left">
             <button class="btn-back" onclick="window.location.href='main.html'">
@@ -111,162 +418,219 @@
                     <path d="M19 12H5M12 19l-7-7 7-7"/>
                 </svg>
             </button>
-
-            <div class="report-title">
-                <h2 id="artistName">Artist Name</h2>
-                <p id="venueInfo">Venue • Date</p>
-            </div>
+            <div class="artist-title" id="headerArtist">Artist Name</div>
         </div>
-
         <div class="user-info">
             <span id="welcomeText">Welcome, </span>
         </div>
     </div>
 
-    <div class="report-container">
-
-        <!-- Top Stats Row -->
-        <div class="stats-row compact">
-            <div class="stat-card small">
-                <div class="stat-label">Avg Tickets (Last Month)</div>
-                <div class="stat-value" id="avgLastMonth">-</div>
+    <div class="container">
+        <!-- Top Section -->
+        <div class="top-grid">
+            <div class="card artist-header">
+                <div class="artist-name" id="artistName">The Local Honeys</div>
+                <div class="event-info" id="venueInfo">@ The Historic Theater on 1/20/2025</div>
             </div>
 
-            <div class="stat-card small">
-                <div class="stat-label">Events (Last Month)</div>
-                <div class="stat-value" id="eventsLastMonth">-</div>
+            <div class="card">
+                <div class="card-title">Expected ticket sales</div>
+                <div class="card-value" id="expectedSalesRange">280-310</div>
+                <div class="card-subtitle" id="expectedPercentage">80% above average</div>
             </div>
 
-            <div class="stat-card small">
-                <div class="stat-label">Avg Tickets (Last Year)</div>
-                <div class="stat-value" id="avgLastYear">-</div>
-            </div>
-
-            <div class="stat-card small">
-                <div class="stat-label">Events (Last Year)</div>
-                <div class="stat-value" id="eventsLastYear">-</div>
-            </div>
-
-            <div class="stat-card small">
-                <div class="stat-label">Weather</div>
-                <div class="stat-value" id="weatherConditionSmall">-</div>
-                <div class="stat-detail" id="weatherTempSmall"></div>
+            <div class="card">
+                <div class="card-title">Expected weather</div>
+                <div class="card-value" id="weatherCondition">Partly Cloudy</div>
+                <div class="card-subtitle" id="weatherTemp">40°F</div>
             </div>
         </div>
 
-        <!-- SOCIAL + COMPETITION -->
-        <div class="two-column">
-
-            <!-- Social -->
-            <div class="info-card">
-                <div class="card-header">
-                    <h3>Social & Streaming Stats</h3>
-                    <span class="card-source">source: Chartmetric</span>
+        <div class="top-grid" style="grid-template-columns: repeat(2, 1fr);">
+            <div class="card">
+                <div class="card-title">Last play date</div>
+                <div class="card-value" id="lastPlayDate">2025-06-14</div>
+                <div class="card-subtitle">
+                    <span id="lastPlayTickets">300</span> tickets sold • 
+                    <span id="timesPlayed">2</span> times played
                 </div>
-                <div class="social-stats" id="socialStats"></div>
             </div>
 
-            <!-- UPDATED COMPETITION ANALYSIS -->
-            <div class="info-card">
-                <div class="card-header">
-                    <h3>Competition Analysis</h3>
-                    <span class="card-source">source: JamBase</span>
-                </div>
-
-                <div id="competingEventsList" class="competition-list">
-                    <!-- JS inserts TWO events -->
-                </div>
-
-                <div class="competition-summary">
-                    ⚠️ <span id="competingShowsCount">0</span> competing shows within 7 days
-                </div>
+            <div class="card" style="display: none;">
+                <!-- Placeholder for future feature -->
             </div>
         </div>
 
-        <!-- Chart -->
-        <div class="chart-card">
-            <div class="card-header">
-                <div>
-                    <h3>Historical Sales Trends</h3>
-                    <p class="card-subtitle" id="chartSubtitle">Last 6 months • Average: - tickets</p>
-                </div>
-                <div class="chart-toggle">
-                    <button class="toggle-btn active">Bar</button>
-                    <button class="toggle-btn">Line</button>
-                </div>
-            </div>
-
-            <canvas id="trendsChart"></canvas>
-        </div>
-
-        <!-- Two Cards: Last Play Information and Predicted Ticket Sales -->
-        <div class="three-cards-row">
-
-            <div class="info-card">
-                <div class="card-header">
-                    <h3>Last Play Information</h3>
-                    <span class="card-source">venue history</span>
-                </div>
-
-                <div class="stat-card">
-                    <div class="lastplay-row">
-                        <div>
-                            <div class="stat-label">Last Play Date</div>
-                            <div class="stat-value" id="lastPlayDate">-</div>
+        <!-- Main Content Grid -->
+        <div class="main-grid">
+            <!-- Social Media Sidebar -->
+            <div class="social-sidebar">
+                <div class="social-platform">
+                    <div class="platform-header">
+                        <span class="platform-icon">🎵</span>
+                        <span class="platform-name">Spotify</span>
+                    </div>
+                    <div class="social-metric">
+                        <span class="metric-label">Monthly listeners</span>
+                        <div class="metric-value-wrapper">
+                            <span class="metric-value" id="spotifyListeners">123.3K</span>
+                            <span class="metric-change positive">+5%</span>
                         </div>
+                    </div>
+                    <div class="social-metric">
+                        <span class="metric-label">Followers</span>
+                        <div class="metric-value-wrapper">
+                            <span class="metric-value" id="spotifyFollowers">25.6K</span>
+                            <span class="metric-change negative">-2%</span>
+                        </div>
+                    </div>
+                </div>
 
-                        <div>
-                            <div class="stat-label">Times played</div>
-                            <div class="stat-value" id="timesPlayed">-</div>
+                <div class="social-platform">
+                    <div class="platform-header">
+                        <span class="platform-icon">📷</span>
+                        <span class="platform-name">Instagram</span>
+                    </div>
+                    <div class="social-metric">
+                        <span class="metric-label">Followers</span>
+                        <div class="metric-value-wrapper">
+                            <span class="metric-value" id="instaFollowers">29.4K</span>
+                            <span class="metric-change positive">+10%</span>
+                        </div>
+                    </div>
+                    <div class="social-metric">
+                        <span class="metric-label">Avg likes per post</span>
+                        <div class="metric-value-wrapper">
+                            <span class="metric-value" id="instaLikes">4K</span>
+                            <span class="metric-change negative">-8%</span>
+                        </div>
+                    </div>
+                    <div class="social-metric">
+                        <span class="metric-label">Avg comments per post</span>
+                        <div class="metric-value-wrapper">
+                            <span class="metric-value" id="instaComments">1K</span>
+                            <span class="metric-change positive">+5%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="social-platform">
+                    <div class="platform-header">
+                        <span class="platform-icon">🎬</span>
+                        <span class="platform-name">TikTok</span>
+                    </div>
+                    <div class="social-metric">
+                        <span class="metric-label">Followers</span>
+                        <div class="metric-value-wrapper">
+                            <span class="metric-value" id="tiktokFollowers">1.8K</span>
+                            <span class="metric-change positive">+1%</span>
+                        </div>
+                    </div>
+                    <div class="social-metric">
+                        <span class="metric-label">Avg likes per post</span>
+                        <div class="metric-value-wrapper">
+                            <span class="metric-value" id="tiktokLikes">0.5K</span>
+                            <span class="metric-change">-</span>
+                        </div>
+                    </div>
+                    <div class="social-metric">
+                        <span class="metric-label">Avg comments per post</span>
+                        <div class="metric-value-wrapper">
+                            <span class="metric-value" id="tiktokComments">0.1K</span>
+                            <span class="metric-change positive">+4%</span>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="info-card">
-                <div class="card-header">
-                    <h3>Predicted Ticket Sales</h3>
-                    <span class="card-source">ML Model</span>
+            <!-- Right Content -->
+            <div class="content-area">
+                <!-- Competition Table -->
+                <div class="competition-section">
+                    <div class="section-header">
+                        <span>Competition</span>
+                        <span class="section-source">source: JamBase</span>
+                    </div>
+                    <table class="competition-table">
+                        <thead>
+                            <tr>
+                                <th>Venue</th>
+                                <th>Artist</th>
+                                <th>Genre</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody id="competitionTableBody">
+                            <!-- JS will populate -->
+                        </tbody>
+                    </table>
                 </div>
 
-                <div class="stat-card">
-                    <div class="stat-label">Expected Sales</div>
-                    <div class="stat-value primary" id="recommendedPriceLarge">-</div>
+                <!-- Venue Stats -->
+                <div class="competition-section">
+                    <div class="section-header">Venue data</div>
+                    <div class="venue-stats">
+                        <div class="stat-card">
+                            <div class="stat-card-title">Avg tickets last month</div>
+                            <div class="stat-card-value" id="avgLastMonth">30</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-card-title">Avg tickets last year</div>
+                            <div class="stat-card-value" id="avgLastYear">50</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-card-title">Events last month</div>
+                            <div class="stat-card-value" id="eventsLastMonth">5</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-card-title">Events last year</div>
+                            <div class="stat-card-value" id="eventsLastYear">40</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chart -->
+                <div class="chart-section">
+                    <div class="chart-header">
+                        <div>
+                            <div class="chart-title">Historical Sales Trends</div>
+                            <div class="chart-subtitle" id="chartSubtitle">Last 6 months • Average: 338 tickets</div>
+                        </div>
+                        <div class="chart-toggle">
+                            <button class="toggle-btn active">Bar</button>
+                            <button class="toggle-btn">Line</button>
+                        </div>
+                    </div>
+                    <canvas id="trendsChart"></canvas>
+                </div>
+
+                <!-- Raw Data -->
+                <div class="raw-data-section">
+                    <div class="collapsible-header" onclick="toggleRawData()">
+                        <div class="section-header">Raw Data & Features</div>
+                        <svg class="expand-icon" id="expandIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M6 9l6 6 6-6"/>
+                        </svg>
+                    </div>
+                    <div class="raw-data-content" id="rawDataContent">
+                        <div class="data-block">
+                            <div class="data-block-title">Weather Data</div>
+                            <pre id="weatherData"></pre>
+                        </div>
+                        <div class="data-block">
+                            <div class="data-block-title">Artist Data (Chartmetric)</div>
+                            <pre id="artistData"></pre>
+                        </div>
+                        <div class="data-block">
+                            <div class="data-block-title">Features Used</div>
+                            <pre id="featuresData"></pre>
+                        </div>
+                    </div>
                 </div>
             </div>
-
         </div>
-
-        <!-- Raw Data -->
-        <div class="info-card">
-            <div class="card-header clickable" onclick="toggleSection('rawData')">
-                <h3>Raw Data & Features</h3>
-                <svg class="expand-icon" width="20" height="20" viewBox="0 0 24 24">
-                    <path d="M6 9l6 6 6-6"/>
-                </svg>
-            </div>
-
-            <div id="rawData" class="raw-data collapsed">
-                <div class="data-section">
-                    <h4>Weather Data</h4>
-                    <pre id="weatherData"></pre>
-                </div>
-
-                <div class="data-section">
-                    <h4>Artist Data (Chartmetric)</h4>
-                    <pre id="artistData"></pre>
-                </div>
-
-                <div class="data-section">
-                    <h4>Features Used</h4>
-                    <pre id="featuresData"></pre>
-                </div>
-            </div>
-        </div>
-
     </div>
 
-    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="report.js"></script>
