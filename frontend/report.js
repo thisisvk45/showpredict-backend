@@ -49,21 +49,29 @@ function populateReport(data) {
     const venueStats = data.venue_stats || {};
     const ticketPrediction = data.predicted_tickets || {};
 
-    // Expected Ticket Sales with Range and % Above Average
+    // Expected Ticket Sales with 10% Confidence Interval
     if (ticketPrediction.expected) {
+        const expected = ticketPrediction.expected;
+        
+        // Calculate 10% confidence interval
+        const margin = Math.round(expected * 0.10);
+        const ciLow = Math.max(0, expected - margin);
+        const ciHigh = expected + margin;
+        
+        // Display range with confidence interval
         document.getElementById("expectedSalesRange").textContent = 
-            `${ticketPrediction.low}-${ticketPrediction.high}`;
+            `${ciLow}-${ciHigh}`;
         
         // Calculate % above/below average
         const avgLastYear = venueStats.avg_tickets_last_1_year || 100;
-        const percentAbove = Math.round(((ticketPrediction.expected - avgLastYear) / avgLastYear) * 100);
+        const percentAbove = Math.round(((expected - avgLastYear) / avgLastYear) * 100);
         
         if (percentAbove >= 0) {
             document.getElementById("expectedPercentage").textContent = 
-                `${percentAbove}% above average`;
+                `${percentAbove}% above average (±10% CI)`;
         } else {
             document.getElementById("expectedPercentage").textContent = 
-                `${Math.abs(percentAbove)}% below average`;
+                `${Math.abs(percentAbove)}% below average (±10% CI)`;
         }
     }
 
@@ -104,7 +112,7 @@ function populateReport(data) {
     // Social Media Stats (Detailed)
     populateSocialStats(data.cm_data);
 
-    // Competition Table
+    // Competition Table (UPDATED - Parse venue from artist name)
     populateCompetitionTable(data.competing_shows);
 
     // Venue Stats
@@ -165,7 +173,7 @@ function populateSocialStats(cmData = {}) {
 }
 
 // ===========================
-// COMPETITION TABLE
+// COMPETITION TABLE (UPDATED - Parse venue from artist name)
 // ===========================
 function populateCompetitionTable(competingShows = {}) {
     const tbody = document.getElementById("competitionTableBody");
@@ -181,14 +189,27 @@ function populateCompetitionTable(competingShows = {}) {
         return;
     }
 
-    tbody.innerHTML = competingShows.events.map(event => `
-        <tr>
-            <td>Nearby Venue</td>
-            <td>${event.name}</td>
-            <td>Various</td>
-            <td>${formatDateShort(event.date)}</td>
-        </tr>
-    `).join('');
+    tbody.innerHTML = competingShows.events.map(event => {
+        // Parse artist name to extract venue
+        // Format: "Artist Name at Venue Name"
+        let artistName = event.name;
+        let venueName = "Nearby Venue";
+        
+        if (event.name && event.name.includes(" at ")) {
+            const parts = event.name.split(" at ");
+            artistName = parts[0].trim();
+            venueName = parts.slice(1).join(" at ").trim(); // Handle multiple " at " in name
+        }
+        
+        return `
+            <tr>
+                <td>${venueName}</td>
+                <td>${artistName}</td>
+                <td>Various</td>
+                <td>${formatDateShort(event.date)}</td>
+            </tr>
+        `;
+    }).join('');
 }
 
 // ===========================
