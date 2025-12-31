@@ -23,20 +23,19 @@
     "venue": "Bright Box Theater",
     "capacity": 300,
     "last_play_date": "2025-08-16",
-    "tickets_last_1_month": 417,
-    "events_last_1_month": 7,
-    "avg_tickets_last_1_month": 59.57,
-    "tickets_last_1_year": 8328,
-    "events_last_1_year": 98,
-    "avg_tickets_last_1_year": 84.98,
+    "tickets_last_1_month": 686,
+    "events_last_1_month": 4,
+    "avg_tickets_last_1_month": 172,
+    "tickets_last_1_year": 5312,
+    "events_last_1_year": 40,
+    "avg_tickets_last_1_year": 133,
     "history_last_6_months": [
-      { "month": "Feb", "tickets": 524 },
-      { "month": "Mar", "tickets": 876 },
-      { "month": "Apr", "tickets": 555 },
-      { "month": "May", "tickets": 678 },
-      { "month": "Jun", "tickets": 814 },
-      { "month": "Jul", "tickets": 402 },
-      { "month": "Aug", "tickets": 143 }
+      { "month": "Jun", "tickets": 187 },
+      { "month": "Jul", "tickets": 463 },
+      { "month": "Sep", "tickets": 505 },
+      { "month": "Oct", "tickets": 639 },
+      { "month": "Nov", "tickets": 862 },
+      { "month": "Dec", "tickets": 153 }
     ]
   },
   {
@@ -97,6 +96,125 @@
       { "month": "Jul", "tickets": 0 },
       { "month": "Aug", "tickets": 0 },
       { "month": "Sep", "tickets": 0 }
+    ]
+  },
+  {
+    "venue": "Martins Downtown",
+    "capacity": 250,
+    "last_play_date": null,
+    "tickets_last_1_month": 85,
+    "events_last_1_month": 1,
+    "avg_tickets_last_1_month": 85,
+    "tickets_last_1_year": 172,
+    "events_last_1_year": 2,
+    "avg_tickets_last_1_year": 86,
+    "history_last_6_months": [
+      { "month": "Nov", "tickets": 85 }
+    ]
+  },
+  {
+    "venue": "Grandin Theater",
+    "capacity": 320,
+    "last_play_date": null,
+    "tickets_last_1_month": 201,
+    "events_last_1_month": 1,
+    "avg_tickets_last_1_month": 201,
+    "tickets_last_1_year": 358,
+    "events_last_1_year": 2,
+    "avg_tickets_last_1_year": 179,
+    "history_last_6_months": [
+      { "month": "Nov", "tickets": 201 }
+    ]
+  },
+  {
+    "venue": "Cat's Cradle",
+    "capacity": 750,
+    "last_play_date": null,
+    "tickets_last_1_month": 773,
+    "events_last_1_month": 5,
+    "avg_tickets_last_1_month": 155,
+    "tickets_last_1_year": 6265,
+    "events_last_1_year": 25,
+    "avg_tickets_last_1_year": 251,
+    "history_last_6_months": [
+      { "month": "Jun", "tickets": 63 },
+      { "month": "Jul", "tickets": 845 },
+      { "month": "Aug", "tickets": 437 },
+      { "month": "Sep", "tickets": 603 },
+      { "month": "Oct", "tickets": 130 },
+      { "month": "Nov", "tickets": 695 },
+      { "month": "Dec", "tickets": 78 }
+    ]
+  },
+  {
+    "venue": "The Fruit",
+    "capacity": 600,
+    "last_play_date": null,
+    "tickets_last_1_month": 0,
+    "events_last_1_month": 0,
+    "avg_tickets_last_1_month": 0,
+    "tickets_last_1_year": 1076,
+    "events_last_1_year": 3,
+    "avg_tickets_last_1_year": 359,
+    "history_last_6_months": [
+      { "month": "Oct", "tickets": 769 }
+    ]
+  },
+  {
+    "venue": "Kings",
+    "capacity": 250,
+    "last_play_date": null,
+    "tickets_last_1_month": 122,
+    "events_last_1_month": 1,
+    "avg_tickets_last_1_month": 122,
+    "tickets_last_1_year": 5622,
+    "events_last_1_year": 43,
+    "avg_tickets_last_1_year": 131,
+    "history_last_6_months": [
+      { "month": "Jun", "tickets": 444 },
+      { "month": "Jul", "tickets": 78 },
+      { "month": "Aug", "tickets": 138 },
+      { "month": "Sep", "tickets": 669 },
+      { "month": "Oct", "tickets": 1049 },
+      { "month": "Dec", "tickets": 122 }
+    ]
+  },
+  {
+    "venue": "Motorco Music Hall",
+    "capacity": 450,
+    "last_play_date": null,
+    "tickets_last_1_month": 1935,
+    "events_last_1_month": 9,
+    "avg_tickets_last_1_month": 215,
+    "tickets_last_1_year": 23065,
+    "events_last_1_year": 88,
+    "avg_tickets_last_1_year": 262,
+    "history_last_6_months": [
+      { "month": "Jun", "tickets": 840 },
+      { "month": "Jul", "tickets": 338 },
+      { "month": "Aug", "tickets": 1542 },
+      { "month": "Sep", "tickets": 1587 },
+      { "month": "Oct", "tickets": 2046 },
+      { "month": "Nov", "tickets": 2799 },
+      { "month": "Dec", "tickets": 400 }
+    ]
+  },
+  {
+    "venue": "The Pinhook",
+    "capacity": 200,
+    "last_play_date": null,
+    "tickets_last_1_month": 424,
+    "events_last_1_month": 3,
+    "avg_tickets_last_1_month": 141,
+    "tickets_last_1_year": 2413,
+    "events_last_1_year": 20,
+    "avg_tickets_last_1_year": 121,
+    "history_last_6_months": [
+      { "month": "Jun", "tickets": 222 },
+      { "month": "Sep", "tickets": 178 },
+      { "month": "Oct", "tickets": 455 },
+      { "month": "Nov", "tickets": 97 },
+      { "month": "Dec", "tickets": 376 }
     ]
   }
 ]
