@@ -1,10 +1,9 @@
 // ===========================
 // Configuration
 // ===========================
-// Automatically detect API URL based on environment
 const API_BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-    ? "http://localhost:8000/api"  // Local development
-    : "https://showpredict-backend.onrender.com/api";  // Production
+    ? "http://localhost:8000/api"
+    : "https://showpredict-backend.onrender.com/api";
 
 // ===========================
 // Utility Functions
@@ -41,7 +40,7 @@ function setButtonLoading(buttonId, isLoading) {
 }
 
 // ===========================
-// Local Storage Helper (UPDATED)
+// Local Storage Helper (UPDATED - Multi-venue support)
 // ===========================
 const Storage = {
     setUser: (username) => {
@@ -53,15 +52,16 @@ const Storage = {
     clearUser: () => {
         localStorage.removeItem("showpredict_user");
     },
-    // NEW: Store and retrieve user's venue
-    setVenue: (venue) => {
-        localStorage.setItem("showpredict_venue", venue);
+    // NEW: Store and retrieve user's venues (array)
+    setVenues: (venues) => {
+        localStorage.setItem("showpredict_venues", JSON.stringify(venues));
     },
-    getVenue: () => {
-        return localStorage.getItem("showpredict_venue");
+    getVenues: () => {
+        const venues = localStorage.getItem("showpredict_venues");
+        return venues ? JSON.parse(venues) : [];
     },
-    clearVenue: () => {
-        localStorage.removeItem("showpredict_venue");
+    clearVenues: () => {
+        localStorage.removeItem("showpredict_venues");
     },
     setReportData: (data) => {
         localStorage.setItem("showpredict_report", JSON.stringify(data));
@@ -73,7 +73,7 @@ const Storage = {
 };
 
 // ===========================
-// Login Page Logic (UPDATED)
+// Login Page Logic (UPDATED - Multi-venue)
 // ===========================
 if (window.location.pathname.endsWith("index.html") || window.location.pathname === "/") {
     const loginForm = document.getElementById("loginForm");
@@ -101,7 +101,7 @@ if (window.location.pathname.endsWith("index.html") || window.location.pathname 
 
                 if (response.data && response.data.success) {
                     Storage.setUser(username);
-                    Storage.setVenue(response.data.venue);  // NEW: Store user's venue
+                    Storage.setVenues(response.data.venues);  // NEW: Store venues array
                     window.location.href = "main.html";
                 } else {
                     showError("Invalid username or password");
@@ -121,14 +121,14 @@ if (window.location.pathname.endsWith("index.html") || window.location.pathname 
 }
 
 // ===========================
-// Main Form Page Logic (UPDATED)
+// Main Form Page Logic (UPDATED - Multi-venue dropdown)
 // ===========================
 if (window.location.pathname.endsWith("main.html")) {
     const username = Storage.getUser();
-    const userVenue = Storage.getVenue();  // NEW: Get user's venue
+    const userVenues = Storage.getVenues();  // NEW: Get venues array
 
-    if (!username || !userVenue) {
-        // If no user or venue, redirect to login
+    if (!username || !userVenues || userVenues.length === 0) {
+        // If no user or venues, redirect to login
         window.location.href = "index.html";
     }
 
@@ -137,15 +137,27 @@ if (window.location.pathname.endsWith("main.html")) {
         welcomeText.textContent = `Welcome, ${username}`;
     }
 
-    // NEW: Pre-select and disable venue dropdown
+    // NEW: Populate venue dropdown with user's assigned venues
     const venueSelect = document.getElementById("venueName");
-    if (venueSelect && userVenue) {
-        venueSelect.value = userVenue;
-        venueSelect.disabled = true;  // Disable dropdown - user can't change it
+    if (venueSelect && userVenues.length > 0) {
+        // Clear existing options except the first one
+        venueSelect.innerHTML = '<option value="">Select a venue</option>';
         
-        // Add visual feedback that it's locked
-        venueSelect.style.backgroundColor = "#f3f4f6";
-        venueSelect.style.cursor = "not-allowed";
+        // Add user's venues to dropdown
+        userVenues.forEach(venue => {
+            const option = document.createElement("option");
+            option.value = venue;
+            option.textContent = venue;
+            venueSelect.appendChild(option);
+        });
+        
+        // If user has only ONE venue, auto-select and disable
+        if (userVenues.length === 1) {
+            venueSelect.value = userVenues[0];
+            venueSelect.disabled = true;
+            venueSelect.style.backgroundColor = "#f3f4f6";
+            venueSelect.style.cursor = "not-allowed";
+        }
     }
 
     const dateInput = document.getElementById("showDate");
@@ -170,9 +182,9 @@ if (window.location.pathname.endsWith("main.html")) {
                 return;
             }
 
-            // NEW: Security check - verify venue matches user's assigned venue
-            if (venueName !== userVenue) {
-                showError("You can only generate reports for your assigned venue");
+            // NEW: Security check - verify venue is in user's assigned venues
+            if (!userVenues.includes(venueName)) {
+                showError("You can only generate reports for your assigned venues");
                 return;
             }
 
