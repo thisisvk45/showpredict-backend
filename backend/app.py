@@ -121,11 +121,21 @@ class PredictRequest(BaseModel):
 # Venue Coordinates
 # -----------------------------
 VENUES = {
-    "The Spot on Kirk": {"coords": (37.2712342, -79.9393615), "capacity": 125},
     "Bright Box Theater": {"coords": (39.1845126, -78.1662175), "capacity": 300},
-    "Carolina Theatre": {"coords": (35.9978045, -78.9027364), "capacity": 1055},
+    "The Millwald": {"coords": (36.9490417, -81.0843156), "capacity": 500},
+    "The Spot on Kirk": {"coords": (37.2712342, -79.9393615), "capacity": 125},
     "9:30 Club": {"coords": (38.91806, -77.02389), "capacity": 1200},
-    "Millwald Theatre": {"coords": (36.9490417, -81.0843156), "capacity": 500},
+    "Carolina Theater": {"coords": (35.7795897, -78.6381787), "capacity": 1600},
+    "Grandin Theater": {"coords": (37.2626, -79.9653), "capacity": 320},
+    "Martins Downtown": {"coords": (37.2710, -79.9414), "capacity": 250},
+    "Evening Muse": {"coords": (35.2271, -80.8431), "capacity": 120},
+    "Motorco Music Hall": {"coords": (35.9940, -78.8986), "capacity": 450},
+    "Local 506": {"coords": (35.9132, -79.0558), "capacity": 250},
+    "Cat's Cradle": {"coords": (35.9101, -79.0558), "capacity": 750},
+    "The Pinhook": {"coords": (35.9940, -78.8986), "capacity": 200},
+    "Kings": {"coords": (35.7796, -78.6382), "capacity": 250},
+    "The Fruit": {"coords": (35.7796, -78.6382), "capacity": 600},
+    "Amos Southend": {"coords": (35.2008, -80.8569), "capacity": 750}
 }
 
 
