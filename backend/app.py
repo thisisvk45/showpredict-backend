@@ -139,8 +139,9 @@ VENUES = {
 }
 
 
+
 # -----------------------------
-# Venue Locations for JamBase API (UPDATED)
+# Venue Locations for JamBase API (CORRECTED CITIES)
 # -----------------------------
 VENUE_LOCATIONS = {
     "Bright Box Theater": {"city": "Winchester", "state": "VA"},
@@ -151,12 +152,12 @@ VENUE_LOCATIONS = {
     "Grandin Theater": {"city": "Roanoke", "state": "VA"},
     "Martins Downtown": {"city": "Roanoke", "state": "VA"},
     "Evening Muse": {"city": "Charlotte", "state": "NC"},
-    "Motorco Music Hall": {"city": "Durham", "state": "NC"},
-    "Local 506": {"city": "Chapel Hill", "state": "NC"},
-    "Cat's Cradle": {"city": "Chapel Hill", "state": "NC"},
-    "The Pinhook": {"city": "Durham", "state": "NC"},
+    "Motorco Music Hall": {"city": "Raleigh", "state": "NC"},
+    "Local 506": {"city": "Raleigh", "state": "NC"},
+    "Cat's Cradle": {"city": "Raleigh", "state": "NC"},
+    "The Pinhook": {"city": "Raleigh", "state": "NC"},
     "Kings": {"city": "Raleigh", "state": "NC"},
-    "The Fruit": {"city": "Durham", "state": "NC"},
+    "The Fruit": {"city": "Raleigh", "state": "NC"},
     "Amos Southend": {"city": "Charlotte", "state": "NC"}
 }
 
