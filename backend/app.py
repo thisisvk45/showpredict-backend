@@ -118,7 +118,7 @@ class PredictRequest(BaseModel):
 
 
 # -----------------------------
-# Venue Coordinates
+# Venue Coordinates & Capacities (UPDATED - All 15 Venues)
 # -----------------------------
 VENUES = {
     "Bright Box Theater": {"coords": (39.1845126, -78.1662175), "capacity": 300},
@@ -140,14 +140,24 @@ VENUES = {
 
 
 # -----------------------------
-# Venue Locations for JamBase API
+# Venue Locations for JamBase API (UPDATED)
 # -----------------------------
 VENUE_LOCATIONS = {
-    "The Spot on Kirk": {"city": "Roanoke", "state": "VA"},
     "Bright Box Theater": {"city": "Winchester", "state": "VA"},
-    "Carolina Theatre": {"city": "Durham", "state": "NC"},
+    "The Millwald": {"city": "Wytheville", "state": "VA"},
+    "The Spot on Kirk": {"city": "Roanoke", "state": "VA"},
     "9:30 Club": {"city": "Washington", "state": "DC"},
-    "Millwald Theatre": {"city": "Wytheville", "state": "VA"},
+    "Carolina Theater": {"city": "Raleigh", "state": "NC"},
+    "Grandin Theater": {"city": "Roanoke", "state": "VA"},
+    "Martins Downtown": {"city": "Roanoke", "state": "VA"},
+    "Evening Muse": {"city": "Charlotte", "state": "NC"},
+    "Motorco Music Hall": {"city": "Durham", "state": "NC"},
+    "Local 506": {"city": "Chapel Hill", "state": "NC"},
+    "Cat's Cradle": {"city": "Chapel Hill", "state": "NC"},
+    "The Pinhook": {"city": "Durham", "state": "NC"},
+    "Kings": {"city": "Raleigh", "state": "NC"},
+    "The Fruit": {"city": "Durham", "state": "NC"},
+    "Amos Southend": {"city": "Charlotte", "state": "NC"}
 }
 
 
@@ -207,7 +217,7 @@ def health():
 
 
 # -----------------------------
-# LOGIN ENDPOINT
+# LOGIN ENDPOINT (UPDATED - Returns venues array)
 # -----------------------------
 @app.post("/api/login")
 def login(data: LoginRequest):
@@ -217,17 +227,17 @@ def login(data: LoginRequest):
     if username not in USERS or USERS[username]["password"] != password:
         raise HTTPException(status_code=401, detail="Invalid username or password")
 
-    # Get user's assigned venue
-    user_venue = USERS[username].get("venue")
+    # Get user's assigned venues (array)
+    user_venues = USERS[username].get("venues", [])
 
     return {
         "success": True,
-        "venue": user_venue
+        "venues": user_venues  # NEW: Returns array of venues
     }
 
 
 # -----------------------------
-# PREDICTION ENDPOINT (UPDATED - Returns Range)
+# PREDICTION ENDPOINT
 # -----------------------------
 @app.post("/api/predict")
 def predict(data: PredictRequest):
@@ -309,7 +319,7 @@ def predict(data: PredictRequest):
 
     # 8. COMPLETE RESPONSE
     return {
-        "predicted_tickets": prediction_range,  # CHANGED: Now returns range instead of single price
+        "predicted_tickets": prediction_range,
         "weather": weather,
         "cm_data": cm_data,
         "features_used": raw_features,
