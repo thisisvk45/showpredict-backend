@@ -83,6 +83,10 @@ function populateReport(data) {
         
         document.getElementById("weatherCondition").textContent = condition;
         document.getElementById("weatherTemp").textContent = `${tempF}°F`;
+    } else {
+        // If weather data is missing
+        document.getElementById("weatherCondition").textContent = "N/A";
+        document.getElementById("weatherTemp").textContent = "No data available";
     }
 
     // Last Play Information (FIXED LOGIC)
@@ -121,14 +125,15 @@ function populateReport(data) {
     document.getElementById("eventsLastMonth").textContent = roundOrDash(venueStats.events_last_1_month);
     document.getElementById("eventsLastYear").textContent = roundOrDash(venueStats.events_last_1_year);
 
-    // Ticket Price (from venue_stats)
+    // Ticket Price (from venue_stats) - FIXED: NO $35 FALLBACK
     const ticketPrice = venueStats.avg_ticket_price;
     if (ticketPrice && ticketPrice > 0) {
         document.getElementById("avgTicketPrice").textContent = `$${Math.round(ticketPrice)}`;
+        document.getElementById("avgPriceSubtitle").textContent = `Historical average`;
     } else {
-        document.getElementById("avgTicketPrice").textContent = `$35`;
+        document.getElementById("avgTicketPrice").textContent = `N/A`;
+        document.getElementById("avgPriceSubtitle").textContent = `No pricing data available`;
     }
-    document.getElementById("avgPriceSubtitle").textContent = `For ${data.venue}`;
 
     // Historical Chart
     const history = venueStats.history_last_6_months || [];
