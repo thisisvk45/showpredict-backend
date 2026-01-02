@@ -3,79 +3,120 @@
     "venue": "The Spot on Kirk",
     "capacity": 125,
     "last_play_date": "2025-09-27",
-    "tickets_last_1_month": 304,
-    "events_last_1_month": 8,
-    "avg_tickets_last_1_month": 38.0,
-    "tickets_last_1_year": 4062,
-    "events_last_1_year": 87,
-    "avg_tickets_last_1_year": 46.69,
+    "tickets_last_1_month": 0,
+    "events_last_1_month": 0,
+    "avg_tickets_last_1_month": 0,
+    "tickets_last_1_year": 3016,
+    "events_last_1_year": 63,
+    "avg_tickets_last_1_year": 47.87,
+    "avg_ticket_price": 14.23,
     "history_last_6_months": [
-      { "month": "Mar", "tickets": 106 },
-      { "month": "Apr", "tickets": 370 },
-      { "month": "May", "tickets": 462 },
-      { "month": "Jun", "tickets": 373 },
-      { "month": "Jul", "tickets": 304 },
-      { "month": "Aug", "tickets": 214 },
-      { "month": "Sep", "tickets": 304 }
+      {
+        "month": "Aug",
+        "tickets": 214
+      },
+      {
+        "month": "Sep",
+        "tickets": 304
+      },
+      {
+        "month": "Jul",
+        "tickets": 233
+      }
     ]
   },
   {
     "venue": "Bright Box Theater",
     "capacity": 300,
-    "last_play_date": "2025-08-16",
-    "tickets_last_1_month": 686,
-    "events_last_1_month": 4,
-    "avg_tickets_last_1_month": 172,
-    "tickets_last_1_year": 5312,
-    "events_last_1_year": 40,
-    "avg_tickets_last_1_year": 133,
+    "last_play_date": "2025-12-05",
+    "tickets_last_1_month": 153,
+    "events_last_1_month": 1,
+    "avg_tickets_last_1_month": 153.0,
+    "tickets_last_1_year": 10412,
+    "events_last_1_year": 104,
+    "avg_tickets_last_1_year": 100.12,
+    "avg_ticket_price": 21.91,
     "history_last_6_months": [
-      { "month": "Jun", "tickets": 187 },
-      { "month": "Jul", "tickets": 463 },
-      { "month": "Sep", "tickets": 505 },
-      { "month": "Oct", "tickets": 639 },
-      { "month": "Nov", "tickets": 862 },
-      { "month": "Dec", "tickets": 153 }
+      {
+        "month": "Aug",
+        "tickets": 143
+      },
+      {
+        "month": "Jul",
+        "tickets": 770
+      },
+      {
+        "month": "Sep",
+        "tickets": 505
+      },
+      {
+        "month": "Oct",
+        "tickets": 639
+      },
+      {
+        "month": "Nov",
+        "tickets": 862
+      },
+      {
+        "month": "Dec",
+        "tickets": 153
+      }
     ]
   },
   {
     "venue": "Carolina Theatre",
     "capacity": 1055,
     "last_play_date": "2025-10-01",
-    "tickets_last_1_month": 3118,
-    "events_last_1_month": 6,
-    "avg_tickets_last_1_month": 519.67,
-    "tickets_last_1_year": 29721,
-    "events_last_1_year": 42,
-    "avg_tickets_last_1_year": 707.64,
+    "tickets_last_1_month": 0,
+    "events_last_1_month": 0,
+    "avg_tickets_last_1_month": 0,
+    "tickets_last_1_year": 19602,
+    "events_last_1_year": 28,
+    "avg_tickets_last_1_year": 700.07,
+    "avg_ticket_price": 55.94,
     "history_last_6_months": [
-      { "month": "Apr", "tickets": 2869 },
-      { "month": "May", "tickets": 2485 },
-      { "month": "Jun", "tickets": 819 },
-      { "month": "Jul", "tickets": 736 },
-      { "month": "Aug", "tickets": 2363 },
-      { "month": "Sep", "tickets": 2111 },
-      { "month": "Oct", "tickets": 1007 }
+      {
+        "month": "Sep",
+        "tickets": 2111
+      },
+      {
+        "month": "Oct",
+        "tickets": 1007
+      },
+      {
+        "month": "Aug",
+        "tickets": 2363
+      },
+      {
+        "month": "Jul",
+        "tickets": 736
+      }
     ]
   },
   {
     "venue": "9:30 Club",
     "capacity": 1200,
     "last_play_date": "2025-09-28",
-    "tickets_last_1_month": 16422,
-    "events_last_1_month": 17,
-    "avg_tickets_last_1_month": 966.0,
-    "tickets_last_1_year": 218785,
-    "events_last_1_year": 241,
-    "avg_tickets_last_1_year": 907.82,
+    "tickets_last_1_month": 0,
+    "events_last_1_month": 0,
+    "avg_tickets_last_1_month": 0,
+    "tickets_last_1_year": 150214,
+    "events_last_1_year": 168,
+    "avg_tickets_last_1_year": 894.13,
+    "avg_ticket_price": 32.98,
     "history_last_6_months": [
-      { "month": "Mar", "tickets": 3141 },
-      { "month": "Apr", "tickets": 24031 },
-      { "month": "May", "tickets": 26843 },
-      { "month": "Jun", "tickets": 21093 },
-      { "month": "Jul", "tickets": 8428 },
-      { "month": "Aug", "tickets": 9262 },
-      { "month": "Sep", "tickets": 15843 }
+      {
+        "month": "Sep",
+        "tickets": 15843
+      },
+      {
+        "month": "Jul",
+        "tickets": 8428
+      },
+      {
+        "month": "Aug",
+        "tickets": 9262
+      }
     ]
   },
   {
@@ -83,138 +124,215 @@
     "capacity": 500,
     "last_play_date": "2025-09-21",
     "tickets_last_1_month": 0,
-    "events_last_1_month": 4,
-    "avg_tickets_last_1_month": 0.0,
-    "tickets_last_1_year": 4463,
-    "events_last_1_year": 34,
-    "avg_tickets_last_1_year": 131.26,
+    "events_last_1_month": 0,
+    "avg_tickets_last_1_month": 0,
+    "tickets_last_1_year": 3416,
+    "events_last_1_year": 29,
+    "avg_tickets_last_1_year": 117.79,
+    "avg_ticket_price": 25.13,
     "history_last_6_months": [
-      { "month": "Mar", "tickets": 270 },
-      { "month": "Apr", "tickets": 767 },
-      { "month": "May", "tickets": 839 },
-      { "month": "Jun", "tickets": 125 },
-      { "month": "Jul", "tickets": 0 },
-      { "month": "Aug", "tickets": 0 },
-      { "month": "Sep", "tickets": 0 }
-    ]
-  },
-  {
-    "venue": "Martins Downtown",
-    "capacity": 250,
-    "last_play_date": null,
-    "tickets_last_1_month": 85,
-    "events_last_1_month": 1,
-    "avg_tickets_last_1_month": 85,
-    "tickets_last_1_year": 172,
-    "events_last_1_year": 2,
-    "avg_tickets_last_1_year": 86,
-    "history_last_6_months": [
-      { "month": "Nov", "tickets": 85 }
+      {
+        "month": "Aug",
+        "tickets": 0
+      },
+      {
+        "month": "Sep",
+        "tickets": 0
+      }
     ]
   },
   {
     "venue": "Grandin Theater",
     "capacity": 320,
-    "last_play_date": null,
-    "tickets_last_1_month": 201,
-    "events_last_1_month": 1,
-    "avg_tickets_last_1_month": 201,
-    "tickets_last_1_year": 358,
-    "events_last_1_year": 2,
-    "avg_tickets_last_1_year": 179,
-    "history_last_6_months": [
-      { "month": "Nov", "tickets": 201 }
-    ]
-  },
-  {
-    "venue": "Cat's Cradle",
-    "capacity": 750,
-    "last_play_date": null,
-    "tickets_last_1_month": 773,
-    "events_last_1_month": 5,
-    "avg_tickets_last_1_month": 155,
-    "tickets_last_1_year": 6265,
-    "events_last_1_year": 25,
-    "avg_tickets_last_1_year": 251,
-    "history_last_6_months": [
-      { "month": "Jun", "tickets": 63 },
-      { "month": "Jul", "tickets": 845 },
-      { "month": "Aug", "tickets": 437 },
-      { "month": "Sep", "tickets": 603 },
-      { "month": "Oct", "tickets": 130 },
-      { "month": "Nov", "tickets": 695 },
-      { "month": "Dec", "tickets": 78 }
-    ]
-  },
-  {
-    "venue": "The Fruit",
-    "capacity": 600,
-    "last_play_date": null,
+    "last_play_date": "2025-11-20",
     "tickets_last_1_month": 0,
     "events_last_1_month": 0,
     "avg_tickets_last_1_month": 0,
-    "tickets_last_1_year": 1076,
-    "events_last_1_year": 3,
-    "avg_tickets_last_1_year": 359,
+    "tickets_last_1_year": 358,
+    "events_last_1_year": 2,
+    "avg_tickets_last_1_year": 179.0,
+    "avg_ticket_price": 23.5,
     "history_last_6_months": [
-      { "month": "Oct", "tickets": 769 }
+      {
+        "month": "Nov",
+        "tickets": 201
+      }
     ]
   },
   {
-    "venue": "Kings",
+    "venue": "Martins Downtown",
     "capacity": 250,
-    "last_play_date": null,
-    "tickets_last_1_month": 122,
-    "events_last_1_month": 1,
-    "avg_tickets_last_1_month": 122,
-    "tickets_last_1_year": 5622,
-    "events_last_1_year": 43,
-    "avg_tickets_last_1_year": 131,
+    "last_play_date": "2025-11-21",
+    "tickets_last_1_month": 0,
+    "events_last_1_month": 0,
+    "avg_tickets_last_1_month": 0,
+    "tickets_last_1_year": 172,
+    "events_last_1_year": 2,
+    "avg_tickets_last_1_year": 86.0,
+    "avg_ticket_price": 10.0,
     "history_last_6_months": [
-      { "month": "Jun", "tickets": 444 },
-      { "month": "Jul", "tickets": 78 },
-      { "month": "Aug", "tickets": 138 },
-      { "month": "Sep", "tickets": 669 },
-      { "month": "Oct", "tickets": 1049 },
-      { "month": "Dec", "tickets": 122 }
+      {
+        "month": "Nov",
+        "tickets": 85
+      }
     ]
   },
   {
     "venue": "Motorco Music Hall",
     "capacity": 450,
-    "last_play_date": null,
-    "tickets_last_1_month": 1935,
-    "events_last_1_month": 9,
-    "avg_tickets_last_1_month": 215,
-    "tickets_last_1_year": 23065,
-    "events_last_1_year": 88,
-    "avg_tickets_last_1_year": 262,
+    "last_play_date": "2025-12-11",
+    "tickets_last_1_month": 400,
+    "events_last_1_month": 3,
+    "avg_tickets_last_1_month": 133.33,
+    "tickets_last_1_year": 22911,
+    "events_last_1_year": 87,
+    "avg_tickets_last_1_year": 263.34,
+    "avg_ticket_price": 25.36,
     "history_last_6_months": [
-      { "month": "Jun", "tickets": 840 },
-      { "month": "Jul", "tickets": 338 },
-      { "month": "Aug", "tickets": 1542 },
-      { "month": "Sep", "tickets": 1587 },
-      { "month": "Oct", "tickets": 2046 },
-      { "month": "Nov", "tickets": 2799 },
-      { "month": "Dec", "tickets": 400 }
+      {
+        "month": "Jul",
+        "tickets": 338
+      },
+      {
+        "month": "Aug",
+        "tickets": 1542
+      },
+      {
+        "month": "Sep",
+        "tickets": 1587
+      },
+      {
+        "month": "Oct",
+        "tickets": 2046
+      },
+      {
+        "month": "Nov",
+        "tickets": 2799
+      },
+      {
+        "month": "Dec",
+        "tickets": 400
+      }
+    ]
+  },
+  {
+    "venue": "Cat's Cradle",
+    "capacity": 750,
+    "last_play_date": "2025-12-05",
+    "tickets_last_1_month": 78,
+    "events_last_1_month": 1,
+    "avg_tickets_last_1_month": 78.0,
+    "tickets_last_1_year": 5974,
+    "events_last_1_year": 24,
+    "avg_tickets_last_1_year": 248.92,
+    "avg_ticket_price": 23.7,
+    "history_last_6_months": [
+      {
+        "month": "Jul",
+        "tickets": 845
+      },
+      {
+        "month": "Aug",
+        "tickets": 437
+      },
+      {
+        "month": "Sep",
+        "tickets": 603
+      },
+      {
+        "month": "Oct",
+        "tickets": 130
+      },
+      {
+        "month": "Nov",
+        "tickets": 695
+      },
+      {
+        "month": "Dec",
+        "tickets": 78
+      }
     ]
   },
   {
     "venue": "The Pinhook",
     "capacity": 200,
-    "last_play_date": null,
-    "tickets_last_1_month": 424,
-    "events_last_1_month": 3,
-    "avg_tickets_last_1_month": 141,
-    "tickets_last_1_year": 2413,
-    "events_last_1_year": 20,
-    "avg_tickets_last_1_year": 121,
+    "last_play_date": "2025-12-12",
+    "tickets_last_1_month": 225,
+    "events_last_1_month": 1,
+    "avg_tickets_last_1_month": 225.0,
+    "tickets_last_1_year": 2030,
+    "events_last_1_year": 18,
+    "avg_tickets_last_1_year": 112.78,
+    "avg_ticket_price": 18.72,
     "history_last_6_months": [
-      { "month": "Jun", "tickets": 222 },
-      { "month": "Sep", "tickets": 178 },
-      { "month": "Oct", "tickets": 455 },
-      { "month": "Nov", "tickets": 97 },
-      { "month": "Dec", "tickets": 376 }
+      {
+        "month": "Sep",
+        "tickets": 178
+      },
+      {
+        "month": "Oct",
+        "tickets": 455
+      },
+      {
+        "month": "Nov",
+        "tickets": 97
+      },
+      {
+        "month": "Dec",
+        "tickets": 376
+      }
+    ]
+  },
+  {
+    "venue": "Kings",
+    "capacity": 250,
+    "last_play_date": "2025-12-10",
+    "tickets_last_1_month": 122,
+    "events_last_1_month": 1,
+    "avg_tickets_last_1_month": 122.0,
+    "tickets_last_1_year": 5622,
+    "events_last_1_year": 43,
+    "avg_tickets_last_1_year": 130.74,
+    "avg_ticket_price": 19.97,
+    "history_last_6_months": [
+      {
+        "month": "Jul",
+        "tickets": 78
+      },
+      {
+        "month": "Aug",
+        "tickets": 138
+      },
+      {
+        "month": "Sep",
+        "tickets": 669
+      },
+      {
+        "month": "Oct",
+        "tickets": 1049
+      },
+      {
+        "month": "Dec",
+        "tickets": 122
+      }
+    ]
+  },
+  {
+    "venue": "The Fruit",
+    "capacity": 600,
+    "last_play_date": "2025-10-04",
+    "tickets_last_1_month": 0,
+    "events_last_1_month": 0,
+    "avg_tickets_last_1_month": 0,
+    "tickets_last_1_year": 1076,
+    "events_last_1_year": 3,
+    "avg_tickets_last_1_year": 358.67,
+    "avg_ticket_price": 27.12,
+    "history_last_6_months": [
+      {
+        "month": "Oct",
+        "tickets": 769
+      }
     ]
   }
 ]
