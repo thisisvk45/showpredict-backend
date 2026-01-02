@@ -121,9 +121,13 @@ function populateReport(data) {
     document.getElementById("eventsLastMonth").textContent = roundOrDash(venueStats.events_last_1_month);
     document.getElementById("eventsLastYear").textContent = roundOrDash(venueStats.events_last_1_year);
 
-    // Average Ticket Price (4th card)
-    const avgPrice = venueStats.avg_ticket_price || 35; // Default to $35 if not available
-    document.getElementById("avgTicketPrice").textContent = `$${Math.round(avgPrice)}`;
+    // Ticket Price (from venue_stats)
+    const ticketPrice = venueStats.avg_ticket_price;
+    if (ticketPrice && ticketPrice > 0) {
+        document.getElementById("avgTicketPrice").textContent = `$${Math.round(ticketPrice)}`;
+    } else {
+        document.getElementById("avgTicketPrice").textContent = `$35`;
+    }
     document.getElementById("avgPriceSubtitle").textContent = `For ${data.venue}`;
 
     // Historical Chart
