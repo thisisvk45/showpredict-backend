@@ -121,6 +121,11 @@ function populateReport(data) {
     document.getElementById("eventsLastMonth").textContent = roundOrDash(venueStats.events_last_1_month);
     document.getElementById("eventsLastYear").textContent = roundOrDash(venueStats.events_last_1_year);
 
+    // Average Ticket Price (4th card)
+    const avgPrice = venueStats.avg_ticket_price || 35; // Default to $35 if not available
+    document.getElementById("avgTicketPrice").textContent = `$${Math.round(avgPrice)}`;
+    document.getElementById("avgPriceSubtitle").textContent = `For ${data.venue}`;
+
     // Historical Chart
     const history = venueStats.history_last_6_months || [];
     const labels = history.map(h => h.month);
@@ -133,7 +138,6 @@ function populateReport(data) {
     // Raw Data
     document.getElementById("weatherData").textContent = JSON.stringify(data.weather, null, 2);
     document.getElementById("artistData").textContent = JSON.stringify(data.cm_data, null, 2);
-    document.getElementById("featuresData").textContent = JSON.stringify(data.features_used, null, 2);
 }
 
 // ===========================
