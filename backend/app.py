@@ -28,7 +28,7 @@ ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://localhost:8000",
     "http://127.0.0.1:8000",
-    "*"
+    "*"  # For now, allow all. Replace with your Netlify URL after deployment
 ]
 
 app.add_middleware(
@@ -118,14 +118,14 @@ class PredictRequest(BaseModel):
 
 
 # -----------------------------
-# Venue Coordinates & Capacities (CORRECTED - Names match venue_stats.json)
+# Venue Coordinates & Capacities (UPDATED - All 15 Venues)
 # -----------------------------
 VENUES = {
     "Bright Box Theater": {"coords": (39.1845126, -78.1662175), "capacity": 300},
-    "Millwald Theatre": {"coords": (36.9490417, -81.0843156), "capacity": 500},
+    "The Millwald": {"coords": (36.9490417, -81.0843156), "capacity": 500},
     "The Spot on Kirk": {"coords": (37.2712342, -79.9393615), "capacity": 125},
     "9:30 Club": {"coords": (38.91806, -77.02389), "capacity": 1200},
-    "Carolina Theatre": {"coords": (35.7795897, -78.6381787), "capacity": 1055},
+    "Carolina Theater": {"coords": (35.7795897, -78.6381787), "capacity": 1600},
     "Grandin Theater": {"coords": (37.2626, -79.9653), "capacity": 320},
     "Martins Downtown": {"coords": (37.2710, -79.9414), "capacity": 250},
     "Evening Muse": {"coords": (35.2271, -80.8431), "capacity": 120},
@@ -140,23 +140,23 @@ VENUES = {
 
 
 # -----------------------------
-# Venue Locations for JamBase API (CORRECTED CITIES)
+# Venue Locations for JamBase API (UPDATED)
 # -----------------------------
 VENUE_LOCATIONS = {
     "Bright Box Theater": {"city": "Winchester", "state": "VA"},
-    "Millwald Theatre": {"city": "Wytheville", "state": "VA"},
+    "The Millwald": {"city": "Wytheville", "state": "VA"},
     "The Spot on Kirk": {"city": "Roanoke", "state": "VA"},
     "9:30 Club": {"city": "Washington", "state": "DC"},
-    "Carolina Theatre": {"city": "Raleigh", "state": "NC"},
+    "Carolina Theater": {"city": "Raleigh", "state": "NC"},
     "Grandin Theater": {"city": "Roanoke", "state": "VA"},
     "Martins Downtown": {"city": "Roanoke", "state": "VA"},
     "Evening Muse": {"city": "Charlotte", "state": "NC"},
-    "Motorco Music Hall": {"city": "Raleigh", "state": "NC"},
-    "Local 506": {"city": "Raleigh", "state": "NC"},
-    "Cat's Cradle": {"city": "Raleigh", "state": "NC"},
-    "The Pinhook": {"city": "Raleigh", "state": "NC"},
+    "Motorco Music Hall": {"city": "Durham", "state": "NC"},
+    "Local 506": {"city": "Chapel Hill", "state": "NC"},
+    "Cat's Cradle": {"city": "Chapel Hill", "state": "NC"},
+    "The Pinhook": {"city": "Durham", "state": "NC"},
     "Kings": {"city": "Raleigh", "state": "NC"},
-    "The Fruit": {"city": "Raleigh", "state": "NC"},
+    "The Fruit": {"city": "Durham", "state": "NC"},
     "Amos Southend": {"city": "Charlotte", "state": "NC"}
 }
 
@@ -166,8 +166,15 @@ VENUE_LOCATIONS = {
 # -----------------------------
 def get_artist_venue_info(artist, venue):
     """Look up last play date and times played for artist at venue"""
+    # Normalize for case-insensitive matching
+    artist_lower = artist.lower().strip()
+    venue_lower = venue.lower().strip()
+    
     for record in ARTIST_VENUE_DATA:
-        if record.get("Artist") == artist and record.get("Venue") == venue:
+        record_artist = record.get("Artist", "").lower().strip()
+        record_venue = record.get("Venue", "").lower().strip()
+        
+        if record_artist == artist_lower and record_venue == venue_lower:
             return {
                 "last_play_date": record.get("last_play_date"),
                 "times_played": record.get("times_played", 0)
@@ -227,11 +234,12 @@ def login(data: LoginRequest):
     if username not in USERS or USERS[username]["password"] != password:
         raise HTTPException(status_code=401, detail="Invalid username or password")
 
+    # Get user's assigned venues (array)
     user_venues = USERS[username].get("venues", [])
 
     return {
         "success": True,
-        "venues": user_venues
+        "venues": user_venues  # NEW: Returns array of venues
     }
 
 
@@ -248,9 +256,11 @@ def predict(data: PredictRequest):
     venue = data.venue
     date_str = data.date
 
+    # Validate venue
     if venue not in VENUES:
         raise HTTPException(status_code=400, detail="Invalid venue name")
 
+    # Validate date
     try:
         date_obj = datetime.strptime(date_str, "%Y-%m-%d")
     except:
@@ -274,20 +284,23 @@ def predict(data: PredictRequest):
         IMPUTER,
     )
 
-    # 4. TICKET SALES PREDICTION
+    # 4. TICKET SALES PREDICTION (WITH RANGE AND CAPACITY CAP)
     try:
         predicted_tickets = float(MODEL.predict(X)[0])
         
-        MAE = 155
+        # Calculate range using MAE-based uncertainty
+        MAE = 155  # Your model's Mean Absolute Error
         
-        low_estimate = max(0, predicted_tickets - (1.5 * MAE))
-        high_estimate = predicted_tickets + (1.5 * MAE)
+        low_estimate = max(0, predicted_tickets - (1.5 * MAE))  # Conservative
+        high_estimate = predicted_tickets + (1.5 * MAE)  # Optimistic
         
+        # Apply capacity cap - cannot exceed venue maximum
         venue_capacity = VENUES[venue]["capacity"]
         low_estimate = min(low_estimate, venue_capacity)
         predicted_tickets = min(predicted_tickets, venue_capacity)
         high_estimate = min(high_estimate, venue_capacity)
         
+        # Round to integers
         prediction_range = {
             "low": int(round(low_estimate)),
             "expected": int(round(predicted_tickets)),
@@ -318,25 +331,29 @@ def predict(data: PredictRequest):
         "cm_data": cm_data,
         "features_used": raw_features,
 
+        # Venue stats
         "venue_stats": {
-            "capacity": stats.get("capacity", venue_capacity),
+            "capacity": stats.get("capacity"),
             "last_play_date": stats.get("last_play_date"),
-            "tickets_last_1_month": stats.get("tickets_last_1_month", 0),
-            "events_last_1_month": stats.get("events_last_1_month", 0),
-            "avg_tickets_last_1_month": stats.get("avg_tickets_last_1_month", 0),
-            "tickets_last_1_year": stats.get("tickets_last_1_year", 0),
-            "events_last_1_year": stats.get("events_last_1_year", 0),
-            "avg_tickets_last_1_year": stats.get("avg_tickets_last_1_year", 0),
+            "tickets_last_1_month": stats.get("tickets_last_1_month"),
+            "events_last_1_month": stats.get("events_last_1_month"),
+            "avg_tickets_last_1_month": stats.get("avg_tickets_last_1_month"),
+            "tickets_last_1_year": stats.get("tickets_last_1_year"),
+            "events_last_1_year": stats.get("events_last_1_year"),
+            "avg_tickets_last_1_year": stats.get("avg_tickets_last_1_year"),
             "history_last_6_months": history
         },
 
+        # Artist-venue info
         "artist_venue_info": artist_venue_info,
+
+        # Competition analysis
         "competing_shows": competing_shows
     }
 
 
 # -----------------------------
-# Run Server
+# Run Server (for local testing)
 # -----------------------------
 if __name__ == "__main__":
     import uvicorn
