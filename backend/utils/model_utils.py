@@ -1,42 +1,54 @@
 import joblib
+import json
 import os
 
-# -----------------------------
-# Model Artifact Paths
-# -----------------------------
+# Model artifact paths
 MODEL_DIR = "model"
-MODEL_FILE = os.path.join(MODEL_DIR, "final_xgb_model.pkl")
+CATBOOST_FILE = os.path.join(MODEL_DIR, "final_catboost_model.pkl")
+LIGHTGBM_FILE = os.path.join(MODEL_DIR, "final_lightgbm_model.pkl")
+XGBOOST_FILE = os.path.join(MODEL_DIR, "final_xgboost_model.pkl")
 IMPUTER_FILE = os.path.join(MODEL_DIR, "final_imputer.pkl")
 FEATURES_FILE = os.path.join(MODEL_DIR, "final_feature_cols.pkl")
+WEIGHTS_FILE = os.path.join(MODEL_DIR, "ensemble_weights.json")
 
-# -----------------------------
-# Load All ML Artifacts
-# -----------------------------
 def load_model():
     """
-    Loads XGB model, imputer, and feature column list.
-    Runs once at FastAPI startup (not on every request).
+    Load ensemble models, imputer, feature columns, and weights.
+    Runs once at FastAPI startup.
     """
-
-    if not os.path.exists(MODEL_FILE):
-        raise FileNotFoundError("final_xgb_model.pkl missing inside /model")
-
-    if not os.path.exists(IMPUTER_FILE):
-        raise FileNotFoundError("final_imputer.pkl missing inside /model")
-
-    if not os.path.exists(FEATURES_FILE):
-        raise FileNotFoundError("final_feature_cols.pkl missing inside /model")
-
-    model = joblib.load(MODEL_FILE)
+    
+    # Check all files exist
+    required_files = {
+        "CatBoost": CATBOOST_FILE,
+        "LightGBM": LIGHTGBM_FILE,
+        "XGBoost": XGBOOST_FILE,
+        "Imputer": IMPUTER_FILE,
+        "Features": FEATURES_FILE,
+        "Weights": WEIGHTS_FILE
+    }
+    
+    for name, file in required_files.items():
+        if not os.path.exists(file):
+            raise FileNotFoundError(f"Missing {name} file: {file}")
+    
+    # Load models
+    catboost_model = joblib.load(CATBOOST_FILE)
+    lightgbm_model = joblib.load(LIGHTGBM_FILE)
+    xgboost_model = joblib.load(XGBOOST_FILE)
+    
+    # Load imputer and features
     imputer = joblib.load(IMPUTER_FILE)
     feature_list = joblib.load(FEATURES_FILE)
-
-    # Safety fix — ensure target column isn't in features
-    if "Ticket price" in feature_list:
-        feature_list = [f for f in feature_list if f != "Ticket price"]
-
+    
+    # Load ensemble weights
+    with open(WEIGHTS_FILE, 'r') as f:
+        weights = json.load(f)
+    
     return {
-        "model": model,
+        "catboost": catboost_model,
+        "lightgbm": lightgbm_model,
+        "xgboost": xgboost_model,
         "imputer": imputer,
         "features": feature_list,
+        "weights": weights
     }
