@@ -147,6 +147,7 @@ function populateReport(data) {
     // Raw Data
     document.getElementById("weatherData").textContent = JSON.stringify(data.weather, null, 2);
     document.getElementById("artistData").textContent = JSON.stringify(data.cm_data, null, 2);
+    document.getElementById("competitionData").textContent = JSON.stringify(data.competing_shows, null, 2);
 }
 
 // ===========================
@@ -186,7 +187,7 @@ function populateSocialStats(cmData = {}) {
 }
 
 // ===========================
-// COMPETITION TABLE (UPDATED - Parse venue from artist name)
+// COMPETITION TABLE (UPDATED - Parse venue from artist name + first genre only)
 // ===========================
 function populateCompetitionTable(competingShows = {}) {
     const tbody = document.getElementById("competitionTableBody");
@@ -214,11 +215,17 @@ function populateCompetitionTable(competingShows = {}) {
             venueName = parts.slice(1).join(" at ").trim(); // Handle multiple " at " in name
         }
         
+        // Parse genre - show only first genre (before first comma)
+        let genre = event.genre || "Various";
+        if (genre.includes(",")) {
+            genre = genre.split(",")[0].trim();
+        }
+        
         return `
             <tr>
                 <td>${venueName}</td>
                 <td>${artistName}</td>
-                <td>Various</td>
+                <td>${genre}</td>
                 <td>${formatDateShort(event.date)}</td>
             </tr>
         `;
