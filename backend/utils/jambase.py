@@ -1,38 +1,36 @@
 import requests
 from datetime import datetime, timedelta
-import os
 
-# Get API key from environment variable (secure)
-JAMBASE_API_KEY = os.environ.get("JAMBASE_API_KEY", "f360dd73-1747-4cff-ae2f-22dd2db4e677")
+API_KEY = "f360dd73-1747-4cff-ae2f-22dd2db4e677"
+BASE_URL = "https://www.jambase.com/jb-api/v1/events"
 
 def get_competing_events(city, state, date_str, days=7):
     """
-    Fetch competing events from JamBase API
+    Fetch competing events from JamBase API for a specific city within a date range.
     
     Args:
-        city: City name (e.g., "Washington")
-        state: State code (e.g., "DC")
-        date_str: Date string "YYYY-MM-DD"
-        days: Number of days to look ahead (default 7)
+        city: City name (e.g., "Durham")
+        state: State code (e.g., "NC")
+        date_str: Start date in YYYY-MM-DD format
+        days: Number of days to search (default 7)
     
     Returns:
-        dict with totalShows and events list
+        Dict with totalShows and list of event details including genre
     """
-    date_obj = datetime.strptime(date_str, "%Y-%m-%d")
-    week_end = date_obj + timedelta(days=days)
-    
-    url = "https://www.jambase.com/jb-api/v1/events"
-    
-    params = {
-        "apikey": JAMBASE_API_KEY,
-        "geoStateIso": f"US-{state.upper()}",
-        "eventDateFrom": date_str,
-        "eventDateTo": week_end.strftime("%Y-%m-%d"),
-        "perPage": 100
-    }
     
     try:
-        response = requests.get(url, params=params, timeout=10)
+        date_obj = datetime.strptime(date_str, "%Y-%m-%d")
+        end_date = date_obj + timedelta(days=days)
+        
+        params = {
+            "apikey": API_KEY,
+            "geoStateIso": f"US-{state.upper()}",
+            "eventDateFrom": date_str,
+            "eventDateTo": end_date.strftime("%Y-%m-%d"),
+            "perPage": 100
+        }
+        
+        response = requests.get(BASE_URL, params=params, timeout=10)
         
         if response.status_code != 200:
             print(f"JamBase API error: {response.status_code}")
@@ -40,14 +38,15 @@ def get_competing_events(city, state, date_str, days=7):
         
         data = response.json()
         
-        # Filter by city
+        # Filter events by city
         city_events = []
-        for e in data.get('events', []):
-            location = e.get('location', {}).get('address', {})
-            event_city = location.get('addressLocality', '').lower()
+        for event in data.get('events', []):
+            location = event.get('location', {})
+            address = location.get('address', {})
+            event_city = address.get('addressLocality', '').lower()
             
             if city.lower() in event_city:
-                city_events.append(e)
+                city_events.append(event)
         
         # Get 2 sample events for display
         sample_events = []
@@ -56,10 +55,21 @@ def get_competing_events(city, state, date_str, days=7):
             event_date_obj = datetime.strptime(start_date, "%Y-%m-%d")
             days_diff = abs((event_date_obj - date_obj).days)
             
+            # Extract genre from performers
+            genre = "Various"
+            performers = event.get('performer', [])
+            if performers and len(performers) > 0:
+                # Get genres from first (headliner) performer
+                headliner_genres = performers[0].get('genre', [])
+                if headliner_genres:
+                    # Join all genres with comma
+                    genre = ", ".join(headliner_genres)
+            
             sample_events.append({
-                "name": event.get('name', 'Unknown Event'),
+                "name": event.get('name'),
                 "date": start_date,
-                "daysDiff": days_diff
+                "daysDiff": days_diff,
+                "genre": genre  # NEW: Added genre field
             })
         
         return {
@@ -68,5 +78,5 @@ def get_competing_events(city, state, date_str, days=7):
         }
         
     except Exception as e:
-        print(f"JamBase API Error: {e}")
+        print(f"Error fetching JamBase data: {e}")
         return {"totalShows": 0, "events": []}
