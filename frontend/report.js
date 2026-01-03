@@ -187,7 +187,7 @@ function populateSocialStats(cmData = {}) {
 }
 
 // ===========================
-// COMPETITION TABLE (UPDATED - Parse venue from artist name + first genre only)
+// COMPETITION TABLE (Show first 2 events only)
 // ===========================
 function populateCompetitionTable(competingShows = {}) {
     const tbody = document.getElementById("competitionTableBody");
@@ -203,7 +203,10 @@ function populateCompetitionTable(competingShows = {}) {
         return;
     }
 
-    tbody.innerHTML = competingShows.events.map(event => {
+    // Show only first 2 events in the table
+    const displayEvents = competingShows.events.slice(0, 2);
+    
+    tbody.innerHTML = displayEvents.map(event => {
         // Parse artist name to extract venue
         // Format: "Artist Name at Venue Name"
         let artistName = event.name;
