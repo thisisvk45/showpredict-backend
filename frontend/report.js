@@ -129,7 +129,7 @@ function populateReport(data) {
     const ticketPrice = venueStats.avg_ticket_price;
     if (ticketPrice && ticketPrice > 0) {
         document.getElementById("avgTicketPrice").textContent = `$${Math.round(ticketPrice)}`;
-        document.getElementById("avgPriceSubtitle").textContent = `Historical average`;
+        document.getElementById("avgPriceSubtitle").textContent = ``;
     } else {
         document.getElementById("avgTicketPrice").textContent = `N/A`;
         document.getElementById("avgPriceSubtitle").textContent = `No pricing data available`;
