@@ -360,7 +360,7 @@ def predict(data: PredictRequest):
             "tickets_last_1_year": stats.get("tickets_last_1_year"),
             "events_last_1_year": stats.get("events_last_1_year"),
             "avg_tickets_last_1_year": stats.get("avg_tickets_last_1_year"),
-            "avg_ticket_price": stats.get("avg_ticket_price"),  # ✅ ADDED
+            "avg_ticket_price": stats.get("avg_ticket_price"),  
             "history_last_6_months": history
         },
 
