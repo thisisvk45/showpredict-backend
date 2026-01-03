@@ -129,7 +129,7 @@ function populateReport(data) {
     const ticketPrice = venueStats.avg_ticket_price;
     if (ticketPrice && ticketPrice > 0) {
         document.getElementById("avgTicketPrice").textContent = `$${Math.round(ticketPrice)}`;
-        document.getElementById("avgPriceSubtitle").textContent = ``;
+        document.getElementById("avgPriceSubtitle").textContent = `Historical average`;
     } else {
         document.getElementById("avgTicketPrice").textContent = `N/A`;
         document.getElementById("avgPriceSubtitle").textContent = `No pricing data available`;
@@ -144,8 +144,9 @@ function populateReport(data) {
     window._chartValues = values;
     createTrendsChart(labels, values);
 
-    // Raw Data
-    document.getElementById("weatherData").textContent = JSON.stringify(data.weather, null, 2);
+    // Raw Data with Fahrenheit conversion for weather
+    const weatherDataForDisplay = convertWeatherToFahrenheit(data.weather);
+    document.getElementById("weatherData").textContent = JSON.stringify(weatherDataForDisplay, null, 2);
     document.getElementById("artistData").textContent = JSON.stringify(data.cm_data, null, 2);
     document.getElementById("competitionData").textContent = JSON.stringify(data.competing_shows, null, 2);
 }
@@ -346,4 +347,28 @@ function formatDateShort(dateStr) {
         month: "numeric",
         day: "numeric"
     });
+}
+
+// Convert weather temperatures from Celsius to Fahrenheit for raw data display
+function convertWeatherToFahrenheit(weather) {
+    if (!weather || typeof weather !== 'object') return weather;
+    
+    const converted = { ...weather };
+    
+    // Convert all temperature fields
+    if (converted.temperature !== undefined) {
+        converted.temperature = Math.round((converted.temperature * 9/5) + 32);
+        converted.temperature_unit = "°F";
+    }
+    if (converted.feels_like !== undefined) {
+        converted.feels_like = Math.round((converted.feels_like * 9/5) + 32);
+    }
+    if (converted.temp_min !== undefined) {
+        converted.temp_min = Math.round((converted.temp_min * 9/5) + 32);
+    }
+    if (converted.temp_max !== undefined) {
+        converted.temp_max = Math.round((converted.temp_max * 9/5) + 32);
+    }
+    
+    return converted;
 }
