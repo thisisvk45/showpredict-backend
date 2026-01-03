@@ -85,21 +85,30 @@ else:
 # -----------------------------
 # Load Model Artifacts
 # -----------------------------
-MODEL = None
+MODELS = None
 IMPUTER = None
 FEATURES = []
+WEIGHTS = {}
 
 @app.on_event("startup")
 def load_ml_artifacts():
-    global MODEL, IMPUTER, FEATURES
+    global MODELS, IMPUTER, FEATURES, WEIGHTS
     try:
         artifacts = load_model()
-        MODEL = artifacts["model"]
-        IMPUTER = artifacts["imputer"]
-        FEATURES = artifacts["features"]
-        print("✅ Model loaded successfully")
+        MODELS = {
+            'catboost': artifacts['catboost'],
+            'lightgbm': artifacts['lightgbm'],
+            'xgboost': artifacts['xgboost']
+        }
+        IMPUTER = artifacts['imputer']
+        FEATURES = artifacts['features']
+        WEIGHTS = artifacts['weights']
+        print("✅ Ensemble models loaded successfully")
+        print(f"   Models: CatBoost, LightGBM, XGBoost")
+        print(f"   Features: {len(FEATURES)}")
+        print(f"   Weights: CB={WEIGHTS['catboost']:.2f}, LGB={WEIGHTS['lightgbm']:.2f}, XGB={WEIGHTS['xgboost']:.2f}")
     except Exception as e:
-        print(f"❌ Error loading model: {e}")
+        print(f"❌ Error loading models: {e}")
         raise
 
 
@@ -211,14 +220,15 @@ def root():
     return {
         "status": "ok",
         "message": "ShowPredict API is running",
-        "model_loaded": MODEL is not None
+        "model_loaded": MODELS is not None
     }
 
 @app.get("/health")
 def health():
     return {
         "status": "healthy",
-        "model_loaded": MODEL is not None,
+        "model_loaded": MODELS is not None,
+        "model_type": "ensemble" if MODELS else None,
         "venues_available": len(VENUES)
     }
 
@@ -249,8 +259,8 @@ def login(data: LoginRequest):
 @app.post("/api/predict")
 def predict(data: PredictRequest):
 
-    if MODEL is None:
-        raise HTTPException(status_code=503, detail="Model not loaded yet")
+    if MODELS is None:
+        raise HTTPException(status_code=503, detail="Models not loaded yet")
 
     artist = data.artist
     venue = data.venue
@@ -273,8 +283,8 @@ def predict(data: PredictRequest):
     # 2. ARTIST (Chartmetric)
     cm_data = search_artist_full(artist) or {}
 
-    # 3. BUILD FEATURES
-    X, raw_features = build_features(
+    # 3. BUILD FEATURES (returns capacity for fillrate conversion)
+    X, raw_features, capacity = build_features(
         venue,
         date_obj,
         weather,
@@ -284,29 +294,38 @@ def predict(data: PredictRequest):
         IMPUTER,
     )
 
-    # 4. TICKET SALES PREDICTION (WITH RANGE AND CAPACITY CAP)
+    # 4. ENSEMBLE PREDICTION (FILLRATE → TICKETS)
     try:
-        predicted_tickets = float(MODEL.predict(X)[0])
+        # Get predictions from all three models (they predict fill rate)
+        cb_fillrate = float(MODELS['catboost'].predict(X)[0])
+        lgb_fillrate = float(MODELS['lightgbm'].predict(X)[0])
+        xgb_fillrate = float(MODELS['xgboost'].predict(X)[0])
         
-        # Calculate range using MAE-based uncertainty
-        MAE = 155  # Your model's Mean Absolute Error
+        # Weighted ensemble
+        ensemble_fillrate = (
+            cb_fillrate * WEIGHTS['catboost'] +
+            lgb_fillrate * WEIGHTS['lightgbm'] +
+            xgb_fillrate * WEIGHTS['xgboost']
+        )
         
-        low_estimate = max(0, predicted_tickets - (1.5 * MAE))  # Conservative
-        high_estimate = predicted_tickets + (1.5 * MAE)  # Optimistic
+        # Convert fill rate to tickets
+        predicted_tickets = ensemble_fillrate * capacity
         
-        # Apply capacity cap - cannot exceed venue maximum
-        venue_capacity = VENUES[venue]["capacity"]
-        low_estimate = min(low_estimate, venue_capacity)
-        predicted_tickets = min(predicted_tickets, venue_capacity)
-        high_estimate = min(high_estimate, venue_capacity)
+        # Clip to [0, capacity]
+        predicted_tickets = max(0, min(predicted_tickets, capacity))
+        
+        # Calculate uncertainty range (±15% based on model uncertainty)
+        uncertainty_pct = 0.15
+        low_estimate = max(0, predicted_tickets * (1 - uncertainty_pct))
+        high_estimate = min(capacity, predicted_tickets * (1 + uncertainty_pct))
         
         # Round to integers
         prediction_range = {
             "low": int(round(low_estimate)),
             "expected": int(round(predicted_tickets)),
             "high": int(round(high_estimate)),
-            "capacity": venue_capacity,
-            "capacity_percentage": int(round((predicted_tickets / venue_capacity) * 100))
+            "capacity": capacity,
+            "capacity_percentage": int(round((predicted_tickets / capacity) * 100))
         }
         
     except Exception as e:
@@ -341,7 +360,7 @@ def predict(data: PredictRequest):
             "tickets_last_1_year": stats.get("tickets_last_1_year"),
             "events_last_1_year": stats.get("events_last_1_year"),
             "avg_tickets_last_1_year": stats.get("avg_tickets_last_1_year"),
-            "avg_ticket_price": stats.get("avg_ticket_price"),  
+            "avg_ticket_price": stats.get("avg_ticket_price"),  # ✅ ADDED
             "history_last_6_months": history
         },
 
