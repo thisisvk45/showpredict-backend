@@ -174,7 +174,7 @@ VENUE_LOCATIONS = {
 # Helper: Get Artist-Venue Info
 # -----------------------------
 def get_artist_venue_info(artist, venue):
-    """Look up last play date and times played for artist at venue"""
+    """Look up last play date, times played, and tickets sold for artist at venue"""
     # Normalize for case-insensitive matching
     artist_lower = artist.lower().strip()
     venue_lower = venue.lower().strip()
@@ -186,9 +186,10 @@ def get_artist_venue_info(artist, venue):
         if record_artist == artist_lower and record_venue == venue_lower:
             return {
                 "last_play_date": record.get("last_play_date"),
-                "times_played": record.get("times_played", 0)
+                "times_played": record.get("times_played", 0),
+                "tickets_sold": record.get("tickets_sold", 0)
             }
-    return {"last_play_date": None, "times_played": 0}
+    return {"last_play_date": None, "times_played": 0, "tickets_sold": None}
 
 
 # -----------------------------
@@ -360,7 +361,7 @@ def predict(data: PredictRequest):
             "tickets_last_1_year": stats.get("tickets_last_1_year"),
             "events_last_1_year": stats.get("events_last_1_year"),
             "avg_tickets_last_1_year": stats.get("avg_tickets_last_1_year"),
-            "avg_ticket_price": stats.get("avg_ticket_price"),  
+            "avg_ticket_price": stats.get("avg_ticket_price"),  # ✅ ADDED
             "history_last_6_months": history
         },
 
