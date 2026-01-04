@@ -100,9 +100,9 @@ function populateReport(data) {
         const lastPlaySubtitle = document.getElementById("lastPlaySubtitle");
         lastPlaySubtitle.classList.remove("hide-info");
         
-        // Estimate tickets sold from last play
-        const estimatedLastPlayTickets = Math.round(venueStats.avg_tickets_last_1_year || ticketPrediction.expected || 300);
-        document.getElementById("lastPlayTickets").textContent = estimatedLastPlayTickets;
+        // Use actual tickets sold from last play
+        const actualTicketsSold = artistVenueInfo.tickets_sold || 0;
+        document.getElementById("lastPlayTickets").textContent = actualTicketsSold;
         document.getElementById("timesPlayed").textContent = artistVenueInfo.times_played || 0;
     } else {
         // Artist has NEVER played here
