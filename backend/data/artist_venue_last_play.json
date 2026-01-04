@@ -8106,6 +8106,13 @@
         "tickets_sold": 239
     },
     {
+        "Artist": "Nathan Harris",
+        "Venue": "Evening Muse",
+        "last_play_date": "2025-04-10",
+        "times_played": 2,
+        "tickets_sold": 109
+    },
+    {
         "Artist": "Caitlin Krisko & The Broadcast",
         "Venue": "Grandin Theater",
         "last_play_date": "2025-11-20",
@@ -8526,188 +8533,6 @@
         "tickets_sold": 206
     },
     {
-        "Artist": "60 juno",
-        "Venue": "Local 506",
-        "last_play_date": "2025-09-30",
-        "times_played": 1,
-        "tickets_sold": 32
-    },
-    {
-        "Artist": "A Country Western",
-        "Venue": "Local 506",
-        "last_play_date": "2024-10-19",
-        "times_played": 1,
-        "tickets_sold": 32
-    },
-    {
-        "Artist": "Abby Holliday",
-        "Venue": "Local 506",
-        "last_play_date": "2024-09-28",
-        "times_played": 1,
-        "tickets_sold": 106
-    },
-    {
-        "Artist": "Ace Monroe",
-        "Venue": "Local 506",
-        "last_play_date": "2024-11-15",
-        "times_played": 1,
-        "tickets_sold": 45
-    },
-    {
-        "Artist": "Anika",
-        "Venue": "Local 506",
-        "last_play_date": "2025-10-06",
-        "times_played": 1,
-        "tickets_sold": 60
-    },
-    {
-        "Artist": "Apes of The State",
-        "Venue": "Local 506",
-        "last_play_date": "2024-10-22",
-        "times_played": 1,
-        "tickets_sold": 108
-    },
-    {
-        "Artist": "Armchair Boogie",
-        "Venue": "Local 506",
-        "last_play_date": "2024-10-09",
-        "times_played": 1,
-        "tickets_sold": 24
-    },
-    {
-        "Artist": "Ashes to Amber",
-        "Venue": "Local 506",
-        "last_play_date": "2025-03-19",
-        "times_played": 1,
-        "tickets_sold": 97
-    },
-    {
-        "Artist": "Bambara",
-        "Venue": "Local 506",
-        "last_play_date": "2025-09-20",
-        "times_played": 1,
-        "tickets_sold": 75
-    },
-    {
-        "Artist": "Bear Ghost",
-        "Venue": "Local 506",
-        "last_play_date": "2025-07-22",
-        "times_played": 1,
-        "tickets_sold": 250
-    },
-    {
-        "Artist": "CLIFFDIVER",
-        "Venue": "Local 506",
-        "last_play_date": "2024-12-04",
-        "times_played": 1,
-        "tickets_sold": 61
-    },
-    {
-        "Artist": "Cloakroom",
-        "Venue": "Local 506",
-        "last_play_date": "2025-03-30",
-        "times_played": 1,
-        "tickets_sold": 97
-    },
-    {
-        "Artist": "Cold",
-        "Venue": "Local 506",
-        "last_play_date": "2025-04-19",
-        "times_played": 1,
-        "tickets_sold": 250
-    },
-    {
-        "Artist": "Daisy The Great",
-        "Venue": "Local 506",
-        "last_play_date": "2025-04-18",
-        "times_played": 1,
-        "tickets_sold": 223
-    },
-    {
-        "Artist": "Dan Spencer",
-        "Venue": "Local 506",
-        "last_play_date": "2025-03-11",
-        "times_played": 1,
-        "tickets_sold": 25
-    },
-    {
-        "Artist": "DeathbyRomy",
-        "Venue": "Local 506",
-        "last_play_date": "2025-05-04",
-        "times_played": 1,
-        "tickets_sold": 250
-    },
-    {
-        "Artist": "Drumming Bird",
-        "Venue": "Local 506",
-        "last_play_date": "2024-10-05",
-        "times_played": 1,
-        "tickets_sold": 26
-    },
-    {
-        "Artist": "Empty Shell Casing",
-        "Venue": "Local 506",
-        "last_play_date": "2025-10-28",
-        "times_played": 2,
-        "tickets_sold": 29
-    },
-    {
-        "Artist": "End It",
-        "Venue": "Local 506",
-        "last_play_date": "2025-09-23",
-        "times_played": 1,
-        "tickets_sold": 177
-    },
-    {
-        "Artist": "Fox N Vead",
-        "Venue": "Local 506",
-        "last_play_date": "2025-01-30",
-        "times_played": 1,
-        "tickets_sold": 146
-    },
-    {
-        "Artist": "GOON",
-        "Venue": "Local 506",
-        "last_play_date": "2025-09-26",
-        "times_played": 1,
-        "tickets_sold": 25
-    },
-    {
-        "Artist": "Goatwhore",
-        "Venue": "Local 506",
-        "last_play_date": "2024-09-25",
-        "times_played": 1,
-        "tickets_sold": 118
-    },
-    {
-        "Artist": "Good Luck Club",
-        "Venue": "Local 506",
-        "last_play_date": "2024-12-28",
-        "times_played": 1,
-        "tickets_sold": 106
-    },
-    {
-        "Artist": "Heart to Gold",
-        "Venue": "Local 506",
-        "last_play_date": "2025-03-24",
-        "times_played": 2,
-        "tickets_sold": 62
-    },
-    {
-        "Artist": "INOHA",
-        "Venue": "Local 506",
-        "last_play_date": "2025-11-11",
-        "times_played": 1,
-        "tickets_sold": 250
-    },
-    {
-        "Artist": "Jer",
-        "Venue": "Local 506",
-        "last_play_date": "2024-08-31",
-        "times_played": 1,
-        "tickets_sold": 118
-    },
-    {
         "Artist": "Josiah and The Bonnevilles",
         "Venue": "Local 506",
         "last_play_date": "2024-02-23",
@@ -8722,291 +8547,11 @@
         "tickets_sold": 153
     },
     {
-        "Artist": "Lip Critic",
-        "Venue": "Local 506",
-        "last_play_date": "2024-11-07",
-        "times_played": 1,
-        "tickets_sold": 52
-    },
-    {
-        "Artist": "Manwolves",
-        "Venue": "Local 506",
-        "last_play_date": "2024-04-14",
-        "times_played": 1,
-        "tickets_sold": 55
-    },
-    {
-        "Artist": "Many Eyes",
-        "Venue": "Local 506",
-        "last_play_date": "2025-09-28",
-        "times_played": 1,
-        "tickets_sold": 94
-    },
-    {
         "Artist": "Mike Mains & The Branches",
         "Venue": "Local 506",
         "last_play_date": "2024-02-29",
         "times_played": 1,
         "tickets_sold": 89
-    },
-    {
-        "Artist": "Mind's Eye",
-        "Venue": "Local 506",
-        "last_play_date": "2025-10-11",
-        "times_played": 1,
-        "tickets_sold": 105
-    },
-    {
-        "Artist": "Molly Grace",
-        "Venue": "Local 506",
-        "last_play_date": "2025-10-24",
-        "times_played": 1,
-        "tickets_sold": 138
-    },
-    {
-        "Artist": "Mx Lonely",
-        "Venue": "Local 506",
-        "last_play_date": "2024-10-06",
-        "times_played": 1,
-        "tickets_sold": 14
-    },
-    {
-        "Artist": "My Sister Maura",
-        "Venue": "Local 506",
-        "last_play_date": "2024-08-09",
-        "times_played": 1,
-        "tickets_sold": 18
-    },
-    {
-        "Artist": "NXCRE",
-        "Venue": "Local 506",
-        "last_play_date": "2025-11-15",
-        "times_played": 1,
-        "tickets_sold": 250
-    },
-    {
-        "Artist": "New Constellations",
-        "Venue": "Local 506",
-        "last_play_date": "2025-11-14",
-        "times_played": 1,
-        "tickets_sold": 250
-    },
-    {
-        "Artist": "Nolan Taylor",
-        "Venue": "Local 506",
-        "last_play_date": "2024-06-01",
-        "times_played": 1,
-        "tickets_sold": 112
-    },
-    {
-        "Artist": "Oddisee",
-        "Venue": "Local 506",
-        "last_play_date": "2025-10-30",
-        "times_played": 1,
-        "tickets_sold": 128
-    },
-    {
-        "Artist": "Ouija Macc",
-        "Venue": "Local 506",
-        "last_play_date": "2025-07-08",
-        "times_played": 1,
-        "tickets_sold": 118
-    },
-    {
-        "Artist": "Paerish",
-        "Venue": "Local 506",
-        "last_play_date": "2024-12-07",
-        "times_played": 1,
-        "tickets_sold": 44
-    },
-    {
-        "Artist": "Petite League",
-        "Venue": "Local 506",
-        "last_play_date": "2025-09-27",
-        "times_played": 1,
-        "tickets_sold": 102
-    },
-    {
-        "Artist": "Phantom Planet",
-        "Venue": "Local 506",
-        "last_play_date": "2024-10-25",
-        "times_played": 1,
-        "tickets_sold": 125
-    },
-    {
-        "Artist": "Poison Ru\u00c3\u00afn",
-        "Venue": "Local 506",
-        "last_play_date": "2025-02-25",
-        "times_played": 1,
-        "tickets_sold": 115
-    },
-    {
-        "Artist": "Post Sex Nachos",
-        "Venue": "Local 506",
-        "last_play_date": "2024-04-18",
-        "times_played": 1,
-        "tickets_sold": 60
-    },
-    {
-        "Artist": "Royale Lynn",
-        "Venue": "Local 506",
-        "last_play_date": "2024-06-21",
-        "times_played": 1,
-        "tickets_sold": 26
-    },
-    {
-        "Artist": "Sad Park",
-        "Venue": "Local 506",
-        "last_play_date": "2024-09-18",
-        "times_played": 1,
-        "tickets_sold": 59
-    },
-    {
-        "Artist": "Scarlet House",
-        "Venue": "Local 506",
-        "last_play_date": "2025-11-17",
-        "times_played": 1,
-        "tickets_sold": 33
-    },
-    {
-        "Artist": "Scott H. Biram",
-        "Venue": "Local 506",
-        "last_play_date": "2024-08-18",
-        "times_played": 1,
-        "tickets_sold": 33
-    },
-    {
-        "Artist": "Shallow Alcove",
-        "Venue": "Local 506",
-        "last_play_date": "2024-08-11",
-        "times_played": 1,
-        "tickets_sold": 75
-    },
-    {
-        "Artist": "Shayfer James",
-        "Venue": "Local 506",
-        "last_play_date": "2025-04-14",
-        "times_played": 1,
-        "tickets_sold": 127
-    },
-    {
-        "Artist": "Slackjaw",
-        "Venue": "Local 506",
-        "last_play_date": "2025-05-23",
-        "times_played": 1,
-        "tickets_sold": 245
-    },
-    {
-        "Artist": "Slater",
-        "Venue": "Local 506",
-        "last_play_date": "2025-10-05",
-        "times_played": 1,
-        "tickets_sold": 109
-    },
-    {
-        "Artist": "Slow Joy",
-        "Venue": "Local 506",
-        "last_play_date": "2025-04-08",
-        "times_played": 1,
-        "tickets_sold": 46
-    },
-    {
-        "Artist": "Smoking Popes",
-        "Venue": "Local 506",
-        "last_play_date": "2024-03-16",
-        "times_played": 1,
-        "tickets_sold": 51
-    },
-    {
-        "Artist": "Softcult",
-        "Venue": "Local 506",
-        "last_play_date": "2025-06-17",
-        "times_played": 1,
-        "tickets_sold": 187
-    },
-    {
-        "Artist": "Spiritual Cramp",
-        "Venue": "Local 506",
-        "last_play_date": "2024-06-22",
-        "times_played": 1,
-        "tickets_sold": 106
-    },
-    {
-        "Artist": "Spy",
-        "Venue": "Local 506",
-        "last_play_date": "2024-05-11",
-        "times_played": 1,
-        "tickets_sold": 137
-    },
-    {
-        "Artist": "Sweeping Promises",
-        "Venue": "Local 506",
-        "last_play_date": "2024-05-09",
-        "times_played": 1,
-        "tickets_sold": 64
-    },
-    {
-        "Artist": "TRSH",
-        "Venue": "Local 506",
-        "last_play_date": "2025-05-15",
-        "times_played": 1,
-        "tickets_sold": 185
-    },
-    {
-        "Artist": "The Bones of J.R. Jones",
-        "Venue": "Local 506",
-        "last_play_date": "2025-05-14",
-        "times_played": 1,
-        "tickets_sold": 93
-    },
-    {
-        "Artist": "The Jins",
-        "Venue": "Local 506",
-        "last_play_date": "2024-10-10",
-        "times_played": 1,
-        "tickets_sold": 74
-    },
-    {
-        "Artist": "The Sloppy Boys",
-        "Venue": "Local 506",
-        "last_play_date": "2025-10-14",
-        "times_played": 1,
-        "tickets_sold": 70
-    },
-    {
-        "Artist": "The Toxhards",
-        "Venue": "Local 506",
-        "last_play_date": "2025-11-02",
-        "times_played": 1,
-        "tickets_sold": 79
-    },
-    {
-        "Artist": "Tophouse",
-        "Venue": "Local 506",
-        "last_play_date": "2024-02-18",
-        "times_played": 1,
-        "tickets_sold": 256
-    },
-    {
-        "Artist": "Wayne Hancock",
-        "Venue": "Local 506",
-        "last_play_date": "2024-03-27",
-        "times_played": 1,
-        "tickets_sold": 47
-    },
-    {
-        "Artist": "Youth Lagoon",
-        "Venue": "Local 506",
-        "last_play_date": "2025-04-20",
-        "times_played": 1,
-        "tickets_sold": 185
-    },
-    {
-        "Artist": "senses",
-        "Venue": "Local 506",
-        "last_play_date": "2025-04-04",
-        "times_played": 1,
-        "tickets_sold": 251
     },
     {
         "Artist": "65 North Pickers",
@@ -12297,5 +11842,467 @@
         "last_play_date": "2022-09-28",
         "times_played": 1,
         "tickets_sold": 22
+    },
+    {
+        "Artist": "60 juno",
+        "Venue": "local 506",
+        "last_play_date": "2025-09-30",
+        "times_played": 1,
+        "tickets_sold": 32
+    },
+    {
+        "Artist": "A Country Western",
+        "Venue": "local 506",
+        "last_play_date": "2024-10-19",
+        "times_played": 1,
+        "tickets_sold": 32
+    },
+    {
+        "Artist": "Abby Holliday",
+        "Venue": "local 506",
+        "last_play_date": "2024-09-28",
+        "times_played": 1,
+        "tickets_sold": 106
+    },
+    {
+        "Artist": "Ace Monroe",
+        "Venue": "local 506",
+        "last_play_date": "2024-11-15",
+        "times_played": 1,
+        "tickets_sold": 45
+    },
+    {
+        "Artist": "Anika",
+        "Venue": "local 506",
+        "last_play_date": "2025-10-06",
+        "times_played": 1,
+        "tickets_sold": 60
+    },
+    {
+        "Artist": "Apes of The State",
+        "Venue": "local 506",
+        "last_play_date": "2024-10-22",
+        "times_played": 1,
+        "tickets_sold": 108
+    },
+    {
+        "Artist": "Armchair Boogie",
+        "Venue": "local 506",
+        "last_play_date": "2024-10-09",
+        "times_played": 1,
+        "tickets_sold": 24
+    },
+    {
+        "Artist": "Ashes to Amber",
+        "Venue": "local 506",
+        "last_play_date": "2025-03-19",
+        "times_played": 1,
+        "tickets_sold": 97
+    },
+    {
+        "Artist": "Bambara",
+        "Venue": "local 506",
+        "last_play_date": "2025-09-20",
+        "times_played": 1,
+        "tickets_sold": 75
+    },
+    {
+        "Artist": "Bear Ghost",
+        "Venue": "local 506",
+        "last_play_date": "2025-07-22",
+        "times_played": 1,
+        "tickets_sold": 250
+    },
+    {
+        "Artist": "CLIFFDIVER",
+        "Venue": "local 506",
+        "last_play_date": "2024-12-04",
+        "times_played": 1,
+        "tickets_sold": 61
+    },
+    {
+        "Artist": "Cloakroom",
+        "Venue": "local 506",
+        "last_play_date": "2025-03-30",
+        "times_played": 1,
+        "tickets_sold": 97
+    },
+    {
+        "Artist": "Cold",
+        "Venue": "local 506",
+        "last_play_date": "2025-04-19",
+        "times_played": 1,
+        "tickets_sold": 250
+    },
+    {
+        "Artist": "Daisy The Great",
+        "Venue": "local 506",
+        "last_play_date": "2025-04-18",
+        "times_played": 1,
+        "tickets_sold": 223
+    },
+    {
+        "Artist": "Dan Spencer",
+        "Venue": "local 506",
+        "last_play_date": "2025-03-11",
+        "times_played": 1,
+        "tickets_sold": 25
+    },
+    {
+        "Artist": "DeathbyRomy",
+        "Venue": "local 506",
+        "last_play_date": "2025-05-04",
+        "times_played": 1,
+        "tickets_sold": 250
+    },
+    {
+        "Artist": "Drumming Bird",
+        "Venue": "local 506",
+        "last_play_date": "2024-10-05",
+        "times_played": 1,
+        "tickets_sold": 26
+    },
+    {
+        "Artist": "Empty Shell Casing",
+        "Venue": "local 506",
+        "last_play_date": "2025-10-28",
+        "times_played": 2,
+        "tickets_sold": 29
+    },
+    {
+        "Artist": "End It",
+        "Venue": "local 506",
+        "last_play_date": "2025-09-23",
+        "times_played": 1,
+        "tickets_sold": 177
+    },
+    {
+        "Artist": "Fox N Vead",
+        "Venue": "local 506",
+        "last_play_date": "2025-01-30",
+        "times_played": 1,
+        "tickets_sold": 146
+    },
+    {
+        "Artist": "GOON",
+        "Venue": "local 506",
+        "last_play_date": "2025-09-26",
+        "times_played": 1,
+        "tickets_sold": 25
+    },
+    {
+        "Artist": "Goatwhore",
+        "Venue": "local 506",
+        "last_play_date": "2024-09-25",
+        "times_played": 1,
+        "tickets_sold": 118
+    },
+    {
+        "Artist": "Good Luck Club",
+        "Venue": "local 506",
+        "last_play_date": "2024-12-28",
+        "times_played": 1,
+        "tickets_sold": 106
+    },
+    {
+        "Artist": "Heart to Gold",
+        "Venue": "local 506",
+        "last_play_date": "2025-03-24",
+        "times_played": 2,
+        "tickets_sold": 62
+    },
+    {
+        "Artist": "INOHA",
+        "Venue": "local 506",
+        "last_play_date": "2025-11-11",
+        "times_played": 1,
+        "tickets_sold": 250
+    },
+    {
+        "Artist": "Jer",
+        "Venue": "local 506",
+        "last_play_date": "2024-08-31",
+        "times_played": 1,
+        "tickets_sold": 118
+    },
+    {
+        "Artist": "Lip Critic",
+        "Venue": "local 506",
+        "last_play_date": "2024-11-07",
+        "times_played": 1,
+        "tickets_sold": 52
+    },
+    {
+        "Artist": "Manwolves",
+        "Venue": "local 506",
+        "last_play_date": "2024-04-14",
+        "times_played": 1,
+        "tickets_sold": 55
+    },
+    {
+        "Artist": "Many Eyes",
+        "Venue": "local 506",
+        "last_play_date": "2025-09-28",
+        "times_played": 1,
+        "tickets_sold": 94
+    },
+    {
+        "Artist": "Mind's Eye",
+        "Venue": "local 506",
+        "last_play_date": "2025-10-11",
+        "times_played": 1,
+        "tickets_sold": 105
+    },
+    {
+        "Artist": "Molly Grace",
+        "Venue": "local 506",
+        "last_play_date": "2025-10-24",
+        "times_played": 1,
+        "tickets_sold": 138
+    },
+    {
+        "Artist": "Mx Lonely",
+        "Venue": "local 506",
+        "last_play_date": "2024-10-06",
+        "times_played": 1,
+        "tickets_sold": 14
+    },
+    {
+        "Artist": "My Sister Maura",
+        "Venue": "local 506",
+        "last_play_date": "2024-08-09",
+        "times_played": 1,
+        "tickets_sold": 18
+    },
+    {
+        "Artist": "NXCRE",
+        "Venue": "local 506",
+        "last_play_date": "2025-11-15",
+        "times_played": 1,
+        "tickets_sold": 250
+    },
+    {
+        "Artist": "New Constellations",
+        "Venue": "local 506",
+        "last_play_date": "2025-11-14",
+        "times_played": 1,
+        "tickets_sold": 250
+    },
+    {
+        "Artist": "Nolan Taylor",
+        "Venue": "local 506",
+        "last_play_date": "2024-06-01",
+        "times_played": 1,
+        "tickets_sold": 112
+    },
+    {
+        "Artist": "Oddisee",
+        "Venue": "local 506",
+        "last_play_date": "2025-10-30",
+        "times_played": 1,
+        "tickets_sold": 128
+    },
+    {
+        "Artist": "Ouija Macc",
+        "Venue": "local 506",
+        "last_play_date": "2025-07-08",
+        "times_played": 1,
+        "tickets_sold": 118
+    },
+    {
+        "Artist": "Paerish",
+        "Venue": "local 506",
+        "last_play_date": "2024-12-07",
+        "times_played": 1,
+        "tickets_sold": 44
+    },
+    {
+        "Artist": "Petite League",
+        "Venue": "local 506",
+        "last_play_date": "2025-09-27",
+        "times_played": 1,
+        "tickets_sold": 102
+    },
+    {
+        "Artist": "Phantom Planet",
+        "Venue": "local 506",
+        "last_play_date": "2024-10-25",
+        "times_played": 1,
+        "tickets_sold": 125
+    },
+    {
+        "Artist": "Poison Ru\u00c3\u00afn",
+        "Venue": "local 506",
+        "last_play_date": "2025-02-25",
+        "times_played": 1,
+        "tickets_sold": 115
+    },
+    {
+        "Artist": "Post Sex Nachos",
+        "Venue": "local 506",
+        "last_play_date": "2024-04-18",
+        "times_played": 1,
+        "tickets_sold": 60
+    },
+    {
+        "Artist": "Royale Lynn",
+        "Venue": "local 506",
+        "last_play_date": "2024-06-21",
+        "times_played": 1,
+        "tickets_sold": 26
+    },
+    {
+        "Artist": "Sad Park",
+        "Venue": "local 506",
+        "last_play_date": "2024-09-18",
+        "times_played": 1,
+        "tickets_sold": 59
+    },
+    {
+        "Artist": "Scarlet House",
+        "Venue": "local 506",
+        "last_play_date": "2025-11-17",
+        "times_played": 1,
+        "tickets_sold": 33
+    },
+    {
+        "Artist": "Scott H. Biram",
+        "Venue": "local 506",
+        "last_play_date": "2024-08-18",
+        "times_played": 1,
+        "tickets_sold": 33
+    },
+    {
+        "Artist": "Shallow Alcove",
+        "Venue": "local 506",
+        "last_play_date": "2024-08-11",
+        "times_played": 1,
+        "tickets_sold": 75
+    },
+    {
+        "Artist": "Shayfer James",
+        "Venue": "local 506",
+        "last_play_date": "2025-04-14",
+        "times_played": 1,
+        "tickets_sold": 127
+    },
+    {
+        "Artist": "Slackjaw",
+        "Venue": "local 506",
+        "last_play_date": "2025-05-23",
+        "times_played": 1,
+        "tickets_sold": 245
+    },
+    {
+        "Artist": "Slater",
+        "Venue": "local 506",
+        "last_play_date": "2025-10-05",
+        "times_played": 1,
+        "tickets_sold": 109
+    },
+    {
+        "Artist": "Slow Joy",
+        "Venue": "local 506",
+        "last_play_date": "2025-04-08",
+        "times_played": 1,
+        "tickets_sold": 46
+    },
+    {
+        "Artist": "Smoking Popes",
+        "Venue": "local 506",
+        "last_play_date": "2024-03-16",
+        "times_played": 1,
+        "tickets_sold": 51
+    },
+    {
+        "Artist": "Softcult",
+        "Venue": "local 506",
+        "last_play_date": "2025-06-17",
+        "times_played": 1,
+        "tickets_sold": 187
+    },
+    {
+        "Artist": "Spiritual Cramp",
+        "Venue": "local 506",
+        "last_play_date": "2024-06-22",
+        "times_played": 1,
+        "tickets_sold": 106
+    },
+    {
+        "Artist": "Spy",
+        "Venue": "local 506",
+        "last_play_date": "2024-05-11",
+        "times_played": 1,
+        "tickets_sold": 137
+    },
+    {
+        "Artist": "Sweeping Promises",
+        "Venue": "local 506",
+        "last_play_date": "2024-05-09",
+        "times_played": 1,
+        "tickets_sold": 64
+    },
+    {
+        "Artist": "TRSH",
+        "Venue": "local 506",
+        "last_play_date": "2025-05-15",
+        "times_played": 1,
+        "tickets_sold": 185
+    },
+    {
+        "Artist": "The Bones of J.R. Jones",
+        "Venue": "local 506",
+        "last_play_date": "2025-05-14",
+        "times_played": 1,
+        "tickets_sold": 93
+    },
+    {
+        "Artist": "The Jins",
+        "Venue": "local 506",
+        "last_play_date": "2024-10-10",
+        "times_played": 1,
+        "tickets_sold": 74
+    },
+    {
+        "Artist": "The Sloppy Boys",
+        "Venue": "local 506",
+        "last_play_date": "2025-10-14",
+        "times_played": 1,
+        "tickets_sold": 70
+    },
+    {
+        "Artist": "The Toxhards",
+        "Venue": "local 506",
+        "last_play_date": "2025-11-02",
+        "times_played": 1,
+        "tickets_sold": 79
+    },
+    {
+        "Artist": "Tophouse",
+        "Venue": "local 506",
+        "last_play_date": "2024-02-18",
+        "times_played": 1,
+        "tickets_sold": 256
+    },
+    {
+        "Artist": "Wayne Hancock",
+        "Venue": "local 506",
+        "last_play_date": "2024-03-27",
+        "times_played": 1,
+        "tickets_sold": 47
+    },
+    {
+        "Artist": "Youth Lagoon",
+        "Venue": "local 506",
+        "last_play_date": "2025-04-20",
+        "times_played": 1,
+        "tickets_sold": 185
+    },
+    {
+        "Artist": "senses",
+        "Venue": "local 506",
+        "last_play_date": "2025-04-04",
+        "times_played": 1,
+        "tickets_sold": 251
     }
 ]
