@@ -28,14 +28,14 @@
   {
     "venue": "Bright Box Theater",
     "capacity": 300,
-    "last_play_date": "2025-12-05",
-    "tickets_last_1_month": 153,
-    "events_last_1_month": 1,
-    "avg_tickets_last_1_month": 153.0,
-    "tickets_last_1_year": 10412,
-    "events_last_1_year": 104,
-    "avg_tickets_last_1_year": 100.12,
-    "avg_ticket_price": 21.91,
+    "last_play_date": "2025-08-16",
+    "tickets_last_1_month": 0,
+    "events_last_1_month": 0,
+    "avg_tickets_last_1_month": 0,
+    "tickets_last_1_year": 5150,
+    "events_last_1_year": 64,
+    "avg_tickets_last_1_year": 80.47,
+    "avg_ticket_price": 22.44,
     "history_last_6_months": [
       {
         "month": "Aug",
@@ -43,28 +43,12 @@
       },
       {
         "month": "Jul",
-        "tickets": 770
-      },
-      {
-        "month": "Sep",
-        "tickets": 505
-      },
-      {
-        "month": "Oct",
-        "tickets": 639
-      },
-      {
-        "month": "Nov",
-        "tickets": 862
-      },
-      {
-        "month": "Dec",
-        "tickets": 153
+        "tickets": 402
       }
     ]
   },
   {
-    "venue": "Carolina Theater",
+    "venue": "Carolina Theatre",
     "capacity": 1055,
     "last_play_date": "2025-10-01",
     "tickets_last_1_month": 0,
@@ -100,9 +84,9 @@
     "tickets_last_1_month": 0,
     "events_last_1_month": 0,
     "avg_tickets_last_1_month": 0,
-    "tickets_last_1_year": 150214,
-    "events_last_1_year": 168,
-    "avg_tickets_last_1_year": 894.13,
+    "tickets_last_1_year": 149310,
+    "events_last_1_year": 167,
+    "avg_tickets_last_1_year": 894.07,
     "avg_ticket_price": 32.98,
     "history_last_6_months": [
       {
@@ -181,9 +165,9 @@
     "venue": "Motorco Music Hall",
     "capacity": 450,
     "last_play_date": "2025-12-11",
-    "tickets_last_1_month": 400,
-    "events_last_1_month": 3,
-    "avg_tickets_last_1_month": 133.33,
+    "tickets_last_1_month": 334,
+    "events_last_1_month": 2,
+    "avg_tickets_last_1_month": 167.0,
     "tickets_last_1_year": 22911,
     "events_last_1_year": 87,
     "avg_tickets_last_1_year": 263.34,
@@ -212,6 +196,40 @@
       {
         "month": "Dec",
         "tickets": 400
+      }
+    ]
+  },
+  {
+    "venue": "Local 506",
+    "capacity": 300,
+    "last_play_date": "2025-12-05",
+    "tickets_last_1_month": 153,
+    "events_last_1_month": 1,
+    "avg_tickets_last_1_month": 153.0,
+    "tickets_last_1_year": 5206,
+    "events_last_1_year": 39,
+    "avg_tickets_last_1_year": 133.49,
+    "avg_ticket_price": 19.04,
+    "history_last_6_months": [
+      {
+        "month": "Jul",
+        "tickets": 368
+      },
+      {
+        "month": "Sep",
+        "tickets": 505
+      },
+      {
+        "month": "Oct",
+        "tickets": 639
+      },
+      {
+        "month": "Nov",
+        "tickets": 862
+      },
+      {
+        "month": "Dec",
+        "tickets": 153
       }
     ]
   },
@@ -332,6 +350,24 @@
       {
         "month": "Oct",
         "tickets": 769
+      }
+    ]
+  },
+  {
+    "venue": "Amos Southend",
+    "capacity": 700,
+    "last_play_date": "2025-12-12",
+    "tickets_last_1_month": 404,
+    "events_last_1_month": 1,
+    "avg_tickets_last_1_month": 404.0,
+    "tickets_last_1_year": 404,
+    "events_last_1_year": 1,
+    "avg_tickets_last_1_year": 404.0,
+    "avg_ticket_price": 32.5,
+    "history_last_6_months": [
+      {
+        "month": "Dec",
+        "tickets": 404
       }
     ]
   }
