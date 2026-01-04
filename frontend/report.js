@@ -1,693 +1,374 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>The MAP - Report</title>
+// ===========================
+// Storage Helper
+// ===========================
+const Storage = {
+    getUser: () => localStorage.getItem("showpredict_user"),
+    getReportData: () => {
+        const raw = localStorage.getItem("showpredict_report");
+        return raw ? JSON.parse(raw) : null;
+    }
+};
+
+let trendsChart = null;
+let currentChartType = "bar";
+
+// ===========================
+// DOM READY
+// ===========================
+document.addEventListener("DOMContentLoaded", async () => {
+    const username = Storage.getUser();
+    if (!username) return (window.location.href = "index.html");
+
+    const reportData = Storage.getReportData();
+    if (!reportData) return (window.location.href = "main.html");
+
+    document.getElementById("welcomeText").textContent = `Welcome, ${username}`;
+    populateReport(reportData);
+
+    // Chart toggle buttons
+    document.querySelectorAll(".toggle-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+            document.querySelectorAll(".toggle-btn").forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+            currentChartType = btn.textContent.trim().toLowerCase();
+            recreateChart();
+        });
+    });
+});
+
+// ===========================
+// POPULATE REPORT
+// ===========================
+function populateReport(data) {
+    // Artist & Venue Info
+    document.getElementById("artistName").textContent = data.artist;
+    document.getElementById("headerArtist").textContent = data.artist;
+    document.getElementById("venueInfo").textContent = 
+        `@ ${data.venue} on ${formatDate(data.date)}`;
+
+    const venueStats = data.venue_stats || {};
+    const ticketPrediction = data.predicted_tickets || {};
+
+    // Expected Ticket Sales with 10% Confidence Interval
+    if (ticketPrediction.expected) {
+        const expected = ticketPrediction.expected;
+        
+        // Calculate 10% confidence interval
+        const margin = Math.round(expected * 0.10);
+        const ciLow = Math.max(0, expected - margin);
+        const ciHigh = expected + margin;
+        
+        // Display range with confidence interval
+        document.getElementById("expectedSalesRange").textContent = 
+            `${ciLow}-${ciHigh}`;
+        
+        // Calculate % above/below average
+        const avgLastYear = venueStats.avg_tickets_last_1_year || 100;
+        const percentAbove = Math.round(((expected - avgLastYear) / avgLastYear) * 100);
+        
+        if (percentAbove >= 0) {
+            document.getElementById("expectedPercentage").textContent = 
+                `${percentAbove}% above average (±10% CI)`;
+        } else {
+            document.getElementById("expectedPercentage").textContent = 
+                `${Math.abs(percentAbove)}% below average (±10% CI)`;
+        }
+    }
+
+    // Weather
+    if (data.weather && Object.keys(data.weather).length) {
+        const condition = data.weather.conditions || "Unknown";
+        const tempC = data.weather.temperature || 0;
+        const tempF = Math.round((tempC * 9/5) + 32);
+        
+        document.getElementById("weatherCondition").textContent = condition;
+        document.getElementById("weatherTemp").textContent = `${tempF}°F`;
+    } else {
+        // If weather data is missing
+        document.getElementById("weatherCondition").textContent = "N/A";
+        document.getElementById("weatherTemp").textContent = "No data available";
+    }
+
+    // Last Play Information (FIXED LOGIC)
+    const artistVenueInfo = data.artist_venue_info || {};
     
-    <!-- Font Awesome for Brand Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background: #f5f5f7;
-            color: #1d1d1f;
-            line-height: 1.5;
-        }
-
-        .header {
-            background: white;
-            padding: 20px 40px;
-            border-bottom: 1px solid #d2d2d7;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .header-left {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .btn-back {
-            background: #f5f5f7;
-            border: none;
-            padding: 8px 12px;
-            border-radius: 8px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            transition: background 0.2s;
-        }
-
-        .btn-back:hover {
-            background: #e8e8ed;
-        }
-
-        .artist-title {
-            font-size: 18px;
-            font-weight: 600;
-            color: #1d1d1f;
-        }
-
-        .user-info {
-            font-size: 14px;
-            color: #6e6e73;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 30px 40px;
-        }
-
-        /* Main 40/60 Split Layout */
-        .main-grid {
-            display: grid;
-            grid-template-columns: 40% 60%;
-            gap: 24px;
-            margin-bottom: 24px;
-            align-items: stretch; /* Force equal height */
-        }
-
-        /* Full Width Section (below 40/60 split) */
-        .full-width-section {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        /* LEFT COLUMN (40%) */
-        .left-column {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            height: 100%; /* Fill grid cell height */
-        }
-
-        /* Artist Name Card */
-        .artist-hero {
-            background: white;
-            border-radius: 12px;
-            padding: 32px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-        }
-
-        .artist-name {
-            font-size: 48px;
-            font-weight: 700;
-            color: #1d1d1f;
-            margin-bottom: 12px;
-            line-height: 1.1;
-        }
-
-        .event-info {
-            font-size: 16px;
-            color: #6e6e73;
-            font-weight: 400;
-        }
-
-        /* Social Stats Card */
-        .social-sidebar {
-            background: white;
-            border-radius: 12px;
-            padding: 28px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-            flex: 1; /* Stretch to fill remaining space and match right column height */
-        }
-
-        .social-platform {
-            margin-bottom: 32px;
-        }
-
-        .social-platform:last-child {
-            margin-bottom: 0;
-        }
-
-        .platform-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 16px;
-        }
-
-        .platform-icon {
-            font-size: 24px;
-        }
-
-        .platform-name {
-            font-size: 17px;
-            font-weight: 600;
-            color: #1d1d1f;
-        }
-
-        .social-metric {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 0;
-            border-bottom: 1px solid #f5f5f7;
-        }
-
-        .social-metric:last-child {
-            border-bottom: none;
-        }
-
-        .metric-label {
-            font-size: 14px;
-            color: #6e6e73;
-        }
-
-        .metric-value-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .metric-value {
-            font-size: 16px;
-            font-weight: 600;
-            color: #1d1d1f;
-        }
-
-        .metric-change {
-            font-size: 13px;
-            font-weight: 500;
-            padding: 3px 8px;
-            border-radius: 6px;
-        }
-
-        .metric-change.positive {
-            color: #34c759;
-            background: #e8f9ef;
-        }
-
-        .metric-change.negative {
-            color: #ff3b30;
-            background: #ffe8e6;
-        }
-
-        .metric-change.neutral {
-            color: #6e6e73;
-            background: #f5f5f7;
-        }
-
-        /* RIGHT COLUMN (60%) */
-        .right-column {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        /* 2x2 Info Cards Grid */
-        .info-cards-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 16px;
-        }
-
-        .info-card {
-            background: white;
-            border-radius: 12px;
-            padding: 28px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .info-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 16px rgba(0,0,0,0.12);
-        }
-
-        .card-title {
-            font-size: 12px;
-            font-weight: 600;
-            color: #6e6e73;
-            margin-bottom: 14px;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-        }
-
-        .card-value {
-            font-size: 38px;
-            font-weight: 700;
-            color: #1d1d1f;
-            margin-bottom: 10px;
-            line-height: 1.1;
-        }
-
-        .card-subtitle {
-            font-size: 14px;
-            color: #6e6e73;
-            font-weight: 400;
-        }
-
-        /* Competition Section */
-        .competition-section {
-            background: white;
-            border-radius: 12px;
-            padding: 28px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-        }
-
-        .section-header {
-            font-size: 20px;
-            font-weight: 600;
-            color: #1d1d1f;
-            margin-bottom: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .section-source {
-            font-size: 12px;
-            color: #6e6e73;
-            font-weight: 400;
-            text-transform: lowercase;
-        }
-
-        .competition-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .competition-table th {
-            text-align: left;
-            font-size: 11px;
-            font-weight: 600;
-            color: #6e6e73;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            padding: 14px 16px;
-            border-bottom: 2px solid #f5f5f7;
-            background: #fafafa;
-        }
-
-        .competition-table td {
-            padding: 16px;
-            font-size: 14px;
-            color: #1d1d1f;
-            border-bottom: 1px solid #f5f5f7;
-        }
-
-        .competition-table tr:last-child td {
-            border-bottom: none;
-        }
-
-        .competition-table tr:hover {
-            background: #fafafa;
-        }
-
-        /* Venue Stats Grid */
-        .venue-stats {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 16px;
-        }
-
-        .stat-card {
-            background: linear-gradient(135deg, #f8f9fa 0%, #f5f5f7 100%);
-            border-radius: 10px;
-            padding: 22px;
-            border: 1px solid #e8e8ed;
-        }
-
-        .stat-card-title {
-            font-size: 13px;
-            font-weight: 500;
-            color: #6e6e73;
-            margin-bottom: 10px;
-        }
-
-        .stat-card-value {
-            font-size: 34px;
-            font-weight: 700;
-            color: #1d1d1f;
-        }
-
-        /* Chart Section */
-        .chart-section {
-            background: white;
-            border-radius: 12px;
-            padding: 28px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-        }
-
-        .chart-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 24px;
-        }
-
-        .chart-title {
-            font-size: 20px;
-            font-weight: 600;
-            color: #1d1d1f;
-        }
-
-        .chart-subtitle {
-            font-size: 13px;
-            color: #6e6e73;
-            margin-top: 6px;
-        }
-
-        .chart-toggle {
-            display: flex;
-            gap: 8px;
-        }
-
-        .toggle-btn {
-            padding: 8px 20px;
-            border: 1.5px solid #d2d2d7;
-            background: white;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .toggle-btn.active {
-            background: #380E75;
-            color: white;
-            border-color: #380E75;
-        }
-
-        .toggle-btn:hover:not(.active) {
-            background: #f5f5f7;
-            border-color: #380E75;
-        }
-
-        /* Raw Data Section */
-        .raw-data-section {
-            background: white;
-            border-radius: 12px;
-            padding: 28px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-        }
-
-        .collapsible-header {
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: color 0.2s;
-        }
-
-        .collapsible-header:hover {
-            color: #380E75;
-        }
-
-        .expand-icon {
-            transition: transform 0.3s;
-            stroke: #6e6e73;
-        }
-
-        .expand-icon.rotated {
-            transform: rotate(180deg);
-        }
-
-        .raw-data-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-        }
-
-        .raw-data-content.expanded {
-            max-height: 2000px;
-            margin-top: 20px;
-        }
-
-        .data-block {
-            margin-bottom: 20px;
-        }
-
-        .data-block:last-child {
-            margin-bottom: 0;
-        }
-
-        .data-block-title {
-            font-size: 14px;
-            font-weight: 600;
-            color: #1d1d1f;
-            margin-bottom: 10px;
-        }
-
-        .data-block pre {
-            background: #f8f9fa;
-            padding: 18px;
-            border-radius: 10px;
-            font-size: 12px;
-            overflow-x: auto;
-            color: #1d1d1f;
-            font-family: 'Monaco', 'Menlo', monospace;
-            border: 1px solid #e8e8ed;
-        }
-
-        /* Hide when never played */
-        .hide-info {
-            display: none !important;
-        }
-    </style>
-</head>
-
-<body>
-    <div class="header">
-        <div class="header-left">
-            <button class="btn-back" onclick="window.location.href='main.html'">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M19 12H5M12 19l-7-7 7-7"/>
-                </svg>
-            </button>
-            <div class="artist-title" id="headerArtist">-</div>
-        </div>
-        <div class="user-info">
-            <span id="welcomeText">Welcome, </span>
-        </div>
-    </div>
-
-    <div class="container">
-        <!-- Main 40/60 Split Layout -->
-        <div class="main-grid">
-            
-            <!-- LEFT COLUMN (40%) -->
-            <div class="left-column">
-                <!-- Artist Name Card -->
-                <div class="artist-hero">
-                    <div class="artist-name" id="artistName">-</div>
-                    <div class="event-info" id="venueInfo">-</div>
-                </div>
-
-                <!-- Social Media Stats -->
-                <div class="social-sidebar">
-                    <div class="social-platform">
-                        <div class="platform-header">
-                            <i class="fab fa-spotify platform-icon" style="color: #1DB954;"></i>
-                            <span class="platform-name">Spotify</span>
-                        </div>
-                        <div class="social-metric">
-                            <span class="metric-label">Monthly listeners</span>
-                            <div class="metric-value-wrapper">
-                                <span class="metric-value" id="spotifyListeners">-</span>
-                            </div>
-                        </div>
-                        <div class="social-metric">
-                            <span class="metric-label">Followers</span>
-                            <div class="metric-value-wrapper">
-                                <span class="metric-value" id="spotifyFollowers">-</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="social-platform">
-                        <div class="platform-header">
-                            <i class="fab fa-instagram platform-icon" style="color: #E4405F;"></i>
-                            <span class="platform-name">Instagram</span>
-                        </div>
-                        <div class="social-metric">
-                            <span class="metric-label">Followers</span>
-                            <div class="metric-value-wrapper">
-                                <span class="metric-value" id="instaFollowers">-</span>
-                            </div>
-                        </div>
-                        <div class="social-metric">
-                            <span class="metric-label">Avg likes per post</span>
-                            <div class="metric-value-wrapper">
-                                <span class="metric-value" id="instaLikes">-</span>
-                            </div>
-                        </div>
-                        <div class="social-metric">
-                            <span class="metric-label">Avg comments per post</span>
-                            <div class="metric-value-wrapper">
-                                <span class="metric-value" id="instaComments">-</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="social-platform">
-                        <div class="platform-header">
-                            <i class="fab fa-tiktok platform-icon" style="color: #000000;"></i>
-                            <span class="platform-name">TikTok</span>
-                        </div>
-                        <div class="social-metric">
-                            <span class="metric-label">Followers</span>
-                            <div class="metric-value-wrapper">
-                                <span class="metric-value" id="tiktokFollowers">-</span>
-                            </div>
-                        </div>
-                        <div class="social-metric">
-                            <span class="metric-label">Avg likes per post</span>
-                            <div class="metric-value-wrapper">
-                                <span class="metric-value" id="tiktokLikes">-</span>
-                            </div>
-                        </div>
-                        <div class="social-metric">
-                            <span class="metric-label">Avg comments per post</span>
-                            <div class="metric-value-wrapper">
-                                <span class="metric-value" id="tiktokComments">-</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- RIGHT COLUMN (60%) -->
-            <div class="right-column">
-                
-                <!-- 2x2 Info Cards Grid (Top) -->
-                <div class="info-cards-grid">
-                    <div class="info-card">
-                        <div class="card-title">Expected ticket sales</div>
-                        <div class="card-value" id="expectedSalesRange">-</div>
-                        <div class="card-subtitle" id="expectedPercentage">-</div>
-                    </div>
-
-                    <div class="info-card">
-                        <div class="card-title">Ticket price</div>
-                        <div class="card-value" id="avgTicketPrice">-</div>
-                        <div class="card-subtitle" id="avgPriceSubtitle">-</div>
-                    </div>
-
-                    <div class="info-card">
-                        <div class="card-title">Last play date</div>
-                        <div class="card-value" id="lastPlayDate">-</div>
-                        <div class="card-subtitle" id="lastPlaySubtitle">
-                            <span id="lastPlayTickets">-</span> tickets sold • 
-                            <span id="timesPlayed">-</span> times played
-                        </div>
-                    </div>
-
-                    <div class="info-card">
-                        <div class="card-title">Expected weather</div>
-                        <div class="card-value" id="weatherCondition">-</div>
-                        <div class="card-subtitle" id="weatherTemp">-</div>
-                    </div>
-                </div>
-
-                <!-- Competition Table -->
-                <div class="competition-section">
-                    <div class="section-header">
-                        <span>Competition</span>
-                        <span class="section-source">source: JamBase</span>
-                    </div>
-                    <table class="competition-table">
-                        <thead>
-                            <tr>
-                                <th>Venue</th>
-                                <th>Artist</th>
-                                <th>Genre</th>
-                                <th>Date</th>
-                            </tr>
-                        </thead>
-                        <tbody id="competitionTableBody">
-                            <!-- JS will populate -->
-                        </tbody>
-                    </table>
-                </div>
-
-            </div>
-        </div>
-
-        <!-- SECOND HALF: Full Width Section -->
-        <div class="full-width-section">
-            
-            <!-- Venue Stats -->
-            <div class="competition-section">
-                <div class="section-header">Venue data</div>
-                <div class="venue-stats">
-                    <div class="stat-card">
-                        <div class="stat-card-title">Avg tickets last month</div>
-                        <div class="stat-card-value" id="avgLastMonth">-</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-card-title">Avg tickets last year</div>
-                        <div class="stat-card-value" id="avgLastYear">-</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-card-title">Events last month</div>
-                        <div class="stat-card-value" id="eventsLastMonth">-</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-card-title">Events last year</div>
-                        <div class="stat-card-value" id="eventsLastYear">-</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Chart -->
-            <div class="chart-section">
-                <div class="chart-header">
-                    <div>
-                        <div class="chart-title">Historical Sales Trends</div>
-                        <div class="chart-subtitle" id="chartSubtitle">-</div>
-                    </div>
-                    <div class="chart-toggle">
-                        <button class="toggle-btn active">Bar</button>
-                        <button class="toggle-btn">Line</button>
-                    </div>
-                </div>
-                <canvas id="trendsChart"></canvas>
-            </div>
-
-            <!-- Raw Data -->
-            <div class="raw-data-section">
-                <div class="collapsible-header" onclick="toggleRawData()">
-                    <div class="section-header">Raw Data & Features</div>
-                    <svg class="expand-icon" id="expandIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M6 9l6 6 6-6"/>
-                    </svg>
-                </div>
-                <div class="raw-data-content" id="rawDataContent">
-                    <div class="data-block">
-                        <div class="data-block-title">Weather Data</div>
-                        <pre id="weatherData"></pre>
-                    </div>
-                    <div class="data-block">
-                        <div class="data-block-title">Artist Data (Chartmetric)</div>
-                        <pre id="artistData"></pre>
-                    </div>
-                    <div class="data-block">
-                        <div class="data-block-title">Competition Data (JamBase)</div>
-                        <pre id="competitionData"></pre>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="report.js"></script>
-</body>
-</html>
+    if (artistVenueInfo.last_play_date && artistVenueInfo.last_play_date !== null) {
+        // Artist HAS played here before
+        document.getElementById("lastPlayDate").textContent = artistVenueInfo.last_play_date;
+        
+        // Show subtitle with tickets and times played
+        const lastPlaySubtitle = document.getElementById("lastPlaySubtitle");
+        lastPlaySubtitle.classList.remove("hide-info");
+        
+        // Use actual tickets sold from last play
+        const actualTicketsSold = artistVenueInfo.tickets_sold || 0;
+        document.getElementById("lastPlayTickets").textContent = actualTicketsSold;
+        document.getElementById("timesPlayed").textContent = artistVenueInfo.times_played || 0;
+    } else {
+        // Artist has NEVER played here
+        document.getElementById("lastPlayDate").textContent = "Never";
+        
+        // Hide the subtitle (tickets sold and times played)
+        const lastPlaySubtitle = document.getElementById("lastPlaySubtitle");
+        lastPlaySubtitle.classList.add("hide-info");
+    }
+
+    // Social Media Stats (Detailed)
+    populateSocialStats(data.cm_data);
+
+    // Competition Table (UPDATED - Parse venue from artist name)
+    populateCompetitionTable(data.competing_shows);
+
+    // Venue Stats
+    document.getElementById("avgLastMonth").textContent = roundOrDash(venueStats.avg_tickets_last_1_month);
+    document.getElementById("avgLastYear").textContent = roundOrDash(venueStats.avg_tickets_last_1_year);
+    document.getElementById("eventsLastMonth").textContent = roundOrDash(venueStats.events_last_1_month);
+    document.getElementById("eventsLastYear").textContent = roundOrDash(venueStats.events_last_1_year);
+
+    // Ticket Price (from venue_stats) - FIXED: NO $35 FALLBACK
+    const ticketPrice = venueStats.avg_ticket_price;
+    if (ticketPrice && ticketPrice > 0) {
+        document.getElementById("avgTicketPrice").textContent = `$${Math.round(ticketPrice)}`;
+        document.getElementById("avgPriceSubtitle").textContent = `Historical average`;
+    } else {
+        document.getElementById("avgTicketPrice").textContent = `N/A`;
+        document.getElementById("avgPriceSubtitle").textContent = `No pricing data available`;
+    }
+
+    // Historical Chart
+    const history = venueStats.history_last_6_months || [];
+    const labels = history.map(h => h.month);
+    const values = history.map(h => h.tickets);
+    
+    window._chartLabels = labels;
+    window._chartValues = values;
+    createTrendsChart(labels, values);
+
+    // Raw Data with Fahrenheit conversion for weather
+    const weatherDataForDisplay = convertWeatherToFahrenheit(data.weather);
+    document.getElementById("weatherData").textContent = JSON.stringify(weatherDataForDisplay, null, 2);
+    document.getElementById("artistData").textContent = JSON.stringify(data.cm_data, null, 2);
+    document.getElementById("competitionData").textContent = JSON.stringify(data.competing_shows, null, 2);
+}
+
+// ===========================
+// SOCIAL MEDIA STATS (Detailed)
+// ===========================
+function populateSocialStats(cmData = {}) {
+    // Spotify
+    document.getElementById("spotifyListeners").textContent = 
+        formatNumber(cmData.spotify_monthly_listeners || 0);
+    document.getElementById("spotifyFollowers").textContent = 
+        formatNumber(cmData.spotify_followers || 0);
+
+    // Instagram
+    document.getElementById("instaFollowers").textContent = 
+        formatNumber(cmData.instagram_total_followers || 0);
+    
+    // Estimate likes and comments (Chartmetric doesn't provide these directly)
+    const instaFollowers = cmData.instagram_total_followers || 0;
+    const engagementRate = cmData.instagram_engagement_rate || 3;
+    const avgLikes = Math.round((instaFollowers * engagementRate) / 100);
+    const avgComments = Math.round(avgLikes * 0.25); // ~25% of likes
+    
+    document.getElementById("instaLikes").textContent = formatNumber(avgLikes);
+    document.getElementById("instaComments").textContent = formatNumber(avgComments);
+
+    // TikTok
+    document.getElementById("tiktokFollowers").textContent = 
+        formatNumber(cmData.tiktok_total_followers || 0);
+    
+    // Estimate TikTok engagement (rough estimates based on typical rates)
+    const tiktokFollowers = cmData.tiktok_total_followers || 0;
+    const tiktokLikes = Math.round(tiktokFollowers * 0.28); // ~28% engagement typical
+    const tiktokComments = Math.round(tiktokLikes * 0.06); // ~6% of likes
+    
+    document.getElementById("tiktokLikes").textContent = formatNumber(tiktokLikes);
+    document.getElementById("tiktokComments").textContent = formatNumber(tiktokComments);
+}
+
+// ===========================
+// COMPETITION TABLE (Show first 2 events only)
+// ===========================
+function populateCompetitionTable(competingShows = {}) {
+    const tbody = document.getElementById("competitionTableBody");
+    
+    if (!competingShows.events || competingShows.events.length === 0) {
+        tbody.innerHTML = `
+            <tr>
+                <td colspan="4" style="text-align: center; color: #6e6e73;">
+                    No competing events in the next 7 days
+                </td>
+            </tr>
+        `;
+        return;
+    }
+
+    // Show only first 2 events in the table
+    const displayEvents = competingShows.events.slice(0, 2);
+    
+    tbody.innerHTML = displayEvents.map(event => {
+        // Parse artist name to extract venue
+        // Format: "Artist Name at Venue Name"
+        let artistName = event.name;
+        let venueName = "Nearby Venue";
+        
+        if (event.name && event.name.includes(" at ")) {
+            const parts = event.name.split(" at ");
+            artistName = parts[0].trim();
+            venueName = parts.slice(1).join(" at ").trim(); // Handle multiple " at " in name
+        }
+        
+        // Parse genre - show only first genre (before first comma)
+        let genre = event.genre || "Various";
+        if (genre.includes(",")) {
+            genre = genre.split(",")[0].trim();
+        }
+        
+        return `
+            <tr>
+                <td>${venueName}</td>
+                <td>${artistName}</td>
+                <td>${genre}</td>
+                <td>${formatDateShort(event.date)}</td>
+            </tr>
+        `;
+    }).join('');
+}
+
+// ===========================
+// CHART
+// ===========================
+function createTrendsChart(labels, values) {
+    const ctx = document.getElementById("trendsChart");
+    if (!ctx) return;
+
+    if (trendsChart) trendsChart.destroy();
+
+    const avg = values.length > 0
+        ? Math.round(values.reduce((a, b) => a + b, 0) / values.length)
+        : 0;
+
+    document.getElementById("chartSubtitle").textContent = 
+        `Last 6 months • Average: ${avg} tickets`;
+
+    const dataset = {
+        label: "Tickets",
+        data: values,
+        backgroundColor: "rgba(211, 204, 227, 0.8)",
+        borderColor: "#9b87f5",
+        borderWidth: 0,
+        borderRadius: 6,
+        tension: 0.4
+    };
+
+    trendsChart = new Chart(ctx, {
+        type: currentChartType,
+        data: {
+            labels,
+            datasets: [dataset]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            aspectRatio: 2.5,
+            plugins: {
+                legend: { display: false }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    grid: {
+                        color: '#f5f5f7'
+                    },
+                    ticks: {
+                        color: '#6e6e73'
+                    }
+                },
+                x: {
+                    grid: {
+                        display: false
+                    },
+                    ticks: {
+                        color: '#6e6e73'
+                    }
+                }
+            }
+        }
+    });
+}
+
+function recreateChart() {
+    createTrendsChart(window._chartLabels, window._chartValues);
+}
+
+// ===========================
+// RAW DATA TOGGLE
+// ===========================
+function toggleRawData() {
+    const content = document.getElementById("rawDataContent");
+    const icon = document.getElementById("expandIcon");
+    
+    if (content.classList.contains("expanded")) {
+        content.classList.remove("expanded");
+        icon.classList.remove("rotated");
+    } else {
+        content.classList.add("expanded");
+        icon.classList.add("rotated");
+    }
+}
+window.toggleRawData = toggleRawData;
+
+// ===========================
+// UTILITY FUNCTIONS
+// ===========================
+function roundOrDash(v) {
+    return typeof v === "number" ? Math.round(v) : "-";
+}
+
+function formatNumber(num) {
+    if (num >= 1_000_000) return (num / 1_000_000).toFixed(1) + "M";
+    if (num >= 1000) return (num / 1000).toFixed(1) + "K";
+    return num.toString();
+}
+
+function formatDate(dateStr) {
+    const d = new Date(dateStr);
+    return d.toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+    });
+}
+
+function formatDateShort(dateStr) {
+    const d = new Date(dateStr);
+    return d.toLocaleDateString("en-US", {
+        month: "numeric",
+        day: "numeric"
+    });
+}
+
+// Convert weather temperatures from Celsius to Fahrenheit for raw data display
+function convertWeatherToFahrenheit(weather) {
+    if (!weather || typeof weather !== 'object') return weather;
+    
+    const converted = { ...weather };
+    
+    // Convert all temperature fields
+    if (converted.temperature !== undefined) {
+        converted.temperature = Math.round((converted.temperature * 9/5) + 32);
+        converted.temperature_unit = "°F";
+    }
+    if (converted.feels_like !== undefined) {
+        converted.feels_like = Math.round((converted.feels_like * 9/5) + 32);
+    }
+    if (converted.temp_min !== undefined) {
+        converted.temp_min = Math.round((converted.temp_min * 9/5) + 32);
+    }
+    if (converted.temp_max !== undefined) {
+        converted.temp_max = Math.round((converted.temp_max * 9/5) + 32);
+    }
+    
+    return converted;
+}
