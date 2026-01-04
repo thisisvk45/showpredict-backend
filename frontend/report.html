@@ -74,6 +74,14 @@
             display: grid;
             grid-template-columns: 40% 60%;
             gap: 24px;
+            margin-bottom: 24px;
+        }
+
+        /* Full Width Section (below 40/60 split) */
+        .full-width-section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
         }
 
         /* LEFT COLUMN (40%) */
@@ -111,6 +119,7 @@
             border-radius: 12px;
             padding: 28px;
             box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            flex: 1; /* Stretch to fill remaining space and match right column height */
         }
 
         .social-platform {
@@ -604,69 +613,74 @@
                     </table>
                 </div>
 
-                <!-- Venue Stats -->
-                <div class="competition-section">
-                    <div class="section-header">Venue data</div>
-                    <div class="venue-stats">
-                        <div class="stat-card">
-                            <div class="stat-card-title">Avg tickets last month</div>
-                            <div class="stat-card-value" id="avgLastMonth">-</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-card-title">Avg tickets last year</div>
-                            <div class="stat-card-value" id="avgLastYear">-</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-card-title">Events last month</div>
-                            <div class="stat-card-value" id="eventsLastMonth">-</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-card-title">Events last year</div>
-                            <div class="stat-card-value" id="eventsLastYear">-</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Chart -->
-                <div class="chart-section">
-                    <div class="chart-header">
-                        <div>
-                            <div class="chart-title">Historical Sales Trends</div>
-                            <div class="chart-subtitle" id="chartSubtitle">-</div>
-                        </div>
-                        <div class="chart-toggle">
-                            <button class="toggle-btn active">Bar</button>
-                            <button class="toggle-btn">Line</button>
-                        </div>
-                    </div>
-                    <canvas id="trendsChart"></canvas>
-                </div>
-
-                <!-- Raw Data -->
-                <div class="raw-data-section">
-                    <div class="collapsible-header" onclick="toggleRawData()">
-                        <div class="section-header">Raw Data & Features</div>
-                        <svg class="expand-icon" id="expandIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M6 9l6 6 6-6"/>
-                        </svg>
-                    </div>
-                    <div class="raw-data-content" id="rawDataContent">
-                        <div class="data-block">
-                            <div class="data-block-title">Weather Data</div>
-                            <pre id="weatherData"></pre>
-                        </div>
-                        <div class="data-block">
-                            <div class="data-block-title">Artist Data (Chartmetric)</div>
-                            <pre id="artistData"></pre>
-                        </div>
-                        <div class="data-block">
-                            <div class="data-block-title">Competition Data (JamBase)</div>
-                            <pre id="competitionData"></pre>
-                        </div>
-                    </div>
-                </div>
-
             </div>
+        </div>
+
+        <!-- SECOND HALF: Full Width Section -->
+        <div class="full-width-section">
+            
+            <!-- Venue Stats -->
+            <div class="competition-section">
+                <div class="section-header">Venue data</div>
+                <div class="venue-stats">
+                    <div class="stat-card">
+                        <div class="stat-card-title">Avg tickets last month</div>
+                        <div class="stat-card-value" id="avgLastMonth">-</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card-title">Avg tickets last year</div>
+                        <div class="stat-card-value" id="avgLastYear">-</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card-title">Events last month</div>
+                        <div class="stat-card-value" id="eventsLastMonth">-</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card-title">Events last year</div>
+                        <div class="stat-card-value" id="eventsLastYear">-</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chart -->
+            <div class="chart-section">
+                <div class="chart-header">
+                    <div>
+                        <div class="chart-title">Historical Sales Trends</div>
+                        <div class="chart-subtitle" id="chartSubtitle">-</div>
+                    </div>
+                    <div class="chart-toggle">
+                        <button class="toggle-btn active">Bar</button>
+                        <button class="toggle-btn">Line</button>
+                    </div>
+                </div>
+                <canvas id="trendsChart"></canvas>
+            </div>
+
+            <!-- Raw Data -->
+            <div class="raw-data-section">
+                <div class="collapsible-header" onclick="toggleRawData()">
+                    <div class="section-header">Raw Data & Features</div>
+                    <svg class="expand-icon" id="expandIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M6 9l6 6 6-6"/>
+                    </svg>
+                </div>
+                <div class="raw-data-content" id="rawDataContent">
+                    <div class="data-block">
+                        <div class="data-block-title">Weather Data</div>
+                        <pre id="weatherData"></pre>
+                    </div>
+                    <div class="data-block">
+                        <div class="data-block-title">Artist Data (Chartmetric)</div>
+                        <pre id="artistData"></pre>
+                    </div>
+                    <div class="data-block">
+                        <div class="data-block-title">Competition Data (JamBase)</div>
+                        <pre id="competitionData"></pre>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
