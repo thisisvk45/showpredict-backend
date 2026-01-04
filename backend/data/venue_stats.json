@@ -200,20 +200,20 @@
     ]
   },
   {
-    "venue": "Local 506",
+    "venue": "local 506",
     "capacity": 300,
-    "last_play_date": "2025-12-05",
-    "tickets_last_1_month": 153,
-    "events_last_1_month": 1,
-    "avg_tickets_last_1_month": 153.0,
-    "tickets_last_1_year": 5206,
-    "events_last_1_year": 39,
-    "avg_tickets_last_1_year": 133.49,
-    "avg_ticket_price": 19.04,
+    "last_play_date": "2025-11-17",
+    "tickets_last_1_month": 0,
+    "events_last_1_month": 0,
+    "avg_tickets_last_1_month": 0,
+    "tickets_last_1_year": 5053,
+    "events_last_1_year": 38,
+    "avg_tickets_last_1_year": 132.97,
+    "avg_ticket_price": 19.13,
     "history_last_6_months": [
       {
         "month": "Jul",
-        "tickets": 368
+        "tickets": 250
       },
       {
         "month": "Sep",
@@ -226,7 +226,21 @@
       {
         "month": "Nov",
         "tickets": 862
-      },
+      }
+    ]
+  },
+  {
+    "venue": "Local 506",
+    "capacity": 300,
+    "last_play_date": "2025-12-05",
+    "tickets_last_1_month": 0,
+    "events_last_1_month": 0,
+    "avg_tickets_last_1_month": 0,
+    "tickets_last_1_year": 153,
+    "events_last_1_year": 1,
+    "avg_tickets_last_1_year": 153.0,
+    "avg_ticket_price": 17.0,
+    "history_last_6_months": [
       {
         "month": "Dec",
         "tickets": 153
@@ -237,9 +251,9 @@
     "venue": "Cat's Cradle",
     "capacity": 750,
     "last_play_date": "2025-12-05",
-    "tickets_last_1_month": 78,
-    "events_last_1_month": 1,
-    "avg_tickets_last_1_month": 78.0,
+    "tickets_last_1_month": 0,
+    "events_last_1_month": 0,
+    "avg_tickets_last_1_month": 0,
     "tickets_last_1_year": 5974,
     "events_last_1_year": 24,
     "avg_tickets_last_1_year": 248.92,
@@ -354,8 +368,21 @@
     ]
   },
   {
+    "venue": "Evening Muse",
+    "capacity": 120,
+    "last_play_date": "2025-04-10",
+    "tickets_last_1_month": 0,
+    "events_last_1_month": 0,
+    "avg_tickets_last_1_month": 0,
+    "tickets_last_1_year": 109,
+    "events_last_1_year": 1,
+    "avg_tickets_last_1_year": 109.0,
+    "avg_ticket_price": 10.0,
+    "history_last_6_months": []
+  },
+  {
     "venue": "Amos Southend",
-    "capacity": 700,
+    "capacity": 750,
     "last_play_date": "2025-12-12",
     "tickets_last_1_month": 404,
     "events_last_1_month": 1,
